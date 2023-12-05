@@ -26,6 +26,10 @@ public class ControladorPresistencia {
             Logger.getLogger(ControladorPresistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Producto traerProducto(String codigoId) {
+      return prodJpa.findProducto(codigoId);
+              }
     
     
 }

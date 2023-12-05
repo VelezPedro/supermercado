@@ -30,4 +30,8 @@ public class Controladora {
         contPersis.borrarProducto(codigoId);
     }
 
+    public Producto traerProducto(String codigoId) {
+        return contPersis.traerProducto(codigoId);  
+    }
+
 }
