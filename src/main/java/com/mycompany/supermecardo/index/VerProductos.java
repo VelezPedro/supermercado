@@ -26,6 +26,7 @@ public class VerProductos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
         eliminar = new javax.swing.JButton();
+        editar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -60,6 +61,13 @@ public class VerProductos extends javax.swing.JFrame {
             }
         });
 
+        editar.setText("Editar");
+        editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -71,6 +79,8 @@ public class VerProductos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(eliminar)
+                .addGap(50, 50, 50)
+                .addComponent(editar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -79,7 +89,9 @@ public class VerProductos extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(eliminar)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(eliminar)
+                    .addComponent(editar))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -145,6 +157,31 @@ public class VerProductos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_eliminarActionPerformed
 
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+        if (tablaProductos.getRowCount() > 0) {
+            //controlo que haya algo seleccionado
+            if (tablaProductos.getSelectedRow() != -1) {
+                String codigoId = (String) (tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
+                System.out.println(codigoId);
+                
+                ModificarProducto pantallModf= new ModificarProducto(codigoId);
+                pantallModf.setVisible(true);
+                pantallModf.setLocationRelativeTo(null);
+                
+                
+                
+//                control.borrarProducto(codigoId);
+//                mensaje("Producto eliminado correctamente", "Info", "Borrado de Produtos");
+                cargarTabla();
+            } else {
+                mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
+            }
+        } else {
+            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
+        }
+        
+    }//GEN-LAST:event_editarActionPerformed
+
     public void mensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {
@@ -158,6 +195,7 @@ public class VerProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editar;
     private javax.swing.JButton eliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
