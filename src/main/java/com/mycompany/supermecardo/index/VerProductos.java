@@ -173,6 +173,7 @@ public class VerProductos extends javax.swing.JFrame {
 //                control.borrarProducto(codigoId);
 //                mensaje("Producto eliminado correctamente", "Info", "Borrado de Produtos");
                 cargarTabla();
+                this.dispose();
             } else {
                 mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
             }
