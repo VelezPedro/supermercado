@@ -99,7 +99,7 @@
                               <EmptySpace min="-2" pref="258" max="-2" attributes="0"/>
                               <Component id="limpiar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
-                              <Component id="guardar" min="-2" max="-2" attributes="0"/>
+                              <Component id="guardarCambios" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="227" max="32767" attributes="0"/>
@@ -129,7 +129,7 @@
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="limpiar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="guardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="guardarCambios" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="volver" min="-2" max="-2" attributes="0"/>
@@ -225,7 +225,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limpiarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="guardar">
+            <Component class="javax.swing.JButton" name="guardarCambios">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e" green="dd" red="0" type="rgb"/>
@@ -233,7 +233,7 @@
                 <Property name="text" type="java.lang.String" value="Guardar Cambios"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarCambiosActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="volver">
