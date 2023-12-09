@@ -8,6 +8,12 @@ public class Controladora {
 
     ControladorPresistencia contPersis = new ControladorPresistencia();
 
+    public Controladora() {
+        contPersis= new ControladorPresistencia();
+    }
+    
+    
+
     public void guardar(JTextField codigoId, JTextField nbrProducto, JTextField stock,
             JTextField costo, JTextField precioVenta, String catego, String formaDeVenta) throws Exception {
         Producto producto = new Producto();
@@ -47,25 +53,33 @@ public class Controladora {
         contPersis.modificarProducto(producto);
     }
 
-    public String validarUsuario(String usuario, String password) {
-        String mensaje="";
+    public Usuario validarUsuario(String usuario, String password) {
+        //String mensaje="";
+        Usuario user= null;
         
         List<Usuario> listaUsuarios= contPersis.traerUsuarios();
         for(Usuario usu : listaUsuarios){
             if(usu.getNombreUsuario().equals(usuario)){
-                if(usu.getContraseña().equals(password)){
-                    mensaje= "Usuario y contraseña correctos. Bienvenido/a!";
+                if(usu.getPassword().equals(password)){
+                    //mensaje= "Usuario y contraseña correctos. Bienvenido/a!";
+                    user = usu;
+                    return user;
                 }
                 else{
-                    mensaje= "Contraseña incorrecta";
+                    user= null;
+                    return user;
                 }
             }
             else{
-                mensaje= "Usuario no encontrado";
+                user= null;
+                return user;
+                
             }
         }
-        return mensaje;
+        return user;
     }
+
+    
 
    
 

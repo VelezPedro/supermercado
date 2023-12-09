@@ -1,6 +1,7 @@
 package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
+import com.mycompany.supermecardo.entidades.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -10,6 +11,8 @@ import javax.swing.JOptionPane;
 public class CrearProducto extends javax.swing.JFrame {
 
     Controladora control=new Controladora();
+    //quiza lo tenga que hacer como arriba
+    Usuario user;
     
     public CrearProducto() {
         initComponents();
@@ -222,7 +225,7 @@ public class CrearProducto extends javax.swing.JFrame {
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         // TODO add your handling code here:
-        Principal principal=new Principal();
+        Principal principal=new Principal(control,user);
         principal.setVisible(true);
         principal.setLocationRelativeTo(null);
     }//GEN-LAST:event_volverActionPerformed
