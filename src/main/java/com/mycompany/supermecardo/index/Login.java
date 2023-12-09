@@ -4,17 +4,20 @@
  */
 package com.mycompany.supermecardo.index;
 
+import com.mycompany.supermecardo.entidades.Controladora;
+
 /**
  *
  * @author Joaquin
  */
 public class Login extends javax.swing.JFrame {
-
+Controladora control;
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        control = new Controladora();
     }
 
     /**
@@ -166,6 +169,13 @@ public class Login extends javax.swing.JFrame {
        Principal principal=new Principal();
        principal.setVisible(true);
        principal.setLocationRelativeTo(null);
+       
+       String usuario= txtUsuario.getText();
+       String password= txtPassword.getText();
+       
+       String mensaje= control.validarUsuario(usuario,password);
+       
+       txtArea.setText(mensaje);
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**

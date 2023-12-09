@@ -47,6 +47,26 @@ public class Controladora {
         contPersis.modificarProducto(producto);
     }
 
+    public String validarUsuario(String usuario, String password) {
+        String mensaje="";
+        
+        List<Usuario> listaUsuarios= contPersis.traerUsuarios();
+        for(Usuario usu : listaUsuarios){
+            if(usu.getNombreUsuario().equals(usuario)){
+                if(usu.getContraseña().equals(password)){
+                    mensaje= "Usuario y contraseña correctos. Bienvenido/a!";
+                }
+                else{
+                    mensaje= "Contraseña incorrecta";
+                }
+            }
+            else{
+                mensaje= "Usuario no encontrado";
+            }
+        }
+        return mensaje;
+    }
+
    
 
 }
