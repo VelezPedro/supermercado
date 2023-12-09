@@ -31,7 +31,22 @@ public class Controladora {
     }
 
     public Producto traerProducto(String codigoId) {
-        return contPersis.traerProducto(codigoId);  
+        return contPersis.traerProducto(codigoId);
     }
+
+    public void modificarProducto(Producto producto, JTextField nbrProducto,
+            JTextField stock, JTextField costo, JTextField precioVenta,
+            String catego, String formaDeVenta) {
+
+        producto.setNombre(nbrProducto.getText());
+        producto.setStock(Integer.valueOf(stock.getText()));
+        producto.setCosto(Integer.valueOf(costo.getText()));
+        producto.setPrecio(Integer.valueOf(precioVenta.getText()));
+        producto.setCategoria(catego);
+        producto.setFromVenta(formaDeVenta);
+        contPersis.modificarProducto(producto);
+    }
+
+   
 
 }

@@ -2,16 +2,22 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 public class ModificarProducto extends javax.swing.JFrame {
 
     Controladora control = null;
     String codigoId;
+    Producto producto;
 
     public ModificarProducto(String codigoId) {
         control = new Controladora();
         //this.codigoId=codigoID;
         initComponents();
+        //se cargan los datos cuando se inicia el modificar productos
         cargarDatos(codigoId);
     }
 
@@ -28,7 +34,7 @@ public class ModificarProducto extends javax.swing.JFrame {
         formVenta = new javax.swing.JComboBox<>();
         categoria = new javax.swing.JComboBox<>();
         limpiar = new javax.swing.JButton();
-        guardar = new javax.swing.JButton();
+        guardarCambios = new javax.swing.JButton();
         volver = new javax.swing.JButton();
         stock = new javax.swing.JTextField();
 
@@ -77,11 +83,11 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        guardar.setBackground(new java.awt.Color(0, 221, 14));
-        guardar.setText("Guardar Cambios");
-        guardar.addActionListener(new java.awt.event.ActionListener() {
+        guardarCambios.setBackground(new java.awt.Color(0, 221, 14));
+        guardarCambios.setText("Guardar Cambios");
+        guardarCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarActionPerformed(evt);
+                guardarCambiosActionPerformed(evt);
             }
         });
 
@@ -115,7 +121,7 @@ public class ModificarProducto extends javax.swing.JFrame {
                         .addGap(258, 258, 258)
                         .addComponent(limpiar)
                         .addGap(142, 142, 142)
-                        .addComponent(guardar)))
+                        .addComponent(guardarCambios)))
                 .addContainerGap(227, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -140,7 +146,7 @@ public class ModificarProducto extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(limpiar)
-                    .addComponent(guardar))
+                    .addComponent(guardarCambios))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(volver)
                 .addGap(11, 11, 11))
@@ -208,28 +214,32 @@ public class ModificarProducto extends javax.swing.JFrame {
         principal.setLocationRelativeTo(null);
     }//GEN-LAST:event_volverActionPerformed
 
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        /*        try {
-        String catego= (String) categoria.getSelectedItem();
-        String formaDeVenta= (String) formVenta.getSelectedItem();
-            control.guardar(codigoId,nbrProducto,stock,costo,precioVenta,catego,formaDeVenta);
-            JOptionPane optionPane=new JOptionPane("Extito en guardar = " + nbrProducto.getText());
-            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-            JDialog dialog=optionPane.createDialog("Guarda Productos");
-            dialog.setAlwaysOnTop(true);
-            dialog.setVisible(true);
+    private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
+        try {
+            String catego = (String) categoria.getSelectedItem();
+            String formaDeVenta = (String) formVenta.getSelectedItem();
+            
+            
+            control.modificarProducto(producto, nbrProducto, stock, costo, precioVenta, catego, formaDeVenta);
+            
+            mensaje("Edicion correcta", "Info", "Edicion Correcta");
+            VerProductos pantalla=new VerProductos();
+            pantalla.setVisible(true);
+            pantalla.setLocationRelativeTo(null);
+            this.dispose();
         } catch (Exception ex) {
+            mensaje("Edicion incorrecta", "Error", "Edicion Incorrecta");
             Logger.getLogger(ModificarProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
-         */
-    }//GEN-LAST:event_guardarActionPerformed
+        
+    }//GEN-LAST:event_guardarCambiosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> categoria;
     private javax.swing.JTextField costo;
     private javax.swing.JComboBox<String> formVenta;
-    private javax.swing.JButton guardar;
+    private javax.swing.JButton guardarCambios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -241,18 +251,47 @@ public class ModificarProducto extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarDatos(String codigoId) {
-        Producto producto = control.traerProducto(codigoId);
+        this.producto = control.traerProducto(codigoId);
         nbrProducto.setText(producto.getNombre());
         costo.setText(String.valueOf(producto.getCosto()));
         precioVenta.setText(String.valueOf(producto.getPrecio()));
         stock.setText(String.valueOf(producto.getStock()));
-        
-        switch (Integer.parseInt(producto.getCategoria())) {
-            case 0:
-                
-                break;
-            default:
-                throw new AssertionError();
+
+        //Set de combox forma de venta!
+        if (producto.getFromVenta().equalsIgnoreCase("unidad")) {
+            formVenta.setSelectedIndex(1);
+        } else {
+            formVenta.setSelectedIndex(2);
         }
+        //Set de combox categoria
+        if (producto.getCategoria().equalsIgnoreCase("panaderia")) {
+            categoria.setSelectedIndex(1);
+        } else if (producto.getCategoria().equalsIgnoreCase("fiambreria")) {
+            categoria.setSelectedIndex(2);
+        } else if (producto.getCategoria().equalsIgnoreCase("carniceria")) {
+            categoria.setSelectedIndex(3);
+        } else if (producto.getCategoria().equalsIgnoreCase("bebida")) {
+            categoria.setSelectedIndex(4);
+        } else if (producto.getCategoria().equalsIgnoreCase("almacen")) {
+            categoria.setSelectedIndex(5);
+        } else if (producto.getCategoria().equalsIgnoreCase("limpieza")) {
+            categoria.setSelectedIndex(6);
+        } else if (producto.getCategoria().equalsIgnoreCase("lacteos")) {
+            categoria.setSelectedIndex(7);
+        } else {
+            categoria.setSelectedIndex(0);
+        }
+    }
+    
+     public void mensaje(String mensaje, String tipo, String titulo) {
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")) {
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        } else if (tipo.equals("Error")) {
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+        }
+        JDialog dialog = optionPane.createDialog("titulo");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
     }
 }

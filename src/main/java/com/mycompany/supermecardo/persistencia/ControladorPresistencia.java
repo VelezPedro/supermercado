@@ -30,6 +30,14 @@ public class ControladorPresistencia {
     public Producto traerProducto(String codigoId) {
       return prodJpa.findProducto(codigoId);
               }
+
+    public void modificarProducto(Producto producto) {
+        try {
+            prodJpa.edit(producto);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladorPresistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     
 }
