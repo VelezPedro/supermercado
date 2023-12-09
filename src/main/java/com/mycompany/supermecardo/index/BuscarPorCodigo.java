@@ -8,10 +8,18 @@ public class BuscarPorCodigo extends javax.swing.JFrame {
 
     Controladora control;
     //Producto producto;
-    
+    private DefaultTableModel modeloTabla;
+
     public BuscarPorCodigo() {
         initComponents();
         control = new Controladora();
+        String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
+        modeloTabla = new DefaultTableModel(titulos, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
     }
 
     @SuppressWarnings("unchecked")
@@ -96,14 +104,10 @@ public class BuscarPorCodigo extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         String codigoId = codigoProducto.getText();
-        
-        
-        
+
         cargarTablaPorProducto(codigoId);
 
-//        BuscarPorCodigo busCodigo = new BuscarPorCodigo();
-//        busCodigo.setVisible(true);
-//        busCodigo.setLocationRelativeTo(null);
+
     }//GEN-LAST:event_BuscarActionPerformed
 
 
@@ -119,21 +123,10 @@ public class BuscarPorCodigo extends javax.swing.JFrame {
     //Para llenar la tabla
     private void cargarTablaPorProducto(String codigoId) {
 
-        DefaultTableModel modeloTabla = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
-        String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
-        modeloTabla.setColumnIdentifiers(titulos);
-
         Producto producto = control.traerProducto(codigoId);
-        
-        System.out.println("producto: " + producto.getNombre() + " " + producto.getPrecio());
+
         if (producto != null) {
-            
+
             Object[] objeto = {producto.getNombre(),
                 producto.getStock(),
                 producto.getPrecio(),
