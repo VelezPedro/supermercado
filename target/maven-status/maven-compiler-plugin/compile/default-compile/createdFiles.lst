@@ -1,3 +1,4 @@
+com\mycompany\supermecardo\index\BuscarPorCodigo.class
 com\mycompany\supermecardo\index\ModificarProducto$3.class
 com\mycompany\supermecardo\index\CrearProducto$2.class
 com\mycompany\supermecardo\index\Venta$1.class
@@ -12,6 +13,7 @@ com\mycompany\supermecardo\index\Principal.class
 com\mycompany\supermecardo\index\ModificarProducto$1.class
 com\mycompany\supermecardo\index\CrearProducto$4.class
 com\mycompany\supermecardo\entidades\Venta.class
+com\mycompany\supermecardo\index\BuscarPorCodigo$1.class
 com\mycompany\supermecardo\index\Venta.class
 com\mycompany\supermecardo\persistencia\ControladorPresistencia.class
 com\mycompany\supermecardo\entidades\Controladora.class
@@ -31,6 +33,7 @@ com\mycompany\supermecardo\persistencia\exceptions\PreexistingEntityException.cl
 com\mycompany\supermecardo\index\Principal$5.class
 com\mycompany\supermecardo\index\CrearProducto.class
 com\mycompany\supermecardo\index\VerProductos$1.class
+com\mycompany\supermecardo\index\BuscarPorCodigo$2.class
 com\mycompany\supermecardo\index\Principal$1.class
 com\mycompany\supermecardo\persistencia\ProductoJpaController.class
 com\mycompany\supermecardo\index\VerProductos$4.class
