@@ -70,11 +70,7 @@ public class Controladora {
                     return user;
                 }
             }
-            else{
-                user= null;
-                return user;
-                
-            }
+            
         }
         return user;
     }
