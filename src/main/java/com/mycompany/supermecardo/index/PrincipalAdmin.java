@@ -6,19 +6,28 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Joaquin
  */
 public class PrincipalAdmin extends javax.swing.JFrame {
-private Controladora control;
-private Usuario user;
-    
+
+    private Controladora control;
+    private Usuario user;
+
     public PrincipalAdmin(Controladora control, Usuario user) {
         initComponents();
-        this.control= control;
-        this.user= user;
+        this.control = control;
+        this.user = user;
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                PrincipalAdmin ventana= new PrincipalAdmin(null,null);
+                ventana.setVisible(true);
+            }
+        });*/
     }
 
     /**
@@ -34,7 +43,7 @@ private Usuario user;
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaUsuarios = new javax.swing.JTable();
         btnEditarUsuario = new javax.swing.JButton();
         btnBorrarUsuario = new javax.swing.JButton();
         btnNuevoUsuario = new javax.swing.JButton();
@@ -62,7 +71,7 @@ private Usuario user;
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -73,15 +82,25 @@ private Usuario user;
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaUsuarios);
 
         btnEditarUsuario.setText("Editar Usuario");
 
         btnBorrarUsuario.setText("Borrar Usuario");
 
         btnNuevoUsuario.setText("Crear Nuevo Usuario");
+        btnNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoUsuarioActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         btnRecargarTabla.setText("Recargar Tabla");
         btnRecargarTabla.addActionListener(new java.awt.event.ActionListener() {
@@ -173,48 +192,54 @@ private Usuario user;
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnRecargarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarTablaActionPerformed
-        // TODO add your handling code here:
+        cargarTabla();
     }//GEN-LAST:event_btnRecargarTablaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.txtNombreUsuario.setText(user.getNombreUsuario());
+        cargarTabla();
     }//GEN-LAST:event_formWindowOpened
+
+    private void cargarTabla() {
+        DefaultTableModel modeloTabla = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        //ponemos contraseña?
+        String titulos[] = {"Id", "Usuario", "Contraseña", "Rol"};
+        modeloTabla.setColumnIdentifiers(titulos);
+        
+        //traemos de la bd la lista de usuarios
+        List<Usuario> listaUsuarios= control.traerUsuarios();
+        
+        if(listaUsuarios != null){
+            for(Usuario usu : listaUsuarios){
+                Object[] objeto = {usu.getId(), usu.getNombreUsuario(), usu.getPassword(),usu.getRol()};
+               //agrega una fila nueva cada vez que ingresa al ciclo.
+                modeloTabla.addRow(objeto);
+            }
+        }
+        
+        tablaUsuarios.setModel(modeloTabla);
+    }
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoUsuarioActionPerformed
+        AltaUsuario altaUsu = new AltaUsuario(control);
+        altaUsu.setVisible(true);
+        altaUsu.setLocationRelativeTo(null);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                PrincipalAdmin ventana= new PrincipalAdmin(null,null);
-                ventana.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrarUsuario;
@@ -225,8 +250,9 @@ private Usuario user;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaUsuarios;
     private javax.swing.JTextField txtNombreUsuario;
     // End of variables declaration//GEN-END:variables
+
 }
