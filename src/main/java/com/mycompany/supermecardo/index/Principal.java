@@ -32,6 +32,11 @@ private Usuario user;
         txtNombreUsuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 153, 51))); // NOI18N
@@ -120,6 +125,7 @@ private Usuario user;
         jLabel1.setText("M & M DRUGSTORE");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        txtNombreUsuario.setEditable(false);
         txtNombreUsuario.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -135,8 +141,8 @@ private Usuario user;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(181, 181, 181)
-                .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90)
+                .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -172,9 +178,8 @@ private Usuario user;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
-        this.txtNombreUsuario.setText(user.getNombreUsuario());
-    } 
+   
+    
     
     private void verVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verVentaActionPerformed
         // TODO add your handling code here:
@@ -208,6 +213,10 @@ private Usuario user;
         venta.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_ventaActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.txtNombreUsuario.setText(user.getNombreUsuario());
+    }//GEN-LAST:event_formWindowOpened
 
  
 
