@@ -65,10 +65,6 @@ public class Controladora {
                     user = usu;
                     return user;
                 }
-                else{
-                    user= null;
-                    return user;
-                }
             }
             
         }
