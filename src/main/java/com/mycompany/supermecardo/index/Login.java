@@ -172,7 +172,7 @@ Controladora control;
        String password= txtPassword.getText();
        Usuario user = control.validarUsuario(usuario, password);
         //System.out.println(user.getRol());
-        System.out.println(user.getPassword());
+        
        if (user!=null){
            String rol = user.getRol();
            if (rol.equals("admin")){
@@ -186,10 +186,9 @@ Controladora control;
                principal.setVisible(true);
                principal.setLocationRelativeTo(null);
                this.dispose();
-               System.out.println("entra aca?");
            }
        }else{
-           txtArea.setText("aca?");
+           txtArea.setText("Usuario o contraseña incorrectos");
        }
        
        

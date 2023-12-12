@@ -65,11 +65,28 @@ public class Controladora {
                     user = usu;
                     return user;
                 }
+                else{
+                    user=null;
+                    return user;
+                }
+            }
+            else {
+                
+                user=null;
             }
             
         }
         return user;
     }
+
+    public List<Usuario> traerUsuarios() {
+        return contPersis.traerUsuarios();
+         }
+
+    public List<String> traerRoles() {
+        return contPersis.traerRoles();
+    }
+    
 
     
 
