@@ -1,7 +1,9 @@
 package com.mycompany.supermecardo.entidades;
 
 import com.mycompany.supermecardo.persistencia.ControladorPresistencia;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 public class Controladora {
@@ -86,6 +88,24 @@ public class Controladora {
     public List<String> traerRoles() {
         return contPersis.traerRoles();
     }
+
+    public void crearVenta(List<Producto> listProducto, Double totalVentas, JTextField descPorcentaje, 
+            JTextField descPrecio, String usuario, String formVenta, Date dia, String string) {
+        Venta venta =new Venta();
+        venta.setListaProductos(listProducto);
+        venta.setPrecio(totalVentas);
+        venta.setDescuentoPorPorcentaje(Integer.valueOf(descPorcentaje.getText()));
+        venta.setDescuentoPorPrecio(Integer.valueOf(descPrecio.getText()));
+        venta.setVendedor(usuario);
+        venta.setFecha(dia);
+        venta.setHorario("10:10");
+        venta.setFormpago(formVenta);
+        contPersis.guardarVenta(venta);
+        
+        
+    }
+
+   
     
 
     
