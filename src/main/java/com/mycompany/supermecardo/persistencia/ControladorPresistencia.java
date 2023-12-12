@@ -1,16 +1,20 @@
 package com.mycompany.supermecardo.persistencia;
 
 import com.mycompany.supermecardo.entidades.Producto;
+import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 
 public class ControladorPresistencia {
     
     ProductoJpaController prodJpa = new ProductoJpaController();
-
+    UsuarioJpaController usuJpa= new UsuarioJpaController();
+    
     public void guardar(Producto producto) throws Exception {
         prodJpa.create(producto);
     }
@@ -38,6 +42,21 @@ public class ControladorPresistencia {
             Logger.getLogger(ControladorPresistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public List<Usuario> traerUsuarios() {
+        //revisar si esta bien, min 2:03 vid
+        return usuJpa.findUsuarioEntities();
+    }
+
+    public List<String> traerRoles() {
+        List<Usuario> usuarios = usuJpa.findUsuarioEntities();
+        List<String> rolesUnicos = usuarios.stream()
+                                          .map(Usuario::getRol)
+                                          .distinct()
+                                          .collect(Collectors.toList());
+
+        return rolesUnicos;
+       }
     
     
 }

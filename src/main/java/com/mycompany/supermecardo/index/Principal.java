@@ -1,11 +1,17 @@
 package com.mycompany.supermecardo.index;
 
+import com.mycompany.supermecardo.entidades.Controladora;
+import com.mycompany.supermecardo.entidades.Usuario;
+
 
 public class Principal extends javax.swing.JFrame {
+private Controladora control;
+private Usuario user;
 
-
-    public Principal() {
+    public Principal(Controladora control, Usuario user) {
         initComponents();
+        this.control= control;
+        this.user= user;
     }
 
 
@@ -23,11 +29,17 @@ public class Principal extends javax.swing.JFrame {
         salir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtNombreUsuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 153, 51))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 153, 51))); // NOI18N
 
         agrStock.setText("Agregar Stock");
         agrStock.addActionListener(new java.awt.event.ActionListener() {
@@ -106,13 +118,15 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Tecno\\Downloads\\logo.pdf (1).png")); // NOI18N
         jLabel3.setText("jLabel3");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Snap ITC", 0, 36)); // NOI18N
         jLabel1.setText("M & M DRUGSTORE");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        txtNombreUsuario.setEditable(false);
+        txtNombreUsuario.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,13 +141,18 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(260, 260, 260))
+                .addGap(90, 90, 90)
+                .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1))
+                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -159,6 +178,9 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+   
+    
+    
     private void verVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verVentaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_verVentaActionPerformed
@@ -192,6 +214,10 @@ public class Principal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ventaActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.txtNombreUsuario.setText(user.getNombreUsuario());
+    }//GEN-LAST:event_formWindowOpened
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -202,6 +228,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton salir;
+    private javax.swing.JTextField txtNombreUsuario;
     private javax.swing.JButton venta;
     private javax.swing.JButton verProductos;
     private javax.swing.JButton verVenta;
