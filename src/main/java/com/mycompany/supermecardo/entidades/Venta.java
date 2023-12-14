@@ -5,42 +5,49 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Venta implements Serializable {
     
     @Id
-    @GeneratedValue(generator = "uuid")
-    //@GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private String id;
     
     @ManyToMany
-    private List<Producto> productos;
+    private List<Producto> listaProductos;
     
     private Double precio;
-    private Double descuento;
+    private Integer descuentoPorPorcentaje;
+    private Integer descuentoPorPrecio;
     private String vendedor;
     private String formpago;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     
+    //@Temporal(TemporalType.TIMESTAMP)
     private String horario;
+    
+    
 
-    public Venta(String id, List<Producto> productos, Double precio, Double descuento, String vendedor, String formpago, Date fecha, String horario) {
+    public Venta(String id, List<Producto> listaProductos, Double precio, Integer descuentoPorPorcentaje, Integer descuentoPorPrecio, String vendedor, String formpago, Date fecha, String horario) {
         this.id = id;
-        this.productos = productos;
+        this.listaProductos = listaProductos;
         this.precio = precio;
-        this.descuento = descuento;
+        this.descuentoPorPorcentaje = descuentoPorPorcentaje;
+        this.descuentoPorPrecio = descuentoPorPrecio;
         this.vendedor = vendedor;
         this.formpago = formpago;
         this.fecha = fecha;
         this.horario = horario;
     }
 
+ 
     
     public Venta() {
     }
@@ -53,13 +60,6 @@ public class Venta implements Serializable {
         this.id = id;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
 
     public Double getPrecio() {
         return precio;
@@ -67,14 +67,6 @@ public class Venta implements Serializable {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
-    }
-
-    public Double getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(Double descuento) {
-        this.descuento = descuento;
     }
 
     public Date getFecha() {
@@ -107,6 +99,30 @@ public class Venta implements Serializable {
 
     public void setFormpago(String formpago) {
         this.formpago = formpago;
+    }
+
+    public Integer getDescuentoPorPorcentaje() {
+        return descuentoPorPorcentaje;
+    }
+
+    public void setDescuentoPorPorcentaje(Integer descuentoPorPorcentaje) {
+        this.descuentoPorPorcentaje = descuentoPorPorcentaje;
+    }
+
+    public Integer getDescuentoPorPrecio() {
+        return descuentoPorPrecio;
+    }
+
+    public void setDescuentoPorPrecio(Integer descuentoPorPrecio) {
+        this.descuentoPorPrecio = descuentoPorPrecio;
+    }
+
+    public List<Producto> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(List<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
     }
     
     
