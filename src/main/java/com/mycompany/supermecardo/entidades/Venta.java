@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Venta implements Serializable {
@@ -28,11 +29,15 @@ public class Venta implements Serializable {
     private String vendedor;
     private String formpago;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private LocalDate fecha;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+    
+    //@Temporal(TemporalType.TIMESTAMP)
+    private String horario;
     
     
-    private LocalTime horario;
+
 
     public Venta(String id, List<Producto> listaProductos, Double precio, Integer descuentoPorPorcentaje, Integer descuentoPorPrecio, String vendedor, String formpago) {
         this.id = id;
