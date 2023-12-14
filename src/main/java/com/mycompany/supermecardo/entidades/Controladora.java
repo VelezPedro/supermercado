@@ -1,6 +1,9 @@
 package com.mycompany.supermecardo.entidades;
 
 import com.mycompany.supermecardo.persistencia.ControladorPresistencia;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -90,15 +93,22 @@ public class Controladora {
     }
 
     public void crearVenta(List<Producto> listProducto, Double totalVentas, JTextField descPorcentaje, 
-            JTextField descPrecio, String usuario, String formVenta, Date dia, String string) {
+            JTextField descPrecio, String usuario, String formVenta, Date dia, String horario) throws ParseException {
         Venta venta =new Venta();
         venta.setListaProductos(listProducto);
         venta.setPrecio(totalVentas);
         venta.setDescuentoPorPorcentaje(Integer.valueOf(descPorcentaje.getText()));
         venta.setDescuentoPorPrecio(Integer.valueOf(descPrecio.getText()));
         venta.setVendedor(usuario);
+        
+        SimpleDateFormat fechaSdf = new SimpleDateFormat("dd/MM/yyyy");
+        venta.setHorario(horario);
+        
+        Date fecha = fechaSdf.parse(fechaSdf.format(dia));
+        //Date hora= horaSdf.parse(horaSdf.format(horario));
         venta.setFecha(dia);
-        venta.setHorario("10:10");
+        
+        
         venta.setFormpago(formVenta);
         contPersis.guardarVenta(venta);
         
