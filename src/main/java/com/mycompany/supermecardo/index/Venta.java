@@ -2,8 +2,12 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
+<<<<<<< HEAD
+import com.mycompany.supermecardo.entidades.Usuario;
+=======
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+>>>>>>> developer
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,7 +20,12 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public class Venta extends javax.swing.JFrame {
+<<<<<<< HEAD
+    
+    Usuario user = new Usuario();
+=======
     Calendar fechaActual = new GregorianCalendar();
+>>>>>>> developer
     Controladora control;
     private DefaultTableModel modeloTabla;
     private Double totalVentas = 0.0;
@@ -165,6 +174,11 @@ public class Venta extends javax.swing.JFrame {
         });
 
         cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Descuento %");
 
@@ -308,6 +322,13 @@ public class Venta extends javax.swing.JFrame {
         precioMostrar.setText("$ " + totalVentas);
         
     }//GEN-LAST:event_BuscarActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        Principal principal = new Principal(control,  user);
+        principal.setVisible(true);
+        principal.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_cancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
