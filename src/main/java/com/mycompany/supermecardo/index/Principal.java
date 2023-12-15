@@ -79,6 +79,11 @@ private Usuario user;
         salir.setBackground(new java.awt.Color(255, 51, 0));
         salir.setForeground(new java.awt.Color(255, 255, 255));
         salir.setText("Salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -217,6 +222,10 @@ private Usuario user;
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.txtNombreUsuario.setText(user.getNombreUsuario());
     }//GEN-LAST:event_formWindowOpened
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_salirActionPerformed
 
  
 
