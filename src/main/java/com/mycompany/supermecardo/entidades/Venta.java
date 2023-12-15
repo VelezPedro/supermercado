@@ -1,6 +1,8 @@
 package com.mycompany.supermecardo.entidades;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -27,6 +29,7 @@ public class Venta implements Serializable {
     private String vendedor;
     private String formpago;
     
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     
@@ -35,7 +38,8 @@ public class Venta implements Serializable {
     
     
 
-    public Venta(String id, List<Producto> listaProductos, Double precio, Integer descuentoPorPorcentaje, Integer descuentoPorPrecio, String vendedor, String formpago, Date fecha, String horario) {
+
+    public Venta(String id, List<Producto> listaProductos, Double precio, Integer descuentoPorPorcentaje, Integer descuentoPorPrecio, String vendedor, String formpago) {
         this.id = id;
         this.listaProductos = listaProductos;
         this.precio = precio;
@@ -43,8 +47,8 @@ public class Venta implements Serializable {
         this.descuentoPorPrecio = descuentoPorPrecio;
         this.vendedor = vendedor;
         this.formpago = formpago;
-        this.fecha = fecha;
-        this.horario = horario;
+        this.fecha = LocalDate.now();
+        this.horario = LocalTime.now();
     }
 
  
