@@ -2,7 +2,6 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
-import com.mycompany.supermecardo.entidades.Usuario;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -11,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class VerProductos extends javax.swing.JFrame {
 
     Controladora control = null;
-    Usuario user;
+
     public VerProductos() {
         control = new Controladora();
         initComponents();
@@ -28,7 +27,6 @@ public class VerProductos extends javax.swing.JFrame {
         tablaProductos = new javax.swing.JTable();
         eliminar = new javax.swing.JButton();
         editar = new javax.swing.JButton();
-        Volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -70,13 +68,6 @@ public class VerProductos extends javax.swing.JFrame {
             }
         });
 
-        Volver.setText("Volver");
-        Volver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -90,9 +81,7 @@ public class VerProductos extends javax.swing.JFrame {
                 .addComponent(eliminar)
                 .addGap(50, 50, 50)
                 .addComponent(editar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Volver)
-                .addGap(80, 80, 80))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,8 +91,7 @@ public class VerProductos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eliminar)
-                    .addComponent(editar)
-                    .addComponent(Volver))
+                    .addComponent(editar))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -195,11 +183,6 @@ public class VerProductos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_editarActionPerformed
 
-    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-
-        this.dispose();
-    }//GEN-LAST:event_VolverActionPerformed
-
     public void mensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {
@@ -213,7 +196,6 @@ public class VerProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Volver;
     private javax.swing.JButton editar;
     private javax.swing.JButton eliminar;
     private javax.swing.JLabel jLabel1;

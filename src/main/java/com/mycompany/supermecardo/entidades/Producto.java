@@ -15,8 +15,7 @@ public class Producto implements Serializable {
     private Integer precio;
     private String categoria;
     private String fromVenta;
-    //private Integer unidadesVendidas;
-    
+
     public Producto() {
     }
 

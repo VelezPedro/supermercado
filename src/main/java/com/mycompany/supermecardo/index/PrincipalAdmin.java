@@ -210,25 +210,22 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         //ponemos contraseña?
         String titulos[] = {"Id", "Usuario", "Contraseña", "Rol"};
         modeloTabla.setColumnIdentifiers(titulos);
-
+        
         //traemos de la bd la lista de usuarios
-        List<Usuario> listaUsuarios = control.traerUsuarios();
-
-        if (listaUsuarios != null) {
-            for (Usuario usu : listaUsuarios) {
-                Object[] objeto = {usu.getId(), usu.getNombreUsuario(), usu.getPassword(), usu.getRol()};
-                //agrega una fila nueva cada vez que ingresa al ciclo.
+        List<Usuario> listaUsuarios= control.traerUsuarios();
+        
+        if(listaUsuarios != null){
+            for(Usuario usu : listaUsuarios){
+                Object[] objeto = {usu.getId(), usu.getNombreUsuario(), usu.getPassword(),usu.getRol()};
+               //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
             }
         }
-
+        
         tablaUsuarios.setModel(modeloTabla);
     }
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Login login = new Login();
-        login.setVisible(true);
-        login.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -237,7 +234,7 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         altaUsu.setVisible(true);
         altaUsu.setLocationRelativeTo(null);
         this.dispose();
-
+        
     }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
 
     /**
