@@ -100,8 +100,6 @@
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="editar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="Volver" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -114,7 +112,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="editar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Volver" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
                   </Group>
@@ -163,14 +160,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editarActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="Volver">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Volver"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VolverActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

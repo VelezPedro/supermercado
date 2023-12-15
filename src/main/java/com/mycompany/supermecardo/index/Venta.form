@@ -103,7 +103,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="codigoProducto" max="32767" attributes="0"/>
-                                  <Component id="unidad" max="32767" attributes="0"/>
+                                  <Component id="unidadesVendidas" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="Buscar" min="-2" max="-2" attributes="0"/>
@@ -130,7 +130,7 @@
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="unidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="unidadesVendidas" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buscarPorCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -187,11 +187,11 @@
                 <Property name="text" type="java.lang.String" value="Producto:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="unidad">
+            <Component class="javax.swing.JTextField" name="unidadesVendidas">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Unidad:"/>
+                <Property name="text" type="java.lang.String" value="Cantidad:"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -337,9 +337,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
