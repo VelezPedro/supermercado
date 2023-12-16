@@ -7,6 +7,8 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -85,8 +87,18 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaUsuarios);
 
         btnEditarUsuario.setText("Editar Usuario");
+        btnEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarUsuarioActionPerformed(evt);
+            }
+        });
 
         btnBorrarUsuario.setText("Borrar Usuario");
+        btnBorrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarUsuarioActionPerformed(evt);
+            }
+        });
 
         btnNuevoUsuario.setText("Crear Nuevo Usuario");
         btnNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -237,9 +249,58 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarUsuarioActionPerformed
+        if(tablaUsuarios.getRowCount()>0){
+            if(tablaUsuarios.getSelectedRow()!=-1){
+                int idUsuario = (int) tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 0);
+                control.borrarUsuario(idUsuario);
+                mostrarMensaje("Se borró el usuario correctamente","Info","Eliminación Correcta");
+                
+                cargarTabla();
+            }
+            else{
+                mostrarMensaje("No seleccionó ningún registro", "Error", "Error al borrar");
+            }
+        }
+        else{
+                mostrarMensaje("La tabla de usuarios está vacía", "Error", "Error al borrar");
+            }
+    }//GEN-LAST:event_btnBorrarUsuarioActionPerformed
+
+    private void btnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUsuarioActionPerformed
+         if(tablaUsuarios.getRowCount()>0){
+            if(tablaUsuarios.getSelectedRow()!=-1){
+                int idUsuario = (int) tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 0);
+                
+                EdicionUsuario pantallaEdit = new EdicionUsuario(control,idUsuario);
+                pantallaEdit.setVisible(true);
+                pantallaEdit.setLocationRelativeTo(null);
+                
+               
+            }
+            else{
+                mostrarMensaje("No seleccionó ningún registro", "Error", "Error al borrar");
+            }
+        }
+        else{
+                mostrarMensaje("La tabla de usuarios está vacía", "Error", "Error al borrar");
+            }
+    }//GEN-LAST:event_btnEditarUsuarioActionPerformed
+    
+
+//metodo para mostrar carteles.    
+    public void mostrarMensaje(String mensaje, String tipo, String titulo){
+        JOptionPane optionPane= new JOptionPane(mensaje);
+        if(tipo.equals("Info")){
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if (tipo.equals("Error")){
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrarUsuario;

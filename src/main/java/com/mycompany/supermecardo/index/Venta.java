@@ -21,12 +21,14 @@ public class Venta extends javax.swing.JFrame {
     private DefaultTableModel modeloTabla;
     private Double totalVentas = 0.0;
     private List<Producto> listProducto;
+    
     private Map<Producto, Integer> unidadesVendidasPorProducto = new HashMap<>();
 
     public Venta() {
         initComponents();
         control = new Controladora();
         listProducto = new ArrayList();
+        
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
@@ -49,7 +51,7 @@ public class Venta extends javax.swing.JFrame {
         buscarPorCodigo = new javax.swing.JButton();
         codigoProducto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        unidad = new javax.swing.JTextField();
+        unidadesVendidas = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -99,7 +101,7 @@ public class Venta extends javax.swing.JFrame {
 
         jLabel5.setText("Producto:");
 
-        jLabel6.setText("Unidad:");
+        jLabel6.setText("Cantidad:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,7 +118,7 @@ public class Venta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(codigoProducto)
-                            .addComponent(unidad))
+                            .addComponent(unidadesVendidas))
                         .addGap(18, 18, 18)
                         .addComponent(Buscar)
                         .addGap(80, 80, 80)
@@ -136,7 +138,7 @@ public class Venta extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Buscar)
-                    .addComponent(unidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(unidadesVendidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(buscarPorCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -290,9 +292,10 @@ public class Venta extends javax.swing.JFrame {
         Date dia=new Date();
         SimpleDateFormat horaSdf = new SimpleDateFormat("HH:mm");
         String horario = horaSdf.format(dia);
-        //Date horario= new Date();
         String formaDeVenta= (String) formVenta.getSelectedItem();
+        
         try {
+            control.actualizarStock(unidadesVendidasPorProducto);
             control.crearVenta(listProducto,totalVentas,descPorcentaje,descPrecio,"Usuario",formaDeVenta,dia,horario);
         } catch (ParseException ex) {
             Logger.getLogger(Venta.class.getName()).log(Level.SEVERE, null, ex);
@@ -302,7 +305,7 @@ public class Venta extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         String codigoId = codigoProducto.getText();
-        Integer unidades = Integer.valueOf(unidad.getText());
+        Integer unidades = Integer.valueOf(unidadesVendidas.getText());
         cargarTablaPorProducto(codigoId, unidades);
         limpiarImput();
         precioMostrar.setText("$ " + totalVentas);
@@ -332,13 +335,15 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JLabel precioMostrar;
     private javax.swing.JTable tablaProducto;
     private javax.swing.JButton terminarVenta;
-    private javax.swing.JTextField unidad;
+    private javax.swing.JTextField unidadesVendidas;
     // End of variables declaration//GEN-END:variables
 
     //Para llenar la tabla
     private void cargarTablaPorProducto(String codigoId, Integer unidades) {
         Producto producto = control.traerProducto(codigoId);
+        
         if (producto != null) {
+            
             Object[] objeto = {producto.getNombre(),
                 unidades,
                 producto.getPrecio(),
@@ -354,7 +359,7 @@ public class Venta extends javax.swing.JFrame {
 
     private void limpiarImput() {
         codigoProducto.setText("");
-        unidad.setText("");
+        unidadesVendidas.setText("");
     }
 
 }

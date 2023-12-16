@@ -35,7 +35,9 @@ public class Venta implements Serializable {
     
     
 
-    public Venta(String id, List<Producto> listaProductos, Double precio, Integer descuentoPorPorcentaje, Integer descuentoPorPrecio, String vendedor, String formpago, Date fecha, String horario) {
+    public Venta(String id, List<Producto> listaProductos, Double precio,
+            Integer descuentoPorPorcentaje, Integer descuentoPorPrecio,
+            String vendedor, String formpago, Date fecha, String horario) {
         this.id = id;
         this.listaProductos = listaProductos;
         this.precio = precio;

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -20,7 +21,7 @@ public class Controladora {
     
 
     public void guardar(JTextField codigoId, JTextField nbrProducto, JTextField stock,
-            JTextField costo, JTextField precioVenta, String catego, String formaDeVenta) throws Exception {
+        JTextField costo, JTextField precioVenta, String catego, String formaDeVenta,Integer unidadesVendidas) throws Exception {
         Producto producto = new Producto();
         producto.setCodigoId(codigoId.getText());
         producto.setNombre(nbrProducto.getText());
@@ -29,7 +30,7 @@ public class Controladora {
         producto.setPrecio(Integer.valueOf(precioVenta.getText()));
         producto.setCategoria(catego);
         producto.setFromVenta(formaDeVenta);
-
+        producto.setUnidadesVendidas(0);
         contPersis.guardar(producto);
     }
 
@@ -94,6 +95,7 @@ public class Controladora {
 
     public void crearVenta(List<Producto> listProducto, Double totalVentas, JTextField descPorcentaje, 
             JTextField descPrecio, String usuario, String formVenta, Date dia, String horario) throws ParseException {
+        
         Venta venta =new Venta();
         venta.setListaProductos(listProducto);
         venta.setPrecio(totalVentas);
@@ -110,11 +112,36 @@ public class Controladora {
         
         
         venta.setFormpago(formVenta);
-        contPersis.guardarVenta(venta);
-        
-        
+        contPersis.guardarVenta(venta);  
     }
 
+    public void actualizarStock(Map<Producto, Integer> unidadesVendidasPorProducto) {
+        for (Map.Entry<Producto, Integer> entry : unidadesVendidasPorProducto.entrySet()) {
+            Producto key = entry.getKey();
+            Integer value = entry.getValue();
+            Producto producto =contPersis.traerProducto(key.getCodigoId());
+            producto.setStock(producto.getStock()-value);
+            producto.setUnidadesVendidas(producto.getUnidadesVendidas()+value);
+            contPersis.modificarProducto(producto);
+        }
+     }
+
+    public void crearUsuario(String usuario, String password, String rol) {
+        Usuario usu= new Usuario();
+        usu.setNombreUsuario(usuario);
+        usu.setPassword(password); 
+        usu.setRol(rol);
+        
+        contPersis.crearUsuario(usu);
+        }
+
+    public void borrarUsuario(int idUsuario) {
+        contPersis.borrarUsuario(idUsuario);
+        }
+
+    public Usuario traerUsuario(int idUsuario) {
+        return contPersis.traerUsuario(idUsuario);
+        }
    
     
 
