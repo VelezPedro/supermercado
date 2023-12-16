@@ -125,6 +125,23 @@ public class Controladora {
             contPersis.modificarProducto(producto);
         }
      }
+
+    public void crearUsuario(String usuario, String password, String rol) {
+        Usuario usu= new Usuario();
+        usu.setNombreUsuario(usuario);
+        usu.setPassword(password); 
+        usu.setRol(rol);
+        
+        contPersis.crearUsuario(usu);
+        }
+
+    public void borrarUsuario(int idUsuario) {
+        contPersis.borrarUsuario(idUsuario);
+        }
+
+    public Usuario traerUsuario(int idUsuario) {
+        return contPersis.traerUsuario(idUsuario);
+        }
    
     
 

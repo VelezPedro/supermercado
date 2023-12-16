@@ -10,6 +10,7 @@ com\mycompany\supermecardo\index\Principal.class
 com\mycompany\supermecardo\index\ModificarProducto$1.class
 com\mycompany\supermecardo\index\CrearProducto$4.class
 com\mycompany\supermecardo\index\PrincipalAdmin$4.class
+com\mycompany\supermecardo\index\AltaUsuario$4.class
 com\mycompany\supermecardo\persistencia\UsuarioJpaController.class
 com\mycompany\supermecardo\index\PrincipalAdmin.class
 com\mycompany\supermecardo\entidades\Venta.class

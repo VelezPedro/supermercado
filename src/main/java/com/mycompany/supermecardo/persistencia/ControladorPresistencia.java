@@ -62,6 +62,22 @@ public class ControladorPresistencia {
     public void guardarVenta(Venta venta) {
         ventaJpa.create(venta);
     }
+
+    public void crearUsuario(Usuario usu) {
+        usuJpa.create(usu);
+         }
+
+    public void borrarUsuario(int idUsuario) {
+        try {
+            usuJpa.destroy(idUsuario);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladorPresistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+
+    public Usuario traerUsuario(int idUsuario) {
+        return usuJpa.findUsuario(idUsuario);
+        }
     
     
 }
