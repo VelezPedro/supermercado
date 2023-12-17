@@ -10,12 +10,14 @@ com\mycompany\supermecardo\index\Principal.class
 com\mycompany\supermecardo\index\ModificarProducto$1.class
 com\mycompany\supermecardo\index\CrearProducto$4.class
 com\mycompany\supermecardo\index\PrincipalAdmin$4.class
+com\mycompany\supermecardo\index\VerProductos$5.class
 com\mycompany\supermecardo\persistencia\UsuarioJpaController.class
 com\mycompany\supermecardo\index\PrincipalAdmin.class
 com\mycompany\supermecardo\entidades\Venta.class
 com\mycompany\supermecardo\index\Venta.class
 com\mycompany\supermecardo\persistencia\ControladorPresistencia.class
 com\mycompany\supermecardo\Supermecardo.class
+com\mycompany\supermecardo\index\Principal$7.class
 com\mycompany\supermecardo\index\PrincipalAdmin$1.class
 com\mycompany\supermecardo\index\Venta$2.class
 com\mycompany\supermecardo\index\AltaUsuario$2.class
@@ -27,6 +29,7 @@ com\mycompany\supermecardo\index\Principal$5.class
 com\mycompany\supermecardo\index\CrearProducto.class
 com\mycompany\supermecardo\index\VerProductos$1.class
 com\mycompany\supermecardo\index\BuscarPorCodigo$2.class
+com\mycompany\supermecardo\index\Venta$5.class
 com\mycompany\supermecardo\index\Principal$1.class
 com\mycompany\supermecardo\index\Login.class
 com\mycompany\supermecardo\persistencia\ProductoJpaController.class

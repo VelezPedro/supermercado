@@ -228,6 +228,7 @@ public class CrearProducto extends javax.swing.JFrame {
         Principal principal=new Principal(control,user);
         principal.setVisible(true);
         principal.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed

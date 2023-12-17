@@ -2,6 +2,7 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
+import com.mycompany.supermecardo.entidades.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class Venta extends javax.swing.JFrame {
     Calendar fechaActual = new GregorianCalendar();
     Controladora control;
+    Usuario user;
     private DefaultTableModel modeloTabla;
     private Double totalVentas = 0.0;
     private List<Producto> listProducto;
@@ -51,6 +53,7 @@ public class Venta extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         unidad = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         precioMostrar = new javax.swing.JLabel();
@@ -101,6 +104,13 @@ public class Venta extends javax.swing.JFrame {
 
         jLabel6.setText("Unidad:");
 
+        btnVolver.setText("<-Volver<-");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -125,6 +135,10 @@ public class Venta extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(231, 231, 231)
+                .addComponent(btnVolver)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,9 +153,11 @@ public class Venta extends javax.swing.JFrame {
                     .addComponent(unidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(buscarPorCodigo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
+                .addGap(42, 42, 42)
+                .addComponent(btnVolver)
+                .addContainerGap())
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -309,9 +325,18 @@ public class Venta extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BuscarActionPerformed
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+        Principal principal=new Principal(control,user);
+        principal.setVisible(true);
+        principal.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JButton buscarPorCodigo;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField codigoProducto;
