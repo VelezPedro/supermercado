@@ -3,6 +3,7 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
+import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -10,7 +11,8 @@ import javax.swing.JOptionPane;
 public class EdicionUsuario extends javax.swing.JFrame {
 int idUsuario;
 Controladora control;
-    
+Usuario usu;
+
     public EdicionUsuario(Controladora control, int idUsuario) {
         initComponents();
         this.idUsuario = idUsuario;
@@ -158,15 +160,28 @@ Controladora control;
         String usuario= txtUsuario.getText();
         String password= txtPassword.getText();
         String rol= (String) cmbRol.getSelectedItem();
-
+        
+        control.editarUsuario(usu,usuario, password, rol);
+        
+        mostrarMensaje("Usuario editado correctamente", "Info", "Creación de Usuario exitosa");
+        this.dispose();
        
 
     }                                                 
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
-        Usuario usu = control.traerUsuario(idUsuario);
+        usu = control.traerUsuario(idUsuario);
         txtUsuario.setText(usu.getNombreUsuario());
         txtPassword.setText(usu.getPassword());
+        List<String> listaRoles = control.traerRoles();
+        
+        cmbRol.setSelectedItem(usu.getRol());
+        if(listaRoles!=null){
+            for(String rol: listaRoles){
+            cmbRol.addItem(rol);
+            }
+        }
+        
         cmbRol.setSelectedItem(usu.getRol());
         
     }                                 

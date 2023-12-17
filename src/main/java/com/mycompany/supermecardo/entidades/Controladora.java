@@ -142,6 +142,14 @@ public class Controladora {
     public Usuario traerUsuario(int idUsuario) {
         return contPersis.traerUsuario(idUsuario);
         }
+
+    public void editarUsuario(Usuario usu, String usuario, String password, String rol) {
+      usu.setNombreUsuario(usuario);
+      usu.setPassword(password);
+      usu.setRol(rol);
+      
+      contPersis.editarUsuario(usu);
+    }
    
     
 
