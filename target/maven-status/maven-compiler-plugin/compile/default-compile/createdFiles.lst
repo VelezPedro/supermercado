@@ -1,6 +1,8 @@
 com\mycompany\supermecardo\index\BuscarPorCodigo.class
 com\mycompany\supermecardo\index\Login$1.class
+com\mycompany\supermecardo\index\PrincipalAdmin$7.class
 com\mycompany\supermecardo\index\BuscarPorCodigo$3.class
+com\mycompany\supermecardo\index\EdicionUsuario$1.class
 com\mycompany\supermecardo\index\Venta$3.class
 com\mycompany\supermecardo\index\VerProductos$2.class
 com\mycompany\supermecardo\index\ModificarProducto$5.class
@@ -10,11 +12,8 @@ com\mycompany\supermecardo\index\Principal.class
 com\mycompany\supermecardo\index\ModificarProducto$1.class
 com\mycompany\supermecardo\index\CrearProducto$4.class
 com\mycompany\supermecardo\index\PrincipalAdmin$4.class
-<<<<<<< HEAD
 com\mycompany\supermecardo\index\VerProductos$5.class
-=======
 com\mycompany\supermecardo\index\AltaUsuario$4.class
->>>>>>> developer
 com\mycompany\supermecardo\persistencia\UsuarioJpaController.class
 com\mycompany\supermecardo\index\PrincipalAdmin.class
 com\mycompany\supermecardo\entidades\Venta.class
@@ -22,8 +21,10 @@ com\mycompany\supermecardo\index\Venta.class
 com\mycompany\supermecardo\persistencia\ControladorPresistencia.class
 com\mycompany\supermecardo\Supermecardo.class
 com\mycompany\supermecardo\index\Principal$7.class
+com\mycompany\supermecardo\index\Venta$6.class
 com\mycompany\supermecardo\index\PrincipalAdmin$1.class
 com\mycompany\supermecardo\index\Venta$2.class
+com\mycompany\supermecardo\index\PrincipalAdmin$8.class
 com\mycompany\supermecardo\index\AltaUsuario$2.class
 com\mycompany\supermecardo\index\ModificarProducto$2.class
 com\mycompany\supermecardo\index\CrearProducto$6.class
@@ -39,15 +40,18 @@ com\mycompany\supermecardo\index\Login.class
 com\mycompany\supermecardo\persistencia\ProductoJpaController.class
 com\mycompany\supermecardo\index\VerProductos$4.class
 com\mycompany\supermecardo\index\CrearProducto$3.class
+com\mycompany\supermecardo\index\EdicionUsuario$2.class
 com\mycompany\supermecardo\index\Login$2.class
 com\mycompany\supermecardo\index\ModificarProducto$3.class
 com\mycompany\supermecardo\index\CrearProducto$2.class
+com\mycompany\supermecardo\index\EdicionUsuario.class
 com\mycompany\supermecardo\index\Venta$1.class
 com\mycompany\supermecardo\persistencia\exceptions\IllegalOrphanException.class
 com\mycompany\supermecardo\entidades\Producto.class
 com\mycompany\supermecardo\persistencia\VentaJpaController.class
 com\mycompany\supermecardo\index\CrearProducto$5.class
 com\mycompany\supermecardo\entidades\Usuario_.class
+com\mycompany\supermecardo\index\EdicionUsuario$3.class
 com\mycompany\supermecardo\index\PrincipalAdmin$5.class
 com\mycompany\supermecardo\index\BuscarPorCodigo$1.class
 com\mycompany\supermecardo\index\Login$3.class
@@ -65,6 +69,7 @@ com\mycompany\supermecardo\persistencia\exceptions\PreexistingEntityException.cl
 com\mycompany\supermecardo\index\Venta$4.class
 com\mycompany\supermecardo\index\AltaUsuario.class
 com\mycompany\supermecardo\index\Principal$6.class
+com\mycompany\supermecardo\index\EdicionUsuario$4.class
 com\mycompany\supermecardo\index\PrincipalAdmin$3.class
 com\mycompany\supermecardo\index\AltaUsuario$3.class
 com\mycompany\supermecardo\index\PrincipalAdmin$6.class
