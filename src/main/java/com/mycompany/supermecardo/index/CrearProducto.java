@@ -235,7 +235,7 @@ public class CrearProducto extends javax.swing.JFrame {
         try {
         String catego= (String) categoria.getSelectedItem();
         String formaDeVenta= (String) formVenta.getSelectedItem();
-            control.guardar(codigoId,nbrProducto,stock,costo,precioVenta,catego,formaDeVenta);
+            control.guardar(codigoId,nbrProducto,stock,costo,precioVenta,catego,formaDeVenta,0);
             JOptionPane optionPane=new JOptionPane("Extito en guardar = " + nbrProducto.getText());
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
             JDialog dialog=optionPane.createDialog("Guarda Productos");
