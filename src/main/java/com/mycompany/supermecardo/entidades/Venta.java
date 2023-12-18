@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,7 +25,10 @@ public class Venta implements Serializable {
     private Double precio;
     private Integer descuentoPorPorcentaje;
     private Integer descuentoPorPrecio;
-    private String vendedor;
+    
+    @ManyToOne
+    private Usuario vendedor;
+    
     private String formpago;
     
     @Temporal(TemporalType.TIMESTAMP)
@@ -32,12 +36,8 @@ public class Venta implements Serializable {
     
     //@Temporal(TemporalType.TIMESTAMP)
     private String horario;
-    
-    
 
-    public Venta(String id, List<Producto> listaProductos, Double precio,
-            Integer descuentoPorPorcentaje, Integer descuentoPorPrecio,
-            String vendedor, String formpago, Date fecha, String horario) {
+    public Venta(String id, List<Producto> listaProductos, Double precio, Integer descuentoPorPorcentaje, Integer descuentoPorPrecio, Usuario vendedor, String formpago, Date fecha, String horario) {
         this.id = id;
         this.listaProductos = listaProductos;
         this.precio = precio;
@@ -48,8 +48,7 @@ public class Venta implements Serializable {
         this.fecha = fecha;
         this.horario = horario;
     }
-
- 
+    
     
     public Venta() {
     }
@@ -87,13 +86,14 @@ public class Venta implements Serializable {
         this.horario = horario;
     }
 
-    public String getVendedor() {
+    public Usuario getVendedor() {
         return vendedor;
     }
 
-    public void setVendedor(String vendedor) {
+    public void setVendedor(Usuario vendedor) {
         this.vendedor = vendedor;
     }
+
 
     public String getFormpago() {
         return formpago;
