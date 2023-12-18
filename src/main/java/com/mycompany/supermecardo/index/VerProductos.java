@@ -175,7 +175,6 @@ public class VerProductos extends javax.swing.JFrame {
             //controlo que haya algo seleccionado
             if (tablaProductos.getSelectedRow() != -1) {
                 String codigoId = (String) (tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
-                System.out.println(codigoId);
                 
                 ModificarProducto pantallModf= new ModificarProducto(codigoId);
                 pantallModf.setVisible(true);

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Tecno\Documents\NetBeansProjects\superk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\UsuarioJpaController.java
 C:\Users\Tecno\Documents\NetBeansProjects\superk2\supermercado\src\main\java\com\mycompany\supermecardo\index\CrearProducto.java
 C:\Users\Tecno\Documents\NetBeansProjects\superk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\exceptions\NonexistentEntityException.java
@@ -20,3 +21,28 @@ C:\Users\Tecno\Documents\NetBeansProjects\superk2\supermercado\src\main\java\com
 C:\Users\Tecno\Documents\NetBeansProjects\superk2\supermercado\src\main\java\com\mycompany\supermecardo\index\EdicionUsuario.java
 C:\Users\Tecno\Documents\NetBeansProjects\superk2\supermercado\src\main\java\com\mycompany\supermecardo\Supermecardo.java
 C:\Users\Tecno\Documents\NetBeansProjects\superk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\exceptions\PreexistingEntityException.java
+=======
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\AltaUsuario.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\UsuarioJpaController.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\entidades\Usuario.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\exceptions\NonexistentEntityException.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\exceptions\PreexistingEntityException.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\EdicionUsuario.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\ModificarProducto.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\Venta.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\VerProductos.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\entidades\Producto.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\entidades\Venta.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\BuscarPorCodigo.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\Login.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\Principal.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\exceptions\IllegalOrphanException.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\EditarVenta.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\entidades\Controladora.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\ControladorPresistencia.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\Supermecardo.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\PrincipalAdmin.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\ProductoJpaController.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\persistencia\VentaJpaController.java
+C:\Users\maxic\Downloads\Supermerk2\supermercado\src\main\java\com\mycompany\supermecardo\index\CrearProducto.java
+>>>>>>> developer

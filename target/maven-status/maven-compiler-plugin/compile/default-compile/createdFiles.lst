@@ -19,6 +19,7 @@ com\mycompany\supermecardo\index\PrincipalAdmin.class
 com\mycompany\supermecardo\entidades\Venta.class
 com\mycompany\supermecardo\index\Venta.class
 com\mycompany\supermecardo\persistencia\ControladorPresistencia.class
+com\mycompany\supermecardo\index\EditarVenta$3.class
 com\mycompany\supermecardo\Supermecardo.class
 com\mycompany\supermecardo\index\Principal$7.class
 com\mycompany\supermecardo\index\Venta$6.class
@@ -41,6 +42,7 @@ com\mycompany\supermecardo\persistencia\ProductoJpaController.class
 com\mycompany\supermecardo\index\VerProductos$4.class
 com\mycompany\supermecardo\index\CrearProducto$3.class
 com\mycompany\supermecardo\index\EdicionUsuario$2.class
+com\mycompany\supermecardo\index\EditarVenta$2.class
 com\mycompany\supermecardo\index\Login$2.class
 com\mycompany\supermecardo\index\ModificarProducto$3.class
 com\mycompany\supermecardo\index\Venta$8.class
@@ -54,6 +56,7 @@ com\mycompany\supermecardo\index\CrearProducto$5.class
 com\mycompany\supermecardo\entidades\Usuario_.class
 com\mycompany\supermecardo\index\EdicionUsuario$3.class
 com\mycompany\supermecardo\index\PrincipalAdmin$5.class
+com\mycompany\supermecardo\index\EditarVenta$1.class
 com\mycompany\supermecardo\index\BuscarPorCodigo$1.class
 com\mycompany\supermecardo\index\Login$3.class
 com\mycompany\supermecardo\entidades\Controladora.class
@@ -62,6 +65,7 @@ com\mycompany\supermecardo\persistencia\exceptions\NonexistentEntityException.cl
 com\mycompany\supermecardo\index\VerProductos$3.class
 com\mycompany\supermecardo\entidades\Producto_.class
 com\mycompany\supermecardo\index\PrincipalAdmin$2.class
+com\mycompany\supermecardo\index\EditarVenta.class
 com\mycompany\supermecardo\index\VerProductos.class
 com\mycompany\supermecardo\index\Principal$3.class
 com\mycompany\supermecardo\index\CrearProducto$1.class
