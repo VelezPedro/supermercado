@@ -37,6 +37,7 @@ public class Venta extends javax.swing.JFrame {
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
+//                return column == 1;      CON ESTO PERMITE EDITAR LA COLUMNA QUE SE DESEE
                 return false;
             }
         };
@@ -409,8 +410,10 @@ public class Venta extends javax.swing.JFrame {
         if (tablaProducto.getRowCount() > 0) {
             //controlo que haya algo seleccionado
             if (tablaProducto.getSelectedRow() != -1) {
-                String codigoId = (String) (tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 0));
-                modeloTabla.removeRow(tablaProducto.getSelectedRow());
+                int precioProd = (int) (tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 3));
+                listProducto.remove(tablaProducto.getSelectedRow());
+                modeloTabla.removeRow(tablaProducto.getSelectedRow());                
+                totalVentas -= precioProd;
                 precioMostrar.setText("$ " + totalVentas);
             } else {
                 mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
@@ -421,7 +424,22 @@ public class Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        if (tablaProducto.getRowCount() > 0) {
+            //controlo que haya algo seleccionado
+            if (tablaProducto.getSelectedRow() != -1) {
+//                String cantidadVenta = (String) (tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 1));  
+                Producto p = listProducto.get(tablaProducto.getSelectedRow());
+                EditarVenta pantallaEditar = new EditarVenta(p);
+                pantallaEditar.setVisible(true);
+                pantallaEditar.setLocationRelativeTo(null);
+                modeloTabla.setValueAt(p.getUnidadesVendidas(), tablaProducto.getSelectedRow(), 1);
+                tablaProducto.setModel(modeloTabla);
+            } else {
+                mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
+            }
+        } else {
+            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
 
@@ -470,6 +488,7 @@ public class Venta extends javax.swing.JFrame {
 
             modeloTabla.addRow(objeto);
             totalVentas += (Integer) objeto[3];
+            producto.setUnidadesVendidas(unidades);
             listProducto.add(producto);
             unidadesVendidasPorProducto.put(producto, unidades);
         }
