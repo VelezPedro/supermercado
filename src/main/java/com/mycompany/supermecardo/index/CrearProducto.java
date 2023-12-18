@@ -14,8 +14,9 @@ public class CrearProducto extends javax.swing.JFrame {
     //quiza lo tenga que hacer como arriba
     Usuario user;
     
-    public CrearProducto() {
+    public CrearProducto(Usuario user) {
         initComponents();
+        this.user=user;
     }
 
    

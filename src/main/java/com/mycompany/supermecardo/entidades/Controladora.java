@@ -94,7 +94,7 @@ public class Controladora {
     }
 
     public void crearVenta(List<Producto> listProducto, Double totalVentas, JTextField descPorcentaje, 
-            JTextField descPrecio, String usuario, String formVenta, Date dia, String horario) throws ParseException {
+            JTextField descPrecio, Usuario usuario, String formVenta, Date dia, String horario) throws ParseException {
         
         Venta venta =new Venta();
         venta.setListaProductos(listProducto);
@@ -150,6 +150,22 @@ public class Controladora {
       
       contPersis.editarUsuario(usu);
     }
+
+    public Producto traerProductoXNombre(String nombre) {
+    return contPersis.buscarXNombre(nombre);
+    }
+
+    public List<Venta> traerVentas() {
+    return contPersis.traerListVentas();
+    }
+
+    public List<Venta> traerVentasVendedor(String vendedor) {
+        return contPersis.traerVentasVendedor(vendedor);
+    }
+
+   
+
+    
    
     
 

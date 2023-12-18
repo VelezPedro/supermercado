@@ -133,4 +133,12 @@ public class VentaJpaController implements Serializable {
         }
     }
     
+         public List<Venta> listaVentasVendedor(String nombre){
+        EntityManager em = getEntityManager();
+        List<Venta> listaVentas= (List<Venta>)
+                em.createQuery("SELECT v FROM Venta v WHERE v.vendedor.nombreUsuario LIKE :nombre").
+                setParameter("nombre", nombre).getResultList();
+        return listaVentas;
+    }
+    
 }
