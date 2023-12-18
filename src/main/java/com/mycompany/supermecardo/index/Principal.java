@@ -39,7 +39,7 @@ private Usuario user;
         });
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 153, 51))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 153, 51))); // NOI18N
 
         agrStock.setText("Agregar Stock");
         agrStock.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +79,11 @@ private Usuario user;
         salir.setBackground(new java.awt.Color(255, 51, 0));
         salir.setForeground(new java.awt.Color(255, 255, 255));
         salir.setText("Salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -199,12 +204,14 @@ private Usuario user;
         crearProduc.setVisible(true);
         //Cuando la pantalla se abra lo hace en el medio
         crearProduc.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_crearProductoActionPerformed
 
     private void verProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verProductosActionPerformed
         VerProductos verProdu=new VerProductos();
         verProdu.setVisible(true);
         verProdu.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_verProductosActionPerformed
 
     private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
@@ -217,6 +224,10 @@ private Usuario user;
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.txtNombreUsuario.setText(user.getNombreUsuario());
     }//GEN-LAST:event_formWindowOpened
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_salirActionPerformed
 
  
 
