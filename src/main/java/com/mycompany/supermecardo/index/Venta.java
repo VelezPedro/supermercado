@@ -295,7 +295,9 @@ public class Venta extends javax.swing.JFrame {
         String formaDeVenta= (String) formVenta.getSelectedItem();
         
         try {
-            control.actualizarStock(unidadesVendidasPorProducto);
+            control.actualizarStock
+        
+        (unidadesVendidasPorProducto);
             control.crearVenta(listProducto,totalVentas,descPorcentaje,descPrecio,"Usuario",formaDeVenta,dia,horario);
         } catch (ParseException ex) {
             Logger.getLogger(Venta.class.getName()).log(Level.SEVERE, null, ex);
