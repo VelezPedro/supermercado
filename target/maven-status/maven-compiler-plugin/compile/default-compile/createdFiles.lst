@@ -43,6 +43,7 @@ com\mycompany\supermecardo\index\CrearProducto$3.class
 com\mycompany\supermecardo\index\EdicionUsuario$2.class
 com\mycompany\supermecardo\index\Login$2.class
 com\mycompany\supermecardo\index\ModificarProducto$3.class
+com\mycompany\supermecardo\index\Venta$8.class
 com\mycompany\supermecardo\index\CrearProducto$2.class
 com\mycompany\supermecardo\index\EdicionUsuario.class
 com\mycompany\supermecardo\index\Venta$1.class
@@ -73,4 +74,5 @@ com\mycompany\supermecardo\index\EdicionUsuario$4.class
 com\mycompany\supermecardo\index\PrincipalAdmin$3.class
 com\mycompany\supermecardo\index\AltaUsuario$3.class
 com\mycompany\supermecardo\index\PrincipalAdmin$6.class
+com\mycompany\supermecardo\index\Venta$7.class
 com\mycompany\supermecardo\index\ModificarProducto.class
