@@ -193,9 +193,10 @@ private Usuario user;
     
     
     private void verVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verVentaActionPerformed
-        VentasTotales ventasTotales=new VentasTotales();
+        VentasTotales ventasTotales=new VentasTotales(user);
         ventasTotales.setVisible(true);
         ventasTotales.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_verVentaActionPerformed
 
     private void agrStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agrStockActionPerformed
@@ -234,6 +235,9 @@ private Usuario user;
     }//GEN-LAST:event_formWindowOpened
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_salirActionPerformed
 
