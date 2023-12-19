@@ -218,7 +218,7 @@ public class VentasTotales extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbVendedorActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        this.total=0.0;
         String vendedor = (String) cmbVendedor.getSelectedItem();
         //String fecha;
 
