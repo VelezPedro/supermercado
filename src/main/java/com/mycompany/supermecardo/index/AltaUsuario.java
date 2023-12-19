@@ -10,10 +10,12 @@ import javax.swing.JOptionPane;
 public class AltaUsuario extends javax.swing.JFrame {
 
     Controladora control;
+    Usuario user;
   
-    public AltaUsuario(Controladora control) {
+    public AltaUsuario(Controladora control, Usuario user) {
         initComponents();
         this.control=control;
+        this.user = user;
     }
 
 
@@ -63,6 +65,11 @@ public class AltaUsuario extends javax.swing.JFrame {
         txtPassword.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         cmbRol.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        cmbRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbRolActionPerformed(evt);
+            }
+        });
 
         btnGuardarUsuario.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnGuardarUsuario.setText("Guardar");
@@ -82,6 +89,11 @@ public class AltaUsuario extends javax.swing.JFrame {
 
         btnVolver.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -189,6 +201,17 @@ public class AltaUsuario extends javax.swing.JFrame {
         txtPassword.setText("");
         
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void cmbRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbRolActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        PrincipalAdmin principal=new PrincipalAdmin(control,user);
+        principal.setVisible(true);
+        principal.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     public void mostrarMensaje(String mensaje, String tipo, String titulo){
         JOptionPane optionPane= new JOptionPane(mensaje);

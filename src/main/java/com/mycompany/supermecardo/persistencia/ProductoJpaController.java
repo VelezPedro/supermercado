@@ -137,4 +137,11 @@ public class ProductoJpaController implements Serializable {
         }
     }
     
+        
+         public Producto findProductoPorNombre(String nombre){
+        EntityManager em = getEntityManager();
+        Producto producto= (Producto) em.createQuery("SELECT p FROM Producto p WHERE p.nombre LIKE :nombre").
+                setParameter("nombre", nombre).getSingleResult();
+        return producto;
+    }
 }

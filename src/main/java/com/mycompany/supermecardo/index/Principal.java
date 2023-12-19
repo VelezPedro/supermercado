@@ -19,6 +19,7 @@ private Usuario user;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         agrStock = new javax.swing.JButton();
@@ -39,7 +40,7 @@ private Usuario user;
         });
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 153, 51))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 153, 51))); // NOI18N
 
         agrStock.setText("Agregar Stock");
         agrStock.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +133,11 @@ private Usuario user;
 
         txtNombreUsuario.setEditable(false);
         txtNombreUsuario.setText("jTextField1");
+        txtNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -187,7 +193,10 @@ private Usuario user;
     
     
     private void verVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verVentaActionPerformed
-        // TODO add your handling code here:
+        VentasTotales ventasTotales=new VentasTotales(user);
+        ventasTotales.setVisible(true);
+        ventasTotales.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_verVentaActionPerformed
 
     private void agrStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agrStockActionPerformed
@@ -199,7 +208,7 @@ private Usuario user;
     private void crearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearProductoActionPerformed
         // Metodo action de botom crear prodcutos
         //Creamos la instancia de la pantalla a que nos va a dirigir
-        CrearProducto crearProduc = new CrearProducto();
+        CrearProducto crearProduc = new CrearProducto(user);
         //setVisible cuando me cargue la pantalla , lo hace visible
         crearProduc.setVisible(true);
         //Cuando la pantalla se abra lo hace en el medio
@@ -208,14 +217,14 @@ private Usuario user;
     }//GEN-LAST:event_crearProductoActionPerformed
 
     private void verProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verProductosActionPerformed
-        VerProductos verProdu=new VerProductos();
+        VerProductos verProdu=new VerProductos(user);
         verProdu.setVisible(true);
         verProdu.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_verProductosActionPerformed
 
     private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
-        Venta venta=new Venta();
+        VentaVista venta=new VentaVista(user);
         venta.setVisible(true);
         venta.setLocationRelativeTo(null);
         this.dispose();
@@ -226,8 +235,15 @@ private Usuario user;
     }//GEN-LAST:event_formWindowOpened
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_salirActionPerformed
+
+    private void txtNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreUsuarioActionPerformed
 
  
 
@@ -238,6 +254,7 @@ private Usuario user;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton salir;
     private javax.swing.JTextField txtNombreUsuario;
     private javax.swing.JButton venta;

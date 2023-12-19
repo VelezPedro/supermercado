@@ -13,8 +13,9 @@ public class VerProductos extends javax.swing.JFrame {
     Controladora control = null;
     Usuario user;
 
-    public VerProductos() {
+    public VerProductos(Usuario user) {
         control = new Controladora();
+        this.user = user;
         initComponents();
     }
 
