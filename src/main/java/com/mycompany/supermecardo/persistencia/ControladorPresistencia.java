@@ -98,4 +98,8 @@ public class ControladorPresistencia {
         return ventaJpa.listaVentasVendedor(vendedor);
     }
 
+    
+
+    
+
 }
