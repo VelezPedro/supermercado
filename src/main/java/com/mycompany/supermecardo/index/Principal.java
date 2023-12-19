@@ -200,8 +200,10 @@ private Usuario user;
     }//GEN-LAST:event_verVentaActionPerformed
 
     private void agrStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agrStockActionPerformed
-        // Metodo action de botom agregarProductos
-        
+        AgregarStock agrStock=new AgregarStock(user);
+        agrStock.setVisible(true);
+        agrStock.setLocationRelativeTo(null);
+        this.dispose();
         
     }//GEN-LAST:event_agrStockActionPerformed
 

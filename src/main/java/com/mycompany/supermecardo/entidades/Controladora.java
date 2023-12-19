@@ -15,22 +15,20 @@ public class Controladora {
     ControladorPresistencia contPersis = new ControladorPresistencia();
 
     public Controladora() {
-        contPersis= new ControladorPresistencia();
+        contPersis = new ControladorPresistencia();
     }
-    
-    
 
     public void guardar(JTextField codigoId, JTextField nbrProducto, JTextField stock,
-        JTextField costo, JTextField precioVenta, String catego, String formaDeVenta,Integer unidadesVendidas) throws Exception {
+            JTextField costo, JTextField precioVenta, String catego, String formaDeVenta, Integer unidadesVendidas) throws Exception {
         Producto producto = new Producto();
         producto.setCodigoId(codigoId.getText());
         producto.setNombre(nbrProducto.getText());
-        producto.setStock(Integer.valueOf(stock.getText()));
+        producto.setStock(Double.valueOf(stock.getText()));
         producto.setCosto(Integer.valueOf(costo.getText()));
         producto.setPrecio(Integer.valueOf(precioVenta.getText()));
         producto.setCategoria(catego);
         producto.setFromVenta(formaDeVenta);
-        producto.setUnidadesVendidas(0);
+        producto.setUnidadesVendidas(0.0);
         contPersis.guardar(producto);
     }
 
@@ -51,7 +49,7 @@ public class Controladora {
             String catego, String formaDeVenta) {
 
         producto.setNombre(nbrProducto.getText());
-        producto.setStock(Integer.valueOf(stock.getText()));
+        producto.setStock(Double.valueOf(stock.getText()));
         producto.setCosto(Integer.valueOf(costo.getText()));
         producto.setPrecio(Integer.valueOf(precioVenta.getText()));
         producto.setCategoria(catego);
@@ -61,116 +59,103 @@ public class Controladora {
 
     public Usuario validarUsuario(String usuario, String password) {
         //String mensaje="";
-        Usuario user= null;
-        
-        List<Usuario> listaUsuarios= contPersis.traerUsuarios();
-        for(Usuario usu : listaUsuarios){
-            if(usu.getNombreUsuario().equals(usuario)){
-                if(usu.getPassword().equals(password)){
+        Usuario user = null;
+
+        List<Usuario> listaUsuarios = contPersis.traerUsuarios();
+        for (Usuario usu : listaUsuarios) {
+            if (usu.getNombreUsuario().equals(usuario)) {
+                if (usu.getPassword().equals(password)) {
                     //mensaje= "Usuario y contraseña correctos. Bienvenido/a!";
                     user = usu;
                     return user;
-                }
-                else{
-                    user=null;
+                } else {
+                    user = null;
                     return user;
                 }
+            } else {
+
+                user = null;
             }
-            else {
-                
-                user=null;
-            }
-            
+
         }
         return user;
     }
 
     public List<Usuario> traerUsuarios() {
         return contPersis.traerUsuarios();
-         }
+    }
 
     public List<String> traerRoles() {
         return contPersis.traerRoles();
     }
 
-    public void crearVenta(List<Producto> listProducto, Double totalVentas, JTextField descPorcentaje, 
+    public void crearVenta(List<Producto> listProducto, Double totalVentas, JTextField descPorcentaje,
             JTextField descPrecio, Usuario usuario, String formVenta, Date dia, String horario) throws ParseException {
-        
-        Venta venta =new Venta();
+
+        Venta venta = new Venta();
         venta.setListaProductos(listProducto);
-        venta.setPrecio(totalVentas);
         venta.setDescuentoPorPorcentaje(Integer.valueOf(descPorcentaje.getText()));
         venta.setDescuentoPorPrecio(Integer.valueOf(descPrecio.getText()));
         venta.setVendedor(usuario);
-        
+
+        venta.setPrecio(totalVentas);
+
         SimpleDateFormat fechaSdf = new SimpleDateFormat("dd/MM/yyyy");
         venta.setHorario(horario);
-        
+
         Date fecha = fechaSdf.parse(fechaSdf.format(dia));
         //Date hora= horaSdf.parse(horaSdf.format(horario));
         venta.setFecha(dia);
-        
-        
         venta.setFormpago(formVenta);
-        contPersis.guardarVenta(venta);  
+        contPersis.guardarVenta(venta);
     }
 
-    public void actualizarStock(Map<Producto, Integer> unidadesVendidasPorProducto) {
-        for (Map.Entry<Producto, Integer> entry : unidadesVendidasPorProducto.entrySet()) {
+    public void actualizarStock(Map<Producto, Double> unidadesVendidasPorProducto) {
+        for (Map.Entry<Producto, Double> entry : unidadesVendidasPorProducto.entrySet()) {
             Producto key = entry.getKey();
-            Integer value = entry.getValue();
-            Producto producto =contPersis.traerProducto(key.getCodigoId());
-            producto.setStock(producto.getStock()-value);
-            producto.setUnidadesVendidas(producto.getUnidadesVendidas()+value);
+            Double value = entry.getValue();
+            Producto producto = contPersis.traerProducto(key.getCodigoId());
+            producto.setStock(producto.getStock() - value);
+            producto.setUnidadesVendidas(producto.getUnidadesVendidas() + value);
             contPersis.modificarProducto(producto);
         }
-     }
+    }
 
     public void crearUsuario(String usuario, String password, String rol) {
-        Usuario usu= new Usuario();
+        Usuario usu = new Usuario();
         usu.setNombreUsuario(usuario);
-        usu.setPassword(password); 
+        usu.setPassword(password);
         usu.setRol(rol);
-        
+
         contPersis.crearUsuario(usu);
-        }
+    }
 
     public void borrarUsuario(int idUsuario) {
         contPersis.borrarUsuario(idUsuario);
-        }
+    }
 
     public Usuario traerUsuario(int idUsuario) {
         return contPersis.traerUsuario(idUsuario);
-        }
+    }
 
     public void editarUsuario(Usuario usu, String usuario, String password, String rol) {
-      usu.setNombreUsuario(usuario);
-      usu.setPassword(password);
-      usu.setRol(rol);
-      
-      contPersis.editarUsuario(usu);
+        usu.setNombreUsuario(usuario);
+        usu.setPassword(password);
+        usu.setRol(rol);
+
+        contPersis.editarUsuario(usu);
     }
 
     public Producto traerProductoXNombre(String nombre) {
-    return contPersis.buscarXNombre(nombre);
+        return contPersis.buscarXNombre(nombre);
     }
 
     public List<Venta> traerVentas() {
-    return contPersis.traerListVentas();
+        return contPersis.traerListVentas();
     }
 
     public List<Venta> traerVentasVendedor(String vendedor) {
         return contPersis.traerVentasVendedor(vendedor);
     }
-
-   
-
-    
-   
-    
-
-    
-
-   
 
 }

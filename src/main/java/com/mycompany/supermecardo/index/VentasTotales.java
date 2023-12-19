@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VentasTotales extends javax.swing.JFrame {
-
+    //7a 15hs mañana /15hs a 23hs tarde / 23hs a 07noche
     private DefaultTableModel modeloTabla;
     private Usuario user;
     Controladora control;
