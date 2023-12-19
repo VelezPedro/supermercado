@@ -9,14 +9,16 @@ import javax.swing.table.DefaultTableModel;
 public class VentasTotales extends javax.swing.JFrame {
 
     private DefaultTableModel modeloTabla;
+    private Usuario user;
     Controladora control;
     Double total = 0.0;
     List<Usuario> listaUsuarios;
     List<Venta> listaVentaVendedor;
 
-    public VentasTotales() {
+    public VentasTotales(Usuario user) {
         initComponents();
         control = new Controladora();
+        this.user = user;
         String titulos[] = {"Nombre/Vendedor", "Fecha", "Hora", "Monto"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
@@ -205,7 +207,10 @@ public class VentasTotales extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Principal principal=new Principal(control,user);
+        principal.setVisible(true);
+        principal.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmbVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVendedorActionPerformed
