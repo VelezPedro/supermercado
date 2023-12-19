@@ -158,4 +158,9 @@ public class Controladora {
         return contPersis.traerVentasVendedor(vendedor);
     }
 
+    public void agregarStock(Producto producto, Double stock) {
+         producto.setStock(stock);
+         contPersis.modificarProducto(producto);
+    }
+
 }
