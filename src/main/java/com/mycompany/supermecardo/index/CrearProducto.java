@@ -2,24 +2,41 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 public class CrearProducto extends javax.swing.JFrame {
 
-    Controladora control=new Controladora();
+    Controladora control = new Controladora();
     //quiza lo tenga que hacer como arriba
     Usuario user;
-    
+
     public CrearProducto(Usuario user) {
         initComponents();
-        this.user=user;
+        this.user = user;
+        PlaceholderExample();
+        // Configurar el botón como predeterminado y agregar ActionListener para la tecla Enter
+        getRootPane().setDefaultButton(guardar);
+        getRootPane().registerKeyboardAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guardar.doClick(); // Simular un clic en el botón
+
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,16 +44,15 @@ public class CrearProducto extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        nbrProducto = new javax.swing.JTextField();
-        codigoId = new javax.swing.JTextField();
-        costo = new javax.swing.JTextField();
-        precioVenta = new javax.swing.JTextField();
-        formVenta = new javax.swing.JComboBox<>();
-        categoria = new javax.swing.JComboBox<>();
-        limpiar = new javax.swing.JButton();
+        txtNombreProducto = new javax.swing.JTextField();
+        txtCodigoId = new javax.swing.JTextField();
+        txtCosto = new javax.swing.JTextField();
+        txtPrecioVenta = new javax.swing.JTextField();
+        cmbFormVenta = new javax.swing.JComboBox<>();
+        cmbCategoria = new javax.swing.JComboBox<>();
         guardar = new javax.swing.JButton();
         volver = new javax.swing.JButton();
-        stock = new javax.swing.JTextField();
+        txtStock = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,51 +62,39 @@ public class CrearProducto extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        nbrProducto.setForeground(new java.awt.Color(102, 153, 255));
-        nbrProducto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        nbrProducto.setText("Nombre del producto");
-        nbrProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNombreProducto.setForeground(new java.awt.Color(102, 153, 255));
+        txtNombreProducto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombreProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        codigoId.setForeground(new java.awt.Color(102, 153, 255));
-        codigoId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        codigoId.setText("Codigo(Numeros)");
-        codigoId.addActionListener(new java.awt.event.ActionListener() {
+        txtCodigoId.setForeground(new java.awt.Color(102, 153, 255));
+        txtCodigoId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCodigoId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codigoIdActionPerformed(evt);
+                txtCodigoIdActionPerformed(evt);
             }
         });
 
-        costo.setForeground(new java.awt.Color(102, 153, 255));
-        costo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        costo.setText("Costo");
-        costo.addActionListener(new java.awt.event.ActionListener() {
+        txtCosto.setForeground(new java.awt.Color(102, 153, 255));
+        txtCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                costoActionPerformed(evt);
+                txtCostoActionPerformed(evt);
             }
         });
 
-        precioVenta.setForeground(new java.awt.Color(102, 153, 255));
-        precioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        precioVenta.setText("Precio de Venta");
-        precioVenta.addActionListener(new java.awt.event.ActionListener() {
+        txtPrecioVenta.setForeground(new java.awt.Color(102, 153, 255));
+        txtPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPrecioVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precioVentaActionPerformed(evt);
+                txtPrecioVentaActionPerformed(evt);
             }
         });
 
-        formVenta.setForeground(new java.awt.Color(102, 153, 255));
-        formVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Unidad", "Gramo" }));
+        cmbFormVenta.setForeground(new java.awt.Color(102, 153, 255));
+        cmbFormVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Unidad", "Gramo" }));
 
-        categoria.setForeground(new java.awt.Color(51, 153, 255));
-        categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Panaderia", "Fiambreria", "Carniceria", "Bebida", "Almacen", "Limpieza", "Lacteos" }));
-
-        limpiar.setBackground(java.awt.SystemColor.activeCaption);
-        limpiar.setText("Limpiar");
-        limpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limpiarActionPerformed(evt);
-            }
-        });
+        cmbCategoria.setForeground(new java.awt.Color(51, 153, 255));
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Panaderia", "Fiambreria", "Carniceria", "Bebida", "Almacen", "Limpieza", "Lacteos" }));
 
         guardar.setBackground(new java.awt.Color(0, 221, 14));
         guardar.setText("Guardar");
@@ -107,59 +111,54 @@ public class CrearProducto extends javax.swing.JFrame {
             }
         });
 
-        stock.setForeground(new java.awt.Color(102, 153, 255));
-        stock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        stock.setText("Stock");
+        txtStock.setForeground(new java.awt.Color(102, 153, 255));
+        txtStock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 350, Short.MAX_VALUE)
+                .addComponent(volver)
+                .addGap(357, 357, 357))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(227, 227, 227)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(precioVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                            .addComponent(costo, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                            .addComponent(codigoId, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                            .addComponent(nbrProducto)
-                            .addComponent(formVenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(stock, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(txtPrecioVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .addComponent(txtCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .addComponent(txtCodigoId, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .addComponent(txtNombreProducto)
+                            .addComponent(cmbFormVenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtStock, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(limpiar)
-                        .addGap(142, 142, 142)
+                        .addGap(358, 358, 358)
                         .addComponent(guardar)))
-                .addContainerGap(227, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(volver)
-                .addGap(357, 357, 357))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
-                .addComponent(nbrProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(codigoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodigoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(precioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(formVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbFormVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(limpiar)
-                    .addComponent(guardar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(guardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(volver)
                 .addGap(11, 11, 11))
         );
@@ -201,32 +200,21 @@ public class CrearProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void codigoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoIdActionPerformed
+    private void txtCodigoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_codigoIdActionPerformed
+    }//GEN-LAST:event_txtCodigoIdActionPerformed
 
-    private void costoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoActionPerformed
+    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_costoActionPerformed
+    }//GEN-LAST:event_txtCostoActionPerformed
 
-    private void precioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioVentaActionPerformed
+    private void txtPrecioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioVentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_precioVentaActionPerformed
-
-    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
-        // TODO add your handling code here:
-        nbrProducto.setText("");
-        codigoId.setText("");
-        costo.setText("");
-        precioVenta.setText("");
-        formVenta.setSelectedIndex(0);
-        categoria.setSelectedIndex(0);
-        stock.setText("");
-    }//GEN-LAST:event_limpiarActionPerformed
+    }//GEN-LAST:event_txtPrecioVentaActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         // TODO add your handling code here:
-        Principal principal=new Principal(control,user);
+        Principal principal = new Principal(control, user);
         principal.setVisible(true);
         principal.setLocationRelativeTo(null);
         this.dispose();
@@ -234,35 +222,84 @@ public class CrearProducto extends javax.swing.JFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         try {
-        String catego= (String) categoria.getSelectedItem();
-        String formaDeVenta= (String) formVenta.getSelectedItem();
-            control.guardar(codigoId,nbrProducto,stock,costo,precioVenta,catego,formaDeVenta,0);
-            JOptionPane optionPane=new JOptionPane("Extito en guardar = " + nbrProducto.getText());
+            String catego = (String) cmbCategoria.getSelectedItem();
+            String formaDeVenta = (String) cmbFormVenta.getSelectedItem();
+            control.guardar(txtCodigoId, txtNombreProducto, txtStock, txtCosto, txtPrecioVenta, catego, formaDeVenta, 0);
+            JOptionPane optionPane = new JOptionPane("Extito en guardar = " + txtNombreProducto.getText());
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-            JDialog dialog=optionPane.createDialog("Guarda Productos");
+            JDialog dialog = optionPane.createDialog("Guarda Productos");
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);
+            PlaceholderExample();
         } catch (Exception ex) {
             Logger.getLogger(CrearProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_guardarActionPerformed
 
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> categoria;
-    private javax.swing.JTextField codigoId;
-    private javax.swing.JTextField costo;
-    private javax.swing.JComboBox<String> formVenta;
+    private javax.swing.JComboBox<String> cmbCategoria;
+    private javax.swing.JComboBox<String> cmbFormVenta;
     private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton limpiar;
-    private javax.swing.JTextField nbrProducto;
-    private javax.swing.JTextField precioVenta;
-    private javax.swing.JTextField stock;
+    private javax.swing.JTextField txtCodigoId;
+    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTextField txtNombreProducto;
+    private javax.swing.JTextField txtPrecioVenta;
+    private javax.swing.JTextField txtStock;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
+
+    public void PlaceholderExample() {
+        txtNombreProducto.addFocusListener((FocusListener) new PlaceholderFocusListener("Nombre del producto", txtNombreProducto));
+        txtCodigoId.addFocusListener(new PlaceholderFocusListener("Codigo(Numeros)", txtCodigoId));
+        txtCosto.addFocusListener(new PlaceholderFocusListener("Costo", txtCosto));
+        txtPrecioVenta.addFocusListener(new PlaceholderFocusListener("Precio de Venta", txtPrecioVenta));
+        txtStock.addFocusListener(new PlaceholderFocusListener("Stock", txtStock));
+        cmbFormVenta.setSelectedIndex(0);
+        cmbCategoria.setSelectedIndex(0);
+
+        jLabel1.requestFocusInWindow();
+
+    }
+
+    private class PlaceholderFocusListener implements FocusListener {
+
+        private String placeholder;
+        private JTextField textField;
+
+        public PlaceholderFocusListener(String placeholder, JTextField textField) {
+            this.placeholder = placeholder;
+            this.textField = textField;
+            mostrarPlaceholder();
+        }
+
+        private void mostrarPlaceholder() {
+            textField.setForeground(Color.GRAY);
+            textField.setText(placeholder);
+        }
+
+        private void ocultarPlaceholder() {
+            textField.setForeground(Color.BLACK);
+            textField.setText("");
+        }
+
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (textField.getText().equals(placeholder)) {
+                ocultarPlaceholder();
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (textField.getText().isEmpty()) {
+                mostrarPlaceholder();
+            }
+        }
+    }
+
 }

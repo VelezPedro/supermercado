@@ -225,7 +225,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             control.modificarProducto(producto, nbrProducto, stock, costo, precioVenta, catego, formaDeVenta);
             
             mensaje("Edicion correcta", "Info", "Edicion Correcta");
-            VerProductos pantalla=new VerProductos();
+            VerProductos pantalla=new VerProductos(user);
             pantalla.setVisible(true);
             pantalla.setLocationRelativeTo(null);
             this.dispose();

@@ -217,7 +217,7 @@ private Usuario user;
     }//GEN-LAST:event_crearProductoActionPerformed
 
     private void verProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verProductosActionPerformed
-        VerProductos verProdu=new VerProductos();
+        VerProductos verProdu=new VerProductos(user);
         verProdu.setVisible(true);
         verProdu.setLocationRelativeTo(null);
         this.dispose();
