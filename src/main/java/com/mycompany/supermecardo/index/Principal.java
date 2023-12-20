@@ -22,7 +22,6 @@ private Usuario user;
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        agrStock = new javax.swing.JButton();
         crearProducto = new javax.swing.JButton();
         verProductos = new javax.swing.JButton();
         venta = new javax.swing.JButton();
@@ -40,14 +39,7 @@ private Usuario user;
         });
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 153, 51))); // NOI18N
-
-        agrStock.setText("Agregar Stock");
-        agrStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agrStockActionPerformed(evt);
-            }
-        });
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(255, 153, 51))); // NOI18N
 
         crearProducto.setText("Crear Producto");
         crearProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -56,7 +48,7 @@ private Usuario user;
             }
         });
 
-        verProductos.setText("Ver Productos");
+        verProductos.setText("Ver y Editar Productos");
         verProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verProductosActionPerformed(evt);
@@ -95,13 +87,12 @@ private Usuario user;
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(agrStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(crearProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(verProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(venta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(verVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGap(53, 53, 53)
                         .addComponent(salir)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -110,17 +101,15 @@ private Usuario user;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(crearProducto)
-                .addGap(47, 47, 47)
-                .addComponent(agrStock)
-                .addGap(44, 44, 44)
+                .addGap(49, 49, 49)
                 .addComponent(verProductos)
-                .addGap(50, 50, 50)
+                .addGap(60, 60, 60)
                 .addComponent(venta)
-                .addGap(45, 45, 45)
+                .addGap(53, 53, 53)
                 .addComponent(verVenta)
-                .addGap(29, 29, 29)
+                .addGap(54, 54, 54)
                 .addComponent(salir)
-                .addContainerGap())
+                .addGap(29, 29, 29))
         );
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -199,12 +188,6 @@ private Usuario user;
         this.dispose();
     }//GEN-LAST:event_verVentaActionPerformed
 
-    private void agrStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agrStockActionPerformed
-        // Metodo action de botom agregarProductos
-        
-        
-    }//GEN-LAST:event_agrStockActionPerformed
-
     private void crearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearProductoActionPerformed
         // Metodo action de botom crear prodcutos
         //Creamos la instancia de la pantalla a que nos va a dirigir
@@ -248,7 +231,6 @@ private Usuario user;
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton agrStock;
     private javax.swing.JButton crearProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

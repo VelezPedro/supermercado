@@ -110,7 +110,6 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="agrStock" max="32767" attributes="0"/>
                                   <Component id="crearProducto" alignment="0" max="32767" attributes="0"/>
                                   <Component id="verProductos" alignment="0" max="32767" attributes="0"/>
                                   <Component id="venta" alignment="0" max="32767" attributes="0"/>
@@ -118,7 +117,7 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                               <Component id="salir" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -131,30 +130,20 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace pref="50" max="32767" attributes="0"/>
                       <Component id="crearProducto" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="agrStock" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Component id="verProductos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       <Component id="venta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="verVenta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       <Component id="salir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="agrStock">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Agregar Stock"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agrStockActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="crearProducto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Producto"/>
@@ -165,7 +154,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="verProductos">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ver Productos"/>
+                <Property name="text" type="java.lang.String" value="Ver y Editar Productos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verProductosActionPerformed"/>

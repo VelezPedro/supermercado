@@ -26,7 +26,7 @@ public class VentaVista extends javax.swing.JFrame {
     private Double totalVentas = 0.0;
     private List<Producto> listProducto;
     
-    private Map<Producto, Integer> unidadesVendidasPorProducto = new HashMap<>();
+    private Map<Producto, Double> unidadesVendidasPorProducto = new HashMap<>();
 
     public VentaVista(Usuario user) {
         initComponents();
@@ -72,7 +72,6 @@ public class VentaVista extends javax.swing.JFrame {
         formVenta = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         terminarVenta = new javax.swing.JButton();
-        cancelar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         descPorcentaje = new javax.swing.JTextField();
@@ -81,6 +80,7 @@ public class VentaVista extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         lblNroVenta = new javax.swing.JLabel();
+        btnDescuento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,23 +134,22 @@ public class VentaVista extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(8, 8, 8)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(unidadesVendidas, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                            .addComponent(codigoProducto)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(Buscar)))
+                        .addComponent(jLabel6)
+                        .addGap(8, 8, 8)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(unidadesVendidas, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addComponent(codigoProducto))
                 .addContainerGap(83, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Buscar)
+                .addGap(119, 119, 119))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,8 +273,6 @@ public class VentaVista extends javax.swing.JFrame {
             }
         });
 
-        cancelar.setText("Cancelar");
-
         jLabel7.setText("Descuento %");
 
         jLabel8.setText("Descuento $");
@@ -292,16 +289,17 @@ public class VentaVista extends javax.swing.JFrame {
 
         lblNroVenta.setText("0000000000");
 
+        btnDescuento.setText("Aplicar");
+        btnDescuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescuentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(terminarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(jLabel4)
@@ -340,6 +338,14 @@ public class VentaVista extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(descPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(23, 23, 23))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(btnDescuento)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(terminarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,11 +372,11 @@ public class VentaVista extends javax.swing.JFrame {
                     .addComponent(descPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(terminarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(cancelar)
-                .addGap(18, 18, 18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDescuento)
+                .addGap(30, 30, 30)
+                .addComponent(terminarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -440,12 +446,13 @@ public class VentaVista extends javax.swing.JFrame {
         totalVentas = 0.0;
         
         lblNroVenta.setText(String.valueOf(Integer.parseInt(lblNroVenta.getText()) + 1));
-        
+        descPorcentaje.setText("0");
+        descPrecio.setText("0");
     }//GEN-LAST:event_terminarVentaActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         String codigoId = codigoProducto.getText();
-        Integer unidades = Integer.valueOf(unidadesVendidas.getText());
+        Double unidades = Double.valueOf(unidadesVendidas.getText());
         cargarTablaPorProducto(codigoId, unidades);
         limpiarImput();
         precioMostrar.setText("$ " + totalVentas);
@@ -465,7 +472,7 @@ public class VentaVista extends javax.swing.JFrame {
         if (tablaProducto.getRowCount() > 0) {
             //controlo que haya algo seleccionado
             if (tablaProducto.getSelectedRow() != -1) {
-                int precioProd = (int) (tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 3));
+                Double precioProd = (Double) (tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 3));
                 unidadesVendidasPorProducto.remove(listProducto.get(tablaProducto.getSelectedRow()));
                 listProducto.remove(tablaProducto.getSelectedRow());
                 modeloTabla.removeRow(tablaProducto.getSelectedRow());                
@@ -481,20 +488,32 @@ public class VentaVista extends javax.swing.JFrame {
 
     private void btnBuscarXNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarXNombreActionPerformed
         String nombreP = txtNombreProducto.getText();
-        Integer unidades = Integer.valueOf(txtCantidadXNombre.getText());
+        Double unidades = Double.valueOf(txtCantidadXNombre.getText());
         cargarTablaPorProductoXNombre(nombreP, unidades);
         limpiarImput();
         precioMostrar.setText("$ " + totalVentas);
         
     }//GEN-LAST:event_btnBuscarXNombreActionPerformed
 
+    private void btnDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescuentoActionPerformed
+        
+        
+        if (Integer.parseInt(descPorcentaje.getText())>0) {
+            Double descuento = (Double.valueOf(descPorcentaje.getText())*Double.valueOf(totalVentas))/100;
+            totalVentas-=descuento;
+        }else if (Integer.parseInt(descPrecio.getText())>0) {
+            totalVentas-=(Integer.valueOf(descPrecio.getText()));
+        }
+        precioMostrar.setText(String.valueOf(totalVentas));
+    }//GEN-LAST:event_btnDescuentoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
     private javax.swing.JButton btnBuscarXNombre;
+    private javax.swing.JButton btnDescuento;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton cancelar;
     private javax.swing.JTextField codigoProducto;
     private javax.swing.JTextField descPorcentaje;
     private javax.swing.JTextField descPrecio;
@@ -527,18 +546,19 @@ public class VentaVista extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Para llenar la tabla
-    private void cargarTablaPorProducto(String codigoId, Integer unidades) {
+    private void cargarTablaPorProducto(String codigoId, Double unidades) {
         Producto producto = control.traerProducto(codigoId);
         
         if (producto != null) {
-            
+            if (producto.getFromVenta().equalsIgnoreCase("unidad")) {
+            }
             Object[] objeto = {producto.getNombre(),
                 unidades,
                 producto.getPrecio(),
                 producto.getPrecio() * unidades};
 
             modeloTabla.addRow(objeto);
-            totalVentas += (Integer) objeto[3];
+            totalVentas += (Double) objeto[3];
             producto.setUnidadesVendidas(unidades);
             listProducto.add(producto);
             unidadesVendidasPorProducto.put(producto, unidades);
@@ -566,7 +586,7 @@ public class VentaVista extends javax.swing.JFrame {
         dialog.setVisible(true);
     }
 
-     private void cargarTablaPorProductoXNombre(String nombre, Integer unidades) {
+     private void cargarTablaPorProductoXNombre(String nombre, Double unidades) {
         Producto producto = control.traerProductoXNombre(nombre);
         if (producto != null) {
             
@@ -576,7 +596,7 @@ public class VentaVista extends javax.swing.JFrame {
                 producto.getPrecio() * unidades};
 
             modeloTabla.addRow(objeto);
-            totalVentas += (Integer) objeto[3];
+            totalVentas += (Double) objeto[3];
             producto.setUnidadesVendidas(unidades);
             listProducto.add(producto);
             unidadesVendidasPorProducto.put(producto, unidades);
