@@ -262,7 +262,7 @@ public class VentaVista extends javax.swing.JFrame {
         precioMostrar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         precioMostrar.setText("$");
 
-        formVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Debito", "Transferencia", "Credito" }));
+        formVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Débito", "Transferencia", "Crédito" }));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Forma de Pago");
