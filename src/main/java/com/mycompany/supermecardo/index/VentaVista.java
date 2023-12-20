@@ -25,6 +25,7 @@ public class VentaVista extends javax.swing.JFrame {
     private DefaultTableModel modeloTabla;
     private Double totalVentas = 0.0;
     private List<Producto> listProducto;
+    private Object[] desct;
     
     private Map<Producto, Double> unidadesVendidasPorProducto = new HashMap<>();
 
@@ -261,7 +262,7 @@ public class VentaVista extends javax.swing.JFrame {
         precioMostrar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         precioMostrar.setText("$");
 
-        formVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Debito", "Transferencia", "Credito" }));
+        formVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Débito", "Transferencia", "Crédito" }));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Forma de Pago");
@@ -472,12 +473,20 @@ public class VentaVista extends javax.swing.JFrame {
         if (tablaProducto.getRowCount() > 0) {
             //controlo que haya algo seleccionado
             if (tablaProducto.getSelectedRow() != -1) {
+                String nombre = (String) tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 0);
                 Double precioProd = (Double) (tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 3));
+                if (nombre.contains("Descuento")) {
+                    
+                    modeloTabla.removeRow(tablaProducto.getSelectedRow());                
+                    totalVentas -= precioProd;
+                    precioMostrar.setText("$ " + totalVentas);
+                }else{
                 unidadesVendidasPorProducto.remove(listProducto.get(tablaProducto.getSelectedRow()));
                 listProducto.remove(tablaProducto.getSelectedRow());
                 modeloTabla.removeRow(tablaProducto.getSelectedRow());                
                 totalVentas -= precioProd;
                 precioMostrar.setText("$ " + totalVentas);
+                }
             } else {
                 mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
             }
@@ -496,15 +505,20 @@ public class VentaVista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarXNombreActionPerformed
 
     private void btnDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescuentoActionPerformed
-        
-        
+        String nombre=null;
+        Double descuento=null;
         if (Integer.parseInt(descPorcentaje.getText())>0) {
-            Double descuento = (Double.valueOf(descPorcentaje.getText())*Double.valueOf(totalVentas))/100;
-            totalVentas-=descuento;
+            descuento = (Double.valueOf(descPorcentaje.getText())*Double.valueOf(totalVentas))/100;
+            nombre="%" + descPorcentaje.getText();
         }else if (Integer.parseInt(descPrecio.getText())>0) {
-            totalVentas-=(Integer.valueOf(descPrecio.getText()));
+            descuento=(Double.valueOf(descPrecio.getText()));
+            nombre="$" + descPrecio.getText();
         }
         precioMostrar.setText(String.valueOf(totalVentas));
+        Object[] desct = {"Descuento "+ nombre,"1","1",(-descuento)};
+        cargarDescuento(desct);
+        descPorcentaje.setText("0");
+        descPrecio.setText("0");
     }//GEN-LAST:event_btnDescuentoActionPerformed
 
 
@@ -600,6 +614,16 @@ public class VentaVista extends javax.swing.JFrame {
             producto.setUnidadesVendidas(unidades);
             listProducto.add(producto);
             unidadesVendidasPorProducto.put(producto, unidades);
+        }
+        tablaProducto.setModel(modeloTabla);
+    }
+     
+      private void cargarDescuento(Object[] descuento) {
+        
+        if (descuento != null) {
+            modeloTabla.addRow(descuento);
+            totalVentas += (Double) descuento[3];
+            precioMostrar.setText("$ " + totalVentas);
         }
         tablaProducto.setModel(modeloTabla);
         

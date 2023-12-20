@@ -1,6 +1,7 @@
 package com.mycompany.supermecardo.entidades;
 
 import com.mycompany.supermecardo.persistencia.ControladorPresistencia;
+import com.mycompany.supermecardo.persistencia.VentaJpaController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -161,6 +162,10 @@ public class Controladora {
     public void agregarStock(Producto producto, Double stock) {
          producto.setStock(stock);
          contPersis.modificarProducto(producto);
+    }
+
+    public List<Venta> buscarYMostrarResultados(String vendedor, String anio, String mes, String dia, String formaDePago) {
+        return contPersis.filtrarVentas(vendedor, anio, mes, dia, formaDePago);
     }
 
 }

@@ -3,15 +3,17 @@ package com.mycompany.supermecardo.persistencia;
 import com.mycompany.supermecardo.entidades.Venta;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
+import org.eclipse.persistence.jpa.JpaHelper;
 
 public class VentaJpaController implements Serializable {
 
@@ -25,10 +27,9 @@ public class VentaJpaController implements Serializable {
     }
 
     public VentaJpaController() {
-        emf= Persistence.createEntityManagerFactory("Supermercado");
+        emf = Persistence.createEntityManagerFactory("Supermercado");
     }
-    
-    
+
     public void create(Venta venta) {
         EntityManager em = null;
         try {
@@ -132,13 +133,77 @@ public class VentaJpaController implements Serializable {
             em.close();
         }
     }
-    
-         public List<Venta> listaVentasVendedor(String nombre){
+
+    public List<Venta> listaVentasVendedor(String nombre) {
         EntityManager em = getEntityManager();
-        List<Venta> listaVentas= (List<Venta>)
-                em.createQuery("SELECT v FROM Venta v WHERE v.vendedor.nombreUsuario LIKE :nombre").
-                setParameter("nombre", nombre).getResultList();
+        List<Venta> listaVentas
+                = (List<Venta>) em.createQuery("SELECT v FROM Venta v WHERE v.vendedor.nombreUsuario LIKE :nombre").
+                        setParameter("nombre", nombre).getResultList();
         return listaVentas;
     }
+
+    public List<Venta> buscarTodo(String vendedor, String anio, String mes, String dia, String formaDePago) {
+        EntityManager em = getEntityManager();
+        
+        try {
+            // Construir la consulta de forma dinámica con JPQL
+            StringBuilder jpql = new StringBuilder("SELECT v FROM Venta v WHERE 1=1");
+
+            if (vendedor != null && !vendedor.isEmpty()) {
+                jpql.append(" AND v.vendedor.nombreUsuario = :vendedor");
+            }
+
+            if (anio != null && !anio.isEmpty()) {
+                jpql.append(" AND FUNC('YEAR', v.fecha) = :anio");
+            }
+
+            if (mes != null && !mes.isEmpty()) {
+                jpql.append(" AND FUNC('MONTH', v.fecha) = :mes");
+            }
+
+            if (dia != null && !dia.isEmpty()) {
+                jpql.append(" AND FUNC('DAY', v.fecha) = :dia");
+            }
+
+            if (formaDePago != null && !formaDePago.isEmpty()) {
+                jpql.append(" AND v.formpago = :formaDePago");
+            }
+
+            TypedQuery<Venta> query = em.createQuery(jpql.toString(), Venta.class);
+
+            if (vendedor != null && !vendedor.isEmpty()) {
+                query.setParameter("vendedor", vendedor);
+            }
+
+            if (anio != null && !anio.isEmpty()) {
+                query.setParameter("anio", Integer.parseInt(anio));
+            }
+
+            if (mes != null && !mes.isEmpty()) {
+                query.setParameter("mes", Integer.parseInt(mes));
+            }
+
+            if (dia != null && !dia.isEmpty()) {
+                query.setParameter("dia", Integer.parseInt(dia));
+            }
+
+            if (formaDePago != null && !formaDePago.isEmpty()) {
+                query.setParameter("formaDePago", formaDePago);
+            }
+
+            List<Venta> resultados = query.getResultList();
+
+            // Convertir los resultados a objetos ResultadoVenta según tu lógica
+            return resultados;
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    
+    
     
 }
+
+
