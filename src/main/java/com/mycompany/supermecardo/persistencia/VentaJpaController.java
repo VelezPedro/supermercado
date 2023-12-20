@@ -12,7 +12,6 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-
 public class VentaJpaController implements Serializable {
 
     public VentaJpaController(EntityManagerFactory emf) {
@@ -25,10 +24,9 @@ public class VentaJpaController implements Serializable {
     }
 
     public VentaJpaController() {
-        emf= Persistence.createEntityManagerFactory("Supermercado");
+        emf = Persistence.createEntityManagerFactory("Supermercado");
     }
-    
-    
+
     public void create(Venta venta) {
         EntityManager em = null;
         try {
@@ -132,13 +130,21 @@ public class VentaJpaController implements Serializable {
             em.close();
         }
     }
-    
-         public List<Venta> listaVentasVendedor(String nombre){
+
+    public List<Venta> listaVentasVendedor(String nombre) {
         EntityManager em = getEntityManager();
-        List<Venta> listaVentas= (List<Venta>)
-                em.createQuery("SELECT v FROM Venta v WHERE v.vendedor.nombreUsuario LIKE :nombre").
+        List<Venta> listaVentas = 
+                (List<Venta>) em.createQuery("SELECT v FROM Venta v WHERE v.vendedor.nombreUsuario LIKE :nombre").
                 setParameter("nombre", nombre).getResultList();
         return listaVentas;
     }
     
+    
+       public List<Venta> listaBuscarTodo(String nombre) {
+        EntityManager em = getEntityManager();
+        List<Venta> listaVentas = 
+                (List<Venta>) em.createQuery("SELECT v FROM Venta v WHERE v.vendedor.nombreUsuario LIKE :nombre").
+                setParameter("nombre", nombre).getResultList();
+        return listaVentas;
+    }
 }
