@@ -81,9 +81,9 @@ public class VentasTotales extends javax.swing.JFrame {
             }
         });
 
-        cmbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", " " }));
+        cmbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", " " }));
 
-        cmbMeses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        cmbMeses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -342,7 +342,8 @@ public class VentasTotales extends javax.swing.JFrame {
                 return false;
             }
         };
-        cargarTablaVariables(vendedor,anio,mes,dia,formaDePago);
+        
+        cargarTabla(cargarTablaVariables(vendedor,anio,mes,dia,formaDePago));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -417,16 +418,6 @@ public class VentasTotales extends javax.swing.JFrame {
         tablaVentas.setModel(modeloTabla);
     }
 
-    private void cargarListaUsuarios() {
-        listaUsuarios = control.traerUsuarios();
-        if (listaUsuarios != null) {
-            for (Usuario vendedor : listaUsuarios) {
-                cmbVendedor.addItem(vendedor.getNombreUsuario());
-            }
-        }
-        
-    }
-
     private void cargarTabla(List<Venta> listaVendedor) {
 
         if (listaVendedor != null) {
@@ -440,7 +431,20 @@ public class VentasTotales extends javax.swing.JFrame {
         lblTotal.setText("Total $" + total);
         lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaVendedor.size()));
         tablaVentas.setModel(modeloTabla);
+        System.out.println(modeloTabla + "maxichuooaishj");
     }
+    
+    private void cargarListaUsuarios() {
+        listaUsuarios = control.traerUsuarios();
+        if (listaUsuarios != null) {
+            for (Usuario vendedor : listaUsuarios) {
+                cmbVendedor.addItem(vendedor.getNombreUsuario());
+            }
+        }
+        
+    }
+
+    
     
     public void mensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
@@ -479,7 +483,7 @@ public class VentasTotales extends javax.swing.JFrame {
         
     }
 
-    private void cargarTablaVariables(String vendedor, String anio, String mes, String dia, String formaDePago) {
-        
+    private List<Venta> cargarTablaVariables(String vendedor, String anio, String mes, String dia, String formaDePago) {
+        return control.buscarYMostrarResultados(vendedor, anio, mes, dia, formaDePago);
      }
 }

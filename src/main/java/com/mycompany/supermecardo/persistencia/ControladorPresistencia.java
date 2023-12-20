@@ -98,8 +98,10 @@ public class ControladorPresistencia {
         return ventaJpa.listaVentasVendedor(vendedor);
     }
 
+    public List<Venta> filtrarVentas(String vendedor, String anio, String mes, String dia, String formaDePago){
+        return ventaJpa.buscarTodo(vendedor,anio,mes,dia,formaDePago);  
+    }
     
-
     
-
+    
 }
