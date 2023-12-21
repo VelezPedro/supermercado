@@ -13,13 +13,14 @@ public class VentasTotales extends javax.swing.JFrame {
     //7a 15hs mañana /15hs a 23hs tarde / 23hs a 07noche
     private DefaultTableModel modeloTabla;
     private Usuario user;
-    Controladora control;
-    Double total = 0.0;
-    List<Usuario> listaUsuarios;
-    List<Venta> listaVentaVendedor;
-    List<String> listaAnio;
-    List<Venta> listaVentas;
-    List<Venta> listaBusqueda;
+    private Controladora control;
+    private Double total = 0.0;
+    private List<Usuario> listaUsuarios;
+    private List<Venta> listaVentaVendedor;
+    private List<String> listaAnio;
+    private List<Venta> listaVentas;
+    private List<Venta> listaBusqueda;
+    
     public VentasTotales(Usuario user) {
         initComponents();
         control = new Controladora();
@@ -332,17 +333,6 @@ public class VentasTotales extends javax.swing.JFrame {
         String formaDePago= (String) cbmPago.getSelectedItem();
         String turno=(String) cmbAnio.getSelectedItem();
         
-        
-       // listaBusqueda
-                String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia","Hora", "Monto $"};
-        modeloTabla = new DefaultTableModel(titulos, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-            //return column == 1;      CON ESTO PERMITE EDITAR LA COLUMNA QUE SE DESEE
-                return false;
-            }
-        };
-        
         cargarTabla(cargarTablaVariables(vendedor,anio,mes,dia,formaDePago));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -406,32 +396,42 @@ public class VentasTotales extends javax.swing.JFrame {
         if (listaVentas != null) {
             for (Venta venta : listaVentas) {
                 Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear()+1900,
-                        venta.getFecha().getMonth()+1,venta.getFecha().getDay(),
+                        venta.getFecha().getMonth()+1,venta.getFecha().getDate(),
                         venta.getHorario(), "$ " + venta.getPrecio()};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
                 total += venta.getPrecio();
             }
         }
+        
         lblTotal.setText("Total $" + total);
         lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaVentas.size()));
         tablaVentas.setModel(modeloTabla);
     }
 
-    private void cargarTabla(List<Venta> listaVendedor) {
+    private void cargarTabla(List<Venta> listaBusqueda) {
+        
+        String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia","Hora", "Monto $"};
+        modeloTabla = new DefaultTableModel(titulos, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            //return column == 1;      CON ESTO PERMITE EDITAR LA COLUMNA QUE SE DESEE
+                return false;
+            }
+        };
 
-        if (listaVendedor != null) {
-            for (Venta venta : listaVendedor) {
-                Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha(), venta.getHorario(), "$ " + venta.getPrecio()};
-                //agrega una fila nueva cada vez que ingresa al ciclo.
+        if (listaBusqueda != null) {
+            for (Venta venta : listaBusqueda) {
+                Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha(),
+                    venta.getHorario(), "$ " + venta.getPrecio()};
                 modeloTabla.addRow(objeto);
                 total += venta.getPrecio();
             }
         }
+        
         lblTotal.setText("Total $" + total);
-        lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaVendedor.size()));
+        lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaBusqueda.size()));
         tablaVentas.setModel(modeloTabla);
-        System.out.println(modeloTabla + "maxichuooaishj");
     }
     
     private void cargarListaUsuarios() {
@@ -440,8 +440,7 @@ public class VentasTotales extends javax.swing.JFrame {
             for (Usuario vendedor : listaUsuarios) {
                 cmbVendedor.addItem(vendedor.getNombreUsuario());
             }
-        }
-        
+        }        
     }
 
     
@@ -464,10 +463,7 @@ public class VentasTotales extends javax.swing.JFrame {
         if (listaVentas != null) {
             String anio =String.valueOf(listaVentas.get(0).getFecha().getYear()+1900);
             
-            System.out.println(anio);
-            
             listaAnio.add(anio);
-            System.out.println(listaAnio.toString());
             
             for (Venta venta : listaVentas) {
                 if (!anio.equals(String.valueOf(venta.getFecha().getYear()+1900))) {
@@ -475,12 +471,11 @@ public class VentasTotales extends javax.swing.JFrame {
                     anio=String.valueOf(venta.getFecha().getYear()+1900);
                 }
             }
+            
             for (String anios : listaAnio) {
                 cmbAnio.addItem(anios);
-            }
-            
-        }
-        
+            }            
+        }        
     }
 
     private List<Venta> cargarTablaVariables(String vendedor, String anio, String mes, String dia, String formaDePago) {

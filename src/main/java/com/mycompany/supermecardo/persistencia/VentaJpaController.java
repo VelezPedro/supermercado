@@ -197,7 +197,6 @@ public class VentaJpaController implements Serializable {
             return resultados;
         } finally {
             em.close();
-            emf.close();
         }
     }
 
