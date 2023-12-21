@@ -332,7 +332,7 @@ public class VentasTotales extends javax.swing.JFrame {
         String mes = (String) cmbMeses.getSelectedItem();
         String dia = (String) cmbDia.getSelectedItem();
         String formaDePago = (String) cbmPago.getSelectedItem();
-        String turno = (String) cmbAnio.getSelectedItem();
+        String turno = (String) cmbTurno.getSelectedItem();
 
         String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia", "Hora", "Monto $"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
@@ -344,7 +344,7 @@ public class VentasTotales extends javax.swing.JFrame {
         };
 
         List<Venta> busqueda = cargarTablaVariables(vendedor, anio, mes, dia, formaDePago);
-        cargarTabla(busqueda);
+        cargarTabla(busqueda, turno);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -420,14 +420,41 @@ public class VentasTotales extends javax.swing.JFrame {
         tablaVentas.setModel(modeloTabla);
     }
 
-    private void cargarTabla(List<Venta> listaBusqueda) {
+    private void cargarTabla(List<Venta> listaBusqueda, String turno) {        
         if (listaBusqueda != null) {
+            
             for (Venta venta : listaBusqueda) {
+                String hora = "";
                 Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
                     venta.getFecha().getMonth() + 1, venta.getFecha().getDate(),
                     venta.getHorario(), "$ " + venta.getPrecio()};
-                modeloTabla.addRow(objeto);
-                total += venta.getPrecio();
+                                
+                for (int i = 0; i <= 1; i++) {
+                    hora += objeto[4].toString().charAt(i);                                       
+                }
+                
+                if (turno.equals("Mañana")) {
+                        if (Integer.parseInt(hora) >= 7 && Integer.parseInt(hora) <= 14) {
+                            modeloTabla.addRow(objeto);
+                            total += venta.getPrecio();
+                            continue;
+                        }
+                    }else if (turno.equals("Tarde")) {
+                        if (Integer.parseInt(hora) >= 15 && Integer.parseInt(hora) <= 22) {
+                            modeloTabla.addRow(objeto);
+                            total += venta.getPrecio();
+                            continue;
+                        }
+                    }else if (turno.equals("Noche")) {
+                        if (Integer.parseInt(hora) >= 23 || Integer.parseInt(hora) <= 6) {
+                            modeloTabla.addRow(objeto);
+                            total += venta.getPrecio();
+                            continue;
+                        }
+                    }else{
+                        modeloTabla.addRow(objeto);
+                        total += venta.getPrecio();
+                    }
             }
         }
 
@@ -485,15 +512,15 @@ public class VentasTotales extends javax.swing.JFrame {
             anio = null;
             mes = null;
             dia = null;
-        }else if(mes.equals(" ")){
+        } else if (mes.equals(" ")) {
             mes = null;
             dia = null;
-        }else if(dia.equals(" ")){
+        } else if (dia.equals(" ")) {
             dia = null;
         }
         if (formaDePago.equals(" ")) {
             formaDePago = null;
-        } 
+        }
         return control.buscarYMostrarResultados(vendedor, anio, mes, dia, formaDePago);
     }
 }
