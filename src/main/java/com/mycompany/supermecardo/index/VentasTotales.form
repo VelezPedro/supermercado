@@ -106,11 +106,11 @@
                                   <Component id="jLabel2" pref="87" max="32767" attributes="0"/>
                                   <Component id="cmbVendedor" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel3" min="-2" pref="85" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace pref="32" max="32767" attributes="0"/>
                                       <Component id="jLabel4" min="-2" pref="86" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -119,17 +119,17 @@
                                       <Component id="cmbMeses" min="-2" pref="85" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel5" min="-2" pref="86" max="-2" attributes="0"/>
-                                  <Component id="cmbDia" min="-2" pref="86" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cbmPago" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbDia" min="-2" pref="86" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" min="-2" pref="86" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="91" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbmPago" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   <Component id="cmbTurno" min="-2" max="-2" attributes="0"/>
@@ -188,8 +188,8 @@
             <Component class="javax.swing.JComboBox" name="cmbDia">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="33">
-                    <StringItem index="0" value="-"/>
+                  <StringArray count="32">
+                    <StringItem index="0" value="*"/>
                     <StringItem index="1" value="1"/>
                     <StringItem index="2" value="2"/>
                     <StringItem index="3" value="3"/>
@@ -221,7 +221,6 @@
                     <StringItem index="29" value="29"/>
                     <StringItem index="30" value="30"/>
                     <StringItem index="31" value="31"/>
-                    <StringItem index="32" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -233,7 +232,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="13">
-                    <StringItem index="0" value="-"/>
+                    <StringItem index="0" value="*"/>
                     <StringItem index="1" value="Enero"/>
                     <StringItem index="2" value="Febrero"/>
                     <StringItem index="3" value="Marzo"/>
@@ -277,12 +276,17 @@
             <Component class="javax.swing.JComboBox" name="cbmPago">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Efectivo"/>
-                    <StringItem index="1" value="Transferencia"/>
-                    <StringItem index="2" value="Cr&#xe9;dito"/>
-                    <StringItem index="3" value="D&#xe9;bito"/>
+                  <StringArray count="5">
+                    <StringItem index="0" value="*"/>
+                    <StringItem index="1" value="Efectivo"/>
+                    <StringItem index="2" value="D&#xe9;bito"/>
+                    <StringItem index="3" value="Transferencia"/>
+                    <StringItem index="4" value="Cr&#xe9;dito"/>
                   </StringArray>
+                </Property>
+                <Property name="autoscrolls" type="boolean" value="true"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor Por defecto"/>
                 </Property>
               </Properties>
               <Events>
@@ -340,10 +344,11 @@
             <Component class="javax.swing.JComboBox" name="cmbTurno">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="Ma&#xf1;ana"/>
-                    <StringItem index="1" value="Tarde"/>
-                    <StringItem index="2" value="Noche"/>
+                  <StringArray count="4">
+                    <StringItem index="0" value="*"/>
+                    <StringItem index="1" value="Ma&#xf1;ana"/>
+                    <StringItem index="2" value="Tarde"/>
+                    <StringItem index="3" value="Noche"/>
                   </StringArray>
                 </Property>
               </Properties>
