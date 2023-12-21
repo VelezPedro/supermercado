@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VentasTotales extends javax.swing.JFrame {
+
     //7a 15hs mañana /15hs a 23hs tarde / 23hs a 07noche
     private DefaultTableModel modeloTabla;
     private Usuario user;
@@ -20,19 +21,19 @@ public class VentasTotales extends javax.swing.JFrame {
     private List<String> listaAnio;
     private List<Venta> listaVentas;
     private List<Venta> listaBusqueda;
-    
+
     public VentasTotales(Usuario user) {
         initComponents();
         control = new Controladora();
         this.user = user;
-        String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia","Hora", "Monto $"};
+        String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia", "Hora", "Monto $"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
 //                return column == 1;      CON ESTO PERMITE EDITAR LA COLUMNA QUE SE DESEE
                 return false;
             }
-        };  
+        };
         cargarTabla();
         cargarAnio();
         cargarListaUsuarios();
@@ -82,9 +83,9 @@ public class VentasTotales extends javax.swing.JFrame {
             }
         });
 
-        cmbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", " " }));
+        cmbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        cmbMeses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        cmbMeses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +100,7 @@ public class VentasTotales extends javax.swing.JFrame {
             }
         });
 
-        cbmPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Transferencia", "Crédito", "Débito" }));
+        cbmPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Efectivo", "Transferencia", "Crédito", "Débito" }));
         cbmPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbmPagoActionPerformed(evt);
@@ -126,7 +127,7 @@ public class VentasTotales extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Froma de Pago");
 
-        cmbTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mañana", "Tarde", "Noche" }));
+        cmbTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Mañana", "Tarde", "Noche" }));
 
         jLabel7.setText("Turno");
 
@@ -314,7 +315,7 @@ public class VentasTotales extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Principal principal=new Principal(control,user);
+        Principal principal = new Principal(control, user);
         principal.setVisible(true);
         principal.setLocationRelativeTo(null);
         this.dispose();
@@ -325,19 +326,29 @@ public class VentasTotales extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbVendedorActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        this.total=0.0;
+        this.total = 0.0;
         String vendedor = (String) cmbVendedor.getSelectedItem();
-        String anio =(String) cmbAnio.getSelectedItem();
+        String anio = (String) cmbAnio.getSelectedItem();
         String mes = (String) cmbMeses.getSelectedItem();
         String dia = (String) cmbDia.getSelectedItem();
-        String formaDePago= (String) cbmPago.getSelectedItem();
-        String turno=(String) cmbAnio.getSelectedItem();
-        
-        cargarTabla(cargarTablaVariables(vendedor,anio,mes,dia,formaDePago));
+        String formaDePago = (String) cbmPago.getSelectedItem();
+        String turno = (String) cmbAnio.getSelectedItem();
+
+        String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia", "Hora", "Monto $"};
+        modeloTabla = new DefaultTableModel(titulos, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //return column == 1;      CON ESTO PERMITE EDITAR LA COLUMNA QUE SE DESEE
+                return false;
+            }
+        };
+
+        List<Venta> busqueda = cargarTablaVariables(vendedor, anio, mes, dia, formaDePago);
+        cargarTabla(busqueda);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-         // conotrolo que la tabla tenga porlomenos un registro
+        // conotrolo que la tabla tenga porlomenos un registro
         if (tablaVentas.getRowCount() > 0) {
             //controlo que haya algo seleccionado
             if (tablaVentas.getSelectedRow() != -1) {
@@ -395,56 +406,46 @@ public class VentasTotales extends javax.swing.JFrame {
 
         if (listaVentas != null) {
             for (Venta venta : listaVentas) {
-                Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear()+1900,
-                        venta.getFecha().getMonth()+1,venta.getFecha().getDate(),
-                        venta.getHorario(), "$ " + venta.getPrecio()};
+                Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
+                    venta.getFecha().getMonth() + 1, venta.getFecha().getDate(),
+                    venta.getHorario(), "$ " + venta.getPrecio()};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
                 total += venta.getPrecio();
             }
         }
-        
+
         lblTotal.setText("Total $" + total);
         lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaVentas.size()));
         tablaVentas.setModel(modeloTabla);
     }
 
     private void cargarTabla(List<Venta> listaBusqueda) {
-        
-        String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia","Hora", "Monto $"};
-        modeloTabla = new DefaultTableModel(titulos, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-            //return column == 1;      CON ESTO PERMITE EDITAR LA COLUMNA QUE SE DESEE
-                return false;
-            }
-        };
-
         if (listaBusqueda != null) {
             for (Venta venta : listaBusqueda) {
-                Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha(),
+                Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
+                    venta.getFecha().getMonth() + 1, venta.getFecha().getDate(),
                     venta.getHorario(), "$ " + venta.getPrecio()};
                 modeloTabla.addRow(objeto);
                 total += venta.getPrecio();
             }
         }
-        
+
         lblTotal.setText("Total $" + total);
         lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaBusqueda.size()));
         tablaVentas.setModel(modeloTabla);
     }
-    
+
     private void cargarListaUsuarios() {
         listaUsuarios = control.traerUsuarios();
+        cmbVendedor.addItem("");
         if (listaUsuarios != null) {
             for (Usuario vendedor : listaUsuarios) {
                 cmbVendedor.addItem(vendedor.getNombreUsuario());
             }
-        }        
+        }
     }
 
-    
-    
     public void mensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {
@@ -456,29 +457,43 @@ public class VentasTotales extends javax.swing.JFrame {
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true);
     }
-    
+
     private void cargarAnio() {
-        listaAnio=new ArrayList();
-        
+        listaAnio = new ArrayList();
+
         if (listaVentas != null) {
-            String anio =String.valueOf(listaVentas.get(0).getFecha().getYear()+1900);
-            
+            String anio = String.valueOf(listaVentas.get(0).getFecha().getYear() + 1900);
+
+            listaAnio.add("");
             listaAnio.add(anio);
-            
+
             for (Venta venta : listaVentas) {
-                if (!anio.equals(String.valueOf(venta.getFecha().getYear()+1900))) {
-                    listaAnio.add(String.valueOf(venta.getFecha().getYear()+1900)); 
-                    anio=String.valueOf(venta.getFecha().getYear()+1900);
+                if (!anio.equals(String.valueOf(venta.getFecha().getYear() + 1900))) {
+                    listaAnio.add(String.valueOf(venta.getFecha().getYear() + 1900));
+                    anio = String.valueOf(venta.getFecha().getYear() + 1900);
                 }
             }
-            
+
             for (String anios : listaAnio) {
                 cmbAnio.addItem(anios);
-            }            
-        }        
+            }
+        }
     }
 
     private List<Venta> cargarTablaVariables(String vendedor, String anio, String mes, String dia, String formaDePago) {
+        if (anio.equals(" ")) {
+            anio = null;
+            mes = null;
+            dia = null;
+        }else if(mes.equals(" ")){
+            mes = null;
+            dia = null;
+        }else if(dia.equals(" ")){
+            dia = null;
+        }
+        if (formaDePago.equals(" ")) {
+            formaDePago = null;
+        } 
         return control.buscarYMostrarResultados(vendedor, anio, mes, dia, formaDePago);
-     }
+    }
 }
