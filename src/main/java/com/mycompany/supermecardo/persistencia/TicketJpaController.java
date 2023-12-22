@@ -1,6 +1,6 @@
 package com.mycompany.supermecardo.persistencia;
 
-import com.mycompany.supermecardo.entidades.Usuario;
+import com.mycompany.supermecardo.entidades.Ticket;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -12,27 +12,29 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class UsuarioJpaController implements Serializable {
 
-    public UsuarioJpaController(EntityManagerFactory emf) {
+public class TicketJpaController implements Serializable {
+
+    public TicketJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    public UsuarioJpaController() {
-        emf= Persistence.createEntityManagerFactory("Supermercado");
-    }  
 
-    public void create(Usuario usuario) {
+    public TicketJpaController() {
+        emf= Persistence.createEntityManagerFactory("Supermercado");
+    }
+    
+
+    public void create(Ticket ticket) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(usuario);
+            em.persist(ticket);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -41,19 +43,19 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public void edit(Usuario usuario) throws NonexistentEntityException, Exception {
+    public void edit(Ticket ticket) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            usuario = em.merge(usuario);
+            ticket = em.merge(ticket);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = usuario.getId();
-                if (findUsuario(id) == null) {
-                    throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
+                String id = ticket.getId();
+                if (findTicket(id) == null) {
+                    throw new NonexistentEntityException("The ticket with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -64,19 +66,19 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public void destroy(int id) throws NonexistentEntityException {
+    public void destroy(String id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario usuario;
+            Ticket ticket;
             try {
-                usuario = em.getReference(Usuario.class, id);
-                usuario.getId();
+                ticket = em.getReference(Ticket.class, id);
+                ticket.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The ticket with id " + id + " no longer exists.", enfe);
             }
-            em.remove(usuario);
+            em.remove(ticket);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -85,19 +87,19 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public List<Usuario> findUsuarioEntities() {
-        return findUsuarioEntities(true, -1, -1);
+    public List<Ticket> findTicketEntities() {
+        return findTicketEntities(true, -1, -1);
     }
 
-    public List<Usuario> findUsuarioEntities(int maxResults, int firstResult) {
-        return findUsuarioEntities(false, maxResults, firstResult);
+    public List<Ticket> findTicketEntities(int maxResults, int firstResult) {
+        return findTicketEntities(false, maxResults, firstResult);
     }
 
-    private List<Usuario> findUsuarioEntities(boolean all, int maxResults, int firstResult) {
+    private List<Ticket> findTicketEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Usuario.class));
+            cq.select(cq.from(Ticket.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -109,20 +111,20 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public Usuario findUsuario(int id) {
+    public Ticket findTicket(String id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Usuario.class, id);
+            return em.find(Ticket.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getUsuarioCount() {
+    public int getTicketCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Usuario> rt = cq.from(Usuario.class);
+            Root<Ticket> rt = cq.from(Ticket.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

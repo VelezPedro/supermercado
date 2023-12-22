@@ -2,8 +2,12 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
+import com.mycompany.supermecardo.entidades.Ticket;
 import com.mycompany.supermecardo.entidades.Venta;
+import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public class VentaDeUna extends javax.swing.JFrame {
@@ -51,9 +55,12 @@ public class VentaDeUna extends javax.swing.JFrame {
         lblHora = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         lblFormaDePago = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
+        lblDescuento = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblNombre.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
         lblNombre.setText("Venta + Id ");
 
         jLabel1.setText("Vendedor :");
@@ -104,6 +111,15 @@ public class VentaDeUna extends javax.swing.JFrame {
 
         lblFormaDePago.setText("jLabel8");
 
+        btnEliminar.setText("XEliminarX");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        lblDescuento.setText("jLabel8");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,31 +127,12 @@ public class VentaDeUna extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addComponent(lblNombre))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblNombreVendedor))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblAnio)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblMes)
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblDia)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblHora))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -145,16 +142,40 @@ public class VentaDeUna extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblFormaDePago)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnVolver))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblNombre)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblAnio)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblMes)
+                                        .addGap(42, 42, 42)
+                                        .addComponent(jLabel4)))
+                                .addGap(18, 18, 18)
+                                .addComponent(lblDia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblHora))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(lblDescuento)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(14, 14, 14)
                 .addComponent(lblNombre)
-                .addGap(29, 29, 29)
+                .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblNombreVendedor))
@@ -168,7 +189,9 @@ public class VentaDeUna extends javax.swing.JFrame {
                     .addComponent(lblMes)
                     .addComponent(lblDia)
                     .addComponent(lblHora))
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDescuento)
+                .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -176,8 +199,9 @@ public class VentaDeUna extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(btnVolver)
                     .addComponent(lblTotal)
-                    .addComponent(lblFormaDePago))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(lblFormaDePago)
+                    .addComponent(btnEliminar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,8 +222,21 @@ public class VentaDeUna extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        try {
+            String idTicket=venta.getTicket().getId();
+            control.borrarVenta(venta.getId());
+            control.borrarTicket(idTicket);
+            this.dispose();
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(VentaDeUna.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JToggleButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -211,6 +248,7 @@ public class VentaDeUna extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAnio;
+    private javax.swing.JLabel lblDescuento;
     private javax.swing.JLabel lblDia;
     private javax.swing.JLabel lblFormaDePago;
     private javax.swing.JLabel lblHora;
@@ -224,28 +262,24 @@ public class VentaDeUna extends javax.swing.JFrame {
     private void cargarVenta(Venta venta) {
         
         if (venta != null) {
-            System.out.println("Entra a cargaVenta dento del if");
-            List<Producto> listaProductos = venta.getListaProductos();
-            for (Producto producto : listaProductos) {
-                Object[] objeto
-                        = {producto.getNombre(),
-                            producto.getUnidadesVendidas(),
-                            producto.getPrecio(),
-                            producto.getUnidadesVendidas() * producto.getPrecio()};
-                System.out.println("Entra a cargaVenta dento del if");
-                modeloTabla.addRow(objeto);
+            Ticket ticket =control.buscarTicket(venta.getTicket().getId());
+            List<Object> info= ticket.getListaDeInfo();
+            for (Object objetos : info) {
+                modeloTabla.addRow((Object[]) objetos);
             }
             tblProducto.setModel(modeloTabla);
         }
     }
 
     private void cargarLbl(Venta venta) {
+        lblNombre.setText("Numero de venta #"+venta.getId());
         lblNombreVendedor.setText(venta.getVendedor().getNombreUsuario());
         lblAnio.setText(String.valueOf(venta.getFecha().getYear()+1900));
         lblMes.setText(String.valueOf(venta.getFecha().getMonth()+1));
         lblDia.setText(String.valueOf(venta.getFecha().getDate()));
         lblHora.setText(String.valueOf(venta.getHorario()));
         lblTotal.setText(String.valueOf(venta.getPrecio()));
+        lblDescuento.setText("Descuento % "+venta.getDescuentoPorPorcentaje() + " $ " + venta.getDescuentoPorPrecio());
         lblFormaDePago.setText(String.valueOf(venta.getFormpago()));
     }
 }

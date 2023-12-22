@@ -15,12 +15,12 @@ public class ModificarProducto extends javax.swing.JFrame {
     Producto producto;
     Usuario user;
 
-    public ModificarProducto(String codigoId) {
+    public ModificarProducto(String codigoId,Usuario user) {
         control = new Controladora();
-        //this.codigoId=codigoID;
         initComponents();
         //se cargan los datos cuando se inicia el modificar productos
         cargarDatos(codigoId);
+        this.user=user;
     }
 
     @SuppressWarnings("unchecked")

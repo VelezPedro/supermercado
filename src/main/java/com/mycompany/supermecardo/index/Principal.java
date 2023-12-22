@@ -39,7 +39,7 @@ private Usuario user;
         });
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(255, 153, 51))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 153, 51))); // NOI18N
 
         crearProducto.setText("Crear Producto");
         crearProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +122,7 @@ private Usuario user;
 
         txtNombreUsuario.setEditable(false);
         txtNombreUsuario.setText("jTextField1");
+        txtNombreUsuario.setBorder(null);
         txtNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreUsuarioActionPerformed(evt);
@@ -214,7 +215,7 @@ private Usuario user;
     }//GEN-LAST:event_ventaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.txtNombreUsuario.setText(user.getNombreUsuario());
+        this.txtNombreUsuario.setText("Bienvenido "+user.getNombreUsuario());
     }//GEN-LAST:event_formWindowOpened
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
