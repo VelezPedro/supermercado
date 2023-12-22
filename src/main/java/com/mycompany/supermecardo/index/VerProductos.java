@@ -195,7 +195,7 @@ public class VerProductos extends javax.swing.JFrame {
             if (tablaProductos.getSelectedRow() != -1) {
                 String codigoId = (String) (tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
                 
-                ModificarProducto pantallModf= new ModificarProducto(codigoId);
+                ModificarProducto pantallModf= new ModificarProducto(codigoId,user);
                 pantallModf.setVisible(true);
                 pantallModf.setLocationRelativeTo(null);
                 

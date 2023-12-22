@@ -65,7 +65,6 @@ public class VentasTotales extends javax.swing.JFrame {
         tablaVentas = new javax.swing.JTable();
         lblTotal = new javax.swing.JLabel();
         lblCantidadVentas = new javax.swing.JLabel();
-        eliminar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -224,13 +223,6 @@ public class VentasTotales extends javax.swing.JFrame {
 
         lblCantidadVentas.setText("Cantidad de Ventas");
 
-        eliminar.setText("Eliminar");
-        eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarActionPerformed(evt);
-            }
-        });
-
         jButton3.setText("Modificar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,17 +240,17 @@ public class VentasTotales extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblCantidadVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(153, 153, 153)
                         .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                         .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(eliminar)))
-                .addGap(37, 37, 37))
+                        .addGap(131, 131, 131))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,9 +268,7 @@ public class VentasTotales extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblTotal)
                                 .addComponent(lblCantidadVentas))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(eliminar)
-                                .addComponent(jButton3)))
+                            .addComponent(jButton3))
                         .addGap(0, 46, Short.MAX_VALUE))))
         );
 
@@ -360,24 +350,6 @@ public class VentasTotales extends javax.swing.JFrame {
         cargarTabla(busqueda, turno);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // conotrolo que la tabla tenga porlomenos un registro
-        if (tablaVentas.getRowCount() > 0) {
-            //controlo que haya algo seleccionado
-            if (tablaVentas.getSelectedRow() != -1) {
-                String codigoId = (String) (tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0));
-                System.out.println(codigoId);
-                control.borrarProducto(codigoId);
-                mensaje("Venta eliminada correctamente", "Info", "Borrado de Ventas");
-                cargarTabla();
-            } else {
-                mensaje("No se selecciono ninguna Venta", "Error", "Borrado de Ventas");
-            }
-        } else {
-            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
-        }
-    }//GEN-LAST:event_eliminarActionPerformed
-
     private void cmbAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAnioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbAnioActionPerformed
@@ -414,7 +386,6 @@ public class VentasTotales extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbMeses;
     private javax.swing.JComboBox<String> cmbTurno;
     private javax.swing.JComboBox<String> cmbVendedor;
-    private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

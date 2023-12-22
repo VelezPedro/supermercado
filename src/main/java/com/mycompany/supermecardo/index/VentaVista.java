@@ -2,6 +2,7 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
+import com.mycompany.supermecardo.entidades.Ticket;
 import com.mycompany.supermecardo.entidades.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +27,8 @@ public class VentaVista extends javax.swing.JFrame {
     private Double totalVentas = 0.0;
     private List<Producto> listProducto;
     private Object[] desct;
+    private List<Object> listaDeInfo;
+   
     
     private Map<Producto, Double> unidadesVendidasPorProducto = new HashMap<>();
 
@@ -34,6 +37,8 @@ public class VentaVista extends javax.swing.JFrame {
         control = new Controladora();
         listProducto = new ArrayList();
         this.user=user;
+        this.listaDeInfo=new ArrayList();
+        
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
@@ -103,7 +108,7 @@ public class VentaVista extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablaProducto);
 
-        btnVolver.setText("<-Volver<-");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-volver-50.png"))); // NOI18N
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -222,20 +227,17 @@ public class VentaVista extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnVolver)
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminar))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -247,11 +249,11 @@ public class VentaVista extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVolver)
-                    .addComponent(btnEliminar))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVolver, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -376,7 +378,7 @@ public class VentaVista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDescuento)
                 .addGap(30, 30, 30)
-                .addComponent(terminarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(terminarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
@@ -398,7 +400,7 @@ public class VentaVista extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -426,9 +428,12 @@ public class VentaVista extends javax.swing.JFrame {
         String formaDeVenta= (String) formVenta.getSelectedItem();
         
         try {
-            control.actualizarStock(unidadesVendidasPorProducto);
             
-            control.crearVenta(listProducto,totalVentas,descPorcentaje,descPrecio,user,formaDeVenta,dia,horario);
+            control.actualizarStock(unidadesVendidasPorProducto);
+            Ticket tic=cargarTicket();
+            control.crearTicket(tic);
+            
+            control.crearVenta(listProducto,totalVentas,descPorcentaje,descPrecio,user,formaDeVenta,dia,horario,tic);
         } catch (ParseException ex) {
             Logger.getLogger(VentaVista.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -517,8 +522,6 @@ public class VentaVista extends javax.swing.JFrame {
         precioMostrar.setText(String.valueOf(totalVentas));
         Object[] desct = {"Descuento "+ nombre,"1","1",(-descuento)};
         cargarDescuento(desct);
-        descPorcentaje.setText("0");
-        descPrecio.setText("0");
     }//GEN-LAST:event_btnDescuentoActionPerformed
 
 
@@ -627,5 +630,18 @@ public class VentaVista extends javax.swing.JFrame {
         }
         tablaProducto.setModel(modeloTabla);
         
+    }
+
+    private Ticket cargarTicket() {
+         Ticket ticket =new Ticket();
+     for (Map.Entry<Producto, Double> entry : unidadesVendidasPorProducto.entrySet()) {
+                Producto key = entry.getKey();
+                Double value = entry.getValue();
+                Object[] objeto={key.getNombre(),value.toString(),key.getPrecio(),value *key.getPrecio()};
+                System.out.println("Nombre ="+objeto[0].toString()+" Unidades "+ objeto[1].toString()+" Precio: "+objeto[2].toString());
+                this.listaDeInfo.add(objeto);
+            }
+        ticket.setListaDeInfo(listaDeInfo);
+      return ticket;
     }
 }

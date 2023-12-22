@@ -2,6 +2,7 @@ package com.mycompany.supermecardo.entidades;
 
 import com.mycompany.supermecardo.persistencia.ControladorPresistencia;
 import com.mycompany.supermecardo.persistencia.VentaJpaController;
+import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -91,7 +92,7 @@ public class Controladora {
     }
 
     public void crearVenta(List<Producto> listProducto, Double totalVentas, JTextField descPorcentaje,
-            JTextField descPrecio, Usuario usuario, String formVenta, Date dia, String horario) throws ParseException {
+            JTextField descPrecio, Usuario usuario, String formVenta, Date dia, String horario,Ticket tic) throws ParseException {
 
         Venta venta = new Venta();
         venta.setListaProductos(listProducto);
@@ -108,6 +109,7 @@ public class Controladora {
         //Date hora= horaSdf.parse(horaSdf.format(horario));
         venta.setFecha(dia);
         venta.setFormpago(formVenta);
+        venta.setTicket(tic);
         contPersis.guardarVenta(venta);
     }
 
@@ -166,6 +168,22 @@ public class Controladora {
 
     public List<Venta> buscarYMostrarResultados(String vendedor, String anio, String mes, String dia, String formaDePago) {
         return contPersis.filtrarVentas(vendedor, anio, mes, dia, formaDePago);
+    }
+
+    public void crearTicket(Ticket ticket) {
+        contPersis.crearTicket(ticket);
+    }
+
+    public Ticket buscarTicket(String idTicket) {
+        return contPersis.buscarTicket(idTicket);
+    }
+
+    public void borrarVenta(String id) throws NonexistentEntityException {
+        contPersis.borrarVenta(id);
+    }
+
+    public void borrarTicket(String id) throws NonexistentEntityException {
+        contPersis.borrarTicket(id);
     }
 
 }

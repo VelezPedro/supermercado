@@ -1,6 +1,7 @@
 package com.mycompany.supermecardo.persistencia;
 
 import com.mycompany.supermecardo.entidades.Producto;
+import com.mycompany.supermecardo.entidades.Ticket;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
@@ -14,6 +15,7 @@ public class ControladorPresistencia {
     ProductoJpaController prodJpa = new ProductoJpaController();
     UsuarioJpaController usuJpa = new UsuarioJpaController();
     VentaJpaController ventaJpa = new VentaJpaController();
+    TicketJpaController ticketJpa=new TicketJpaController();
 
     public void guardar(Producto producto) throws Exception {
         prodJpa.create(producto);
@@ -101,7 +103,21 @@ public class ControladorPresistencia {
     public List<Venta> filtrarVentas(String vendedor, String anio, String mes, String dia, String formaDePago){
         return ventaJpa.buscarTodo(vendedor,anio,mes,dia,formaDePago);  
     }
-    
-    
+
+    public void crearTicket(Ticket ticket) {
+        ticketJpa.create(ticket);
+    }
+
+    public Ticket buscarTicket(String idTicket) {
+     return ticketJpa.findTicket(idTicket);
+    }
+
+    public void borrarVenta(String id) throws NonexistentEntityException {
+        ventaJpa.destroy(id);
+    }
+
+    public void borrarTicket(String id) throws NonexistentEntityException {
+        ticketJpa.destroy(id);
+    }
     
 }
