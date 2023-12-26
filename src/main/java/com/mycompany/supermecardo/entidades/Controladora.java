@@ -186,4 +186,8 @@ public class Controladora {
         contPersis.borrarTicket(id);
     }
 
+    public List<Producto> traerListaProductosXNombre(String nombre) {
+       return contPersis.traerListaProductosXNombre(nombre);
+    }
+
 }

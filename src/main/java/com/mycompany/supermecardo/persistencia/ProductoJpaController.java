@@ -4,6 +4,7 @@ import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import com.mycompany.supermecardo.persistencia.exceptions.PreexistingEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -143,5 +144,16 @@ public class ProductoJpaController implements Serializable {
         Producto producto= (Producto) em.createQuery("SELECT p FROM Producto p WHERE p.nombre LIKE :nombre").
                 setParameter("nombre", nombre).getSingleResult();
         return producto;
+    }
+
+    public List<Producto> traerListaProductosXNombre(String nombre) {
+    EntityManager em = getEntityManager();
+    List<Producto> productos=(List<Producto>) (Producto) em.createQuery("SELECT p FROM Producto p WHERE p.nombre LIKE :nombre").
+            setParameter("'%nombre%'", nombre).getResultList();
+//        Producto producto= (Producto) em.createQuery("SELECT p FROM Producto p WHERE p.nombre LIKE :nombre").
+//                setParameter("%nombre%", nombre).getResultList();
+//        
+//        productos.add(producto);
+        return productos;
     }
 }
