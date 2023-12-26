@@ -119,5 +119,11 @@ public class ControladorPresistencia {
     public void borrarTicket(String id) throws NonexistentEntityException {
         ticketJpa.destroy(id);
     }
+
+
+
+    public List<Producto> traerListaProductosXNombre(String nombre) {
+     return prodJpa.traerListaProductosXNombre(nombre);
+    }
     
 }
