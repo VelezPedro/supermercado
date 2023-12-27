@@ -78,7 +78,7 @@
                       </Group>
                       <Component id="jPanel2" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -114,6 +114,7 @@
                                       <Component id="venta" alignment="0" max="32767" attributes="0"/>
                                       <Component id="verVenta" alignment="0" max="32767" attributes="0"/>
                                       <Component id="salir" max="32767" attributes="0"/>
+                                      <Component id="btnUsuarios" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -133,15 +134,17 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtNombreUsuario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
-                      <Component id="crearProducto" min="-2" pref="81" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="verProductos" min="-2" pref="78" max="-2" attributes="0"/>
+                      <Component id="crearProducto" min="-2" pref="65" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="venta" min="-2" pref="78" max="-2" attributes="0"/>
+                      <Component id="verProductos" min="-2" pref="65" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="verVenta" min="-2" pref="74" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="venta" min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="verVenta" min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnUsuarios" min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace pref="46" max="32767" attributes="0"/>
                       <Component id="salir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -151,7 +154,10 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="crearProducto">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Crear Producto"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons8-agregar-propiedad-48.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Crear PRODUCTO"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearProductoActionPerformed"/>
@@ -159,7 +165,10 @@
             </Component>
             <Component class="javax.swing.JButton" name="verProductos">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ver y Editar Productos"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons8-editar2-32.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="EDITAR PRODUCTOS"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verProductosActionPerformed"/>
@@ -167,7 +176,10 @@
             </Component>
             <Component class="javax.swing.JButton" name="venta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Venta"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons8-bolsas-de-compra-48.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="VENTA"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ventaActionPerformed"/>
@@ -175,7 +187,10 @@
             </Component>
             <Component class="javax.swing.JButton" name="verVenta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ver Ventas"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons8-editar2-32.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="VER VENTAS"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verVentaActionPerformed"/>
@@ -208,6 +223,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Bienvenido"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnUsuarios">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons8-usuarios2-48.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="USUARIOS"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuariosActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

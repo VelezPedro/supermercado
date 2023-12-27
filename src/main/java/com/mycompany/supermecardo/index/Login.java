@@ -158,20 +158,19 @@ public class Login extends javax.swing.JFrame {
         String usuario = txtUsuario.getText();
         String password = txtPassword.getText();
         Usuario user = control.validarUsuario(usuario, password);
-        //System.out.println(user.getRol());
 
         if (user != null) {
             String rol = user.getRol();
             if (rol.equals("admin")) {
-                PrincipalAdmin pAdmin = new PrincipalAdmin(control, user);
-                pAdmin.setVisible(true);
-                pAdmin.setLocationRelativeTo(null);
+                Principal principal=new Principal(control, user);
+                principal.setVisible(true);
+                principal.setLocationRelativeTo(null);
                 this.dispose();
             }
             if (rol.equals("user")) {
-                Principal principal = new Principal(control, user);
-                principal.setVisible(true);
-                principal.setLocationRelativeTo(null);
+                PanelVendedor panelVendedor=new PanelVendedor(control,user);
+                panelVendedor.setVisible(true);
+                panelVendedor.setLocationRelativeTo(null);
                 this.dispose();
             }
         } else {
@@ -179,10 +178,7 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;

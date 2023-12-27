@@ -207,7 +207,7 @@ public class AltaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbRolActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        PrincipalAdmin principal=new PrincipalAdmin(control,user);
+        Usuarios principal=new Usuarios(control,user);
         principal.setVisible(true);
         principal.setLocationRelativeTo(null);
         this.dispose();

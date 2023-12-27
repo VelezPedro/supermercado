@@ -115,6 +115,7 @@ public class CrearProducto extends javax.swing.JFrame {
 
         jLabel3.setText("FORMA DE VENTA");
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("\tRECOMENDACIONES\n-Nombre especifico , unico del producto.\n-Codigo unico por producto.\n-Se recomienda armar grupo con codigos parecidos.\n-Completar todas las celdas.\n-Si se equivoca al cargar datos , no eliminar el producto, editarlo.\n\n");

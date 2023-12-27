@@ -284,6 +284,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="jTextArea1">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" value="&#x9;RECOMENDACIONES&#xa;-Nombre especifico , unico del producto.&#xa;-Codigo unico por producto.&#xa;-Se recomienda armar grupo con codigos parecidos.&#xa;-Completar todas las celdas.&#xa;-Si se equivoca al cargar datos , no eliminar el producto, editarlo.&#xa;&#xa;"/>
