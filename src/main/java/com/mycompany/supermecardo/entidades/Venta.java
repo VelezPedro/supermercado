@@ -1,6 +1,7 @@
 package com.mycompany.supermecardo.entidades;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 public class Venta implements Serializable {
@@ -41,7 +43,7 @@ public class Venta implements Serializable {
     
     @OneToOne
     private Ticket ticket;
-
+    
     public Venta(String id, List<Producto> listaProductos, Double precio, Integer descuentoPorPorcentaje, Integer descuentoPorPrecio, Usuario vendedor, String formpago, Date fecha, String horario, Ticket ticket) {
         this.id = id;
         this.listaProductos = listaProductos;

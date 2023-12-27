@@ -3,6 +3,7 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Ticket;
+import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
@@ -17,11 +18,15 @@ public class VentaDeUna extends javax.swing.JFrame {
     private Venta venta;
     private DefaultTableModel modeloTabla;
     private Controladora control;
+    private Usuario usuario;
+
 
     public VentaDeUna(Venta venta, VentasTotales ventasTotales) {
         initComponents();
         this.venta = venta;
         this.ventasTotales = ventasTotales;
+
+
         control = new Controladora();
         String titulos[] = {"Producto", "Unidades", "Precio por Unidad", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
@@ -227,12 +232,20 @@ public class VentaDeUna extends javax.swing.JFrame {
     
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
+            VentasTotales ventasTotales = new VentasTotales(usuario);
+//            ventasTotales.remove(modeloTabla.removeRow(tablaVentas));
+//            ;
+//            tablaVentas.setModel(modeloTabla);
+            
             String idTicket=venta.getTicket().getId();
             control.borrarVenta(venta.getId());
+
             control.borrarTicket(idTicket);
             ventasTotales.limpiarTabla();
             ventasTotales.cargarTabla();
+
             this.dispose();
+            
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(VentaDeUna.class.getName()).log(Level.SEVERE, null, ex);
         }        

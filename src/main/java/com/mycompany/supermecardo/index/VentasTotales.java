@@ -3,9 +3,12 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +18,7 @@ public class VentasTotales extends javax.swing.JFrame {
     private DefaultTableModel modeloTabla;
     private Usuario user;
     private Controladora control;
-    private Double total = 0.0;
+    private BigDecimal total = BigDecimal.ZERO;
     private List<Usuario> listaUsuarios;
     private List<String> listaAnio;
     private List<Venta> listaVentas;
@@ -315,19 +318,19 @@ public class VentasTotales extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
         Principal principal = new Principal(control, user);
         principal.setVisible(true);
         principal.setLocationRelativeTo(null);
         this.dispose();
-    }                                         
+    }
 
     private void cmbVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVendedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbVendedorActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        this.total = 0.0;
+        this.total = BigDecimal.ZERO;
         String vendedor = (String) cmbVendedor.getSelectedItem();
         String anio = (String) cmbAnio.getSelectedItem();
         String mes = (String) cmbMeses.getSelectedItem();
@@ -361,21 +364,30 @@ public class VentasTotales extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             Venta venta = listaVentas.get(tablaVentas.getSelectedRow());
 
-            VentaDeUna ventaDeUna = new VentaDeUna(venta,this);
+            VentaDeUna ventaDeUna = new VentaDeUna(venta, this);
+
             ventaDeUna.setVisible(true);
             ventaDeUna.setLocationRelativeTo(null);
+
         }
+
     }//GEN-LAST:event_tablaVentasMouseClicked
 
     private void tablaVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseExited
 
     }//GEN-LAST:event_tablaVentasMouseExited
 
+
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        
+
     }//GEN-LAST:event_btnModificarActionPerformed
+
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
+    }                                        
+
+    {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -405,7 +417,7 @@ public class VentasTotales extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void cargarTabla() {
-        total = 0.0;
+        total = BigDecimal.ZERO;
         listaVentas = control.traerVentas();
 
         if (!listaVentas.isEmpty()) {
@@ -415,7 +427,10 @@ public class VentasTotales extends javax.swing.JFrame {
                     venta.getHorario(), "$ " + venta.getPrecio()};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
-                total += venta.getPrecio();
+                
+               total = total.add(BigDecimal.valueOf(venta.getPrecio()));
+                
+                 
             }
         }
 
@@ -425,47 +440,56 @@ public class VentasTotales extends javax.swing.JFrame {
     }
 
     private void cargarTabla(List<Venta> listaBusqueda, String turno) {
-        if (listaBusqueda != null) {
 
-            for (Venta venta : listaBusqueda) {
-                String hora = "";
-                Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
-                    venta.getFecha().getMonth() + 1, venta.getFecha().getDate(),
-                    venta.getHorario(), "$ " + venta.getPrecio()};
+    if (listaBusqueda != null) {
 
-                for (int i = 0; i <= 1; i++) {
-                    hora += objeto[4].toString().charAt(i);
-                }
+        for (Venta venta : listaBusqueda) {
+            String hora = "";
+            BigDecimal precio = BigDecimal.valueOf(venta.getPrecio());  // Convertir el precio a BigDecimal
+            Object[] objeto = {
+                    venta.getVendedor().getNombreUsuario(),
+                    venta.getFecha().getYear() + 1900,
+                    venta.getFecha().getMonth() + 1,
+                    venta.getFecha().getDate(),
+                    venta.getHorario(),
+                    "$ " + formatearBigDecimalConDosDecimales(precio)
+            };
 
-                if (turno.equals("Mañana")) {
-                    if (Integer.parseInt(hora) >= 7 && Integer.parseInt(hora) <= 14) {
-                        modeloTabla.addRow(objeto);
-                        total += venta.getPrecio();
-                        continue;
-                    }
-                } else if (turno.equals("Tarde")) {
-                    if (Integer.parseInt(hora) >= 15 && Integer.parseInt(hora) <= 22) {
-                        modeloTabla.addRow(objeto);
-                        total += venta.getPrecio();
-                        continue;
-                    }
-                } else if (turno.equals("Noche")) {
-                    if (Integer.parseInt(hora) >= 23 || Integer.parseInt(hora) <= 6) {
-                        modeloTabla.addRow(objeto);
-                        total += venta.getPrecio();
-                        continue;
-                    }
-                } else {
+            for (int i = 0; i <= 1; i++) {
+                hora += objeto[4].toString().charAt(i);
+            }
+
+            if (turno.equals("Mañana")) {
+                if (Integer.parseInt(hora) >= 7 && Integer.parseInt(hora) <= 14) {
                     modeloTabla.addRow(objeto);
-                    total += venta.getPrecio();
+                    total = total.add(precio);
+                    continue;
                 }
+            } else if (turno.equals("Tarde")) {
+                if (Integer.parseInt(hora) >= 15 && Integer.parseInt(hora) <= 22) {
+                    modeloTabla.addRow(objeto);
+                    total = total.add(precio);
+                    continue;
+                }
+            } else if (turno.equals("Noche")) {
+                if (Integer.parseInt(hora) >= 23 || Integer.parseInt(hora) <= 6) {
+                    modeloTabla.addRow(objeto);
+                    total = total.add(precio);
+                    continue;
+                }
+            } else {
+                modeloTabla.addRow(objeto);
+                total = total.add(precio);
+
             }
         }
-
-        lblTotal.setText("Total $" + total);
-        lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaBusqueda.size()));
-        tablaVentas.setModel(modeloTabla);
     }
+
+    actualizarLabelConBigDecimal(lblTotal, total);
+    lblCantidadVentas.setText("Cantidad de ventas: " + String.valueOf(listaBusqueda.size()));
+    tablaVentas.setModel(modeloTabla);
+}
+
 
     private void cargarListaUsuarios() {
         listaUsuarios = control.traerUsuarios();
@@ -527,7 +551,20 @@ public class VentasTotales extends javax.swing.JFrame {
         return control.buscarYMostrarResultados(vendedor, anio, mes, dia, formaDePago);
     }
     
+
     public void limpiarTabla(){
         modeloTabla.setRowCount(0);
     }
+
+    private void actualizarLabelConBigDecimal(JLabel label, BigDecimal numero) {
+    DecimalFormat formato = new DecimalFormat("#.00");
+    String numeroFormateado = formato.format(numero);
+    label.setText("Total $" + numeroFormateado);
+}
+
+private String formatearBigDecimalConDosDecimales(BigDecimal numero) {
+    DecimalFormat formato = new DecimalFormat("#.00");
+    return formato.format(numero);
+}
+
 }

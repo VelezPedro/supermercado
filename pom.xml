@@ -84,6 +84,7 @@
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
+                <version>2.3.1</version>
                 <executions>
                     <execution>
                         <id>l4j-clui</id>
@@ -93,15 +94,15 @@
                         </goals>
                         <configuration>
                             <headerType>gui</headerType>
-                            <outfile>C:/Users/maxic/Downloads/Supermerk2/supermercado/target/Supermercado.exe</outfile>
-                            <jar>C:/Users/maxic/Downloads/Supermerk2/supermercado/target/Supermecardo-1.0-SNAPSHOT.jar</jar>
+                            <outfile>C:\Users\Joaquín\Desktop\Proyectos\supermercado\supermercado\target\Supermercado.exe</outfile>
+                            <jar>C:\Users\Joaquín\Desktop\Proyectos\supermercado\supermercado\target\Supermecardo-1.0-SNAPSHOT.jar</jar>
                             <errTitle>Supermercado - Error</errTitle>
                             <classPath>
                                 <mainClass>com.mycompany.supermecardo.Supermecardo</mainClass>
                                 <!-- Agrega cualquier otra dependencia si es necesario -->
                             </classPath>
                             <jre>
-                                <path>C:/Program Files/Java/jdk-21/bin</path> <!-- Utiliza el directorio del JDK -->
+                                <path>C:\Program Files\Java\jdk-17</path> <!-- Utiliza el directorio del JDK -->
                             </jre>
                             <versionInfo>
                                 <fileVersion>1.0.0.0</fileVersion>
