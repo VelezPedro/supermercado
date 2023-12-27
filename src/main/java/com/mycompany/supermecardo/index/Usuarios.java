@@ -17,8 +17,8 @@ public class Usuarios extends javax.swing.JFrame {
         this.control = control;
         this.user = user;
     }
-
-
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -205,8 +205,7 @@ public class Usuarios extends javax.swing.JFrame {
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
             }
-        }
-        
+        }        
         tablaUsuarios.setModel(modeloTabla);
     }
 

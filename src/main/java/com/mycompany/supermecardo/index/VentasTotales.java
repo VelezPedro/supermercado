@@ -17,10 +17,8 @@ public class VentasTotales extends javax.swing.JFrame {
     private Controladora control;
     private Double total = 0.0;
     private List<Usuario> listaUsuarios;
-    private List<Venta> listaVentaVendedor;
     private List<String> listaAnio;
     private List<Venta> listaVentas;
-    private List<Venta> listaBusqueda;
 
     public VentasTotales(Usuario user) {
         initComponents();
@@ -317,12 +315,12 @@ public class VentasTotales extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {                                          
         Principal principal = new Principal(control, user);
         principal.setVisible(true);
         principal.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btnVolverActionPerformed
+    }                                         
 
     private void cmbVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVendedorActionPerformed
         // TODO add your handling code here:
@@ -359,11 +357,11 @@ public class VentasTotales extends javax.swing.JFrame {
     }//GEN-LAST:event_cbmPagoActionPerformed
 
     private void tablaVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseClicked
-        
-        if (evt.getClickCount()==2) {
-            Venta venta=listaVentas.get(tablaVentas.getSelectedRow());
-            
-            VentaDeUna ventaDeUna=new VentaDeUna(venta);
+
+        if (evt.getClickCount() == 2) {
+            Venta venta = listaVentas.get(tablaVentas.getSelectedRow());
+
+            VentaDeUna ventaDeUna = new VentaDeUna(venta,this);
             ventaDeUna.setVisible(true);
             ventaDeUna.setLocationRelativeTo(null);
         }
@@ -376,7 +374,9 @@ public class VentasTotales extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         
     }//GEN-LAST:event_btnModificarActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -404,7 +404,8 @@ public class VentasTotales extends javax.swing.JFrame {
     private javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarTabla() {
+    public void cargarTabla() {
+        total = 0.0;
         listaVentas = control.traerVentas();
 
         if (!listaVentas.isEmpty()) {
@@ -423,41 +424,41 @@ public class VentasTotales extends javax.swing.JFrame {
         tablaVentas.setModel(modeloTabla);
     }
 
-    private void cargarTabla(List<Venta> listaBusqueda, String turno) {        
+    private void cargarTabla(List<Venta> listaBusqueda, String turno) {
         if (listaBusqueda != null) {
-            
+
             for (Venta venta : listaBusqueda) {
                 String hora = "";
                 Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
                     venta.getFecha().getMonth() + 1, venta.getFecha().getDate(),
                     venta.getHorario(), "$ " + venta.getPrecio()};
-                                
+
                 for (int i = 0; i <= 1; i++) {
-                    hora += objeto[4].toString().charAt(i);                                       
+                    hora += objeto[4].toString().charAt(i);
                 }
-                
+
                 if (turno.equals("Mañana")) {
-                        if (Integer.parseInt(hora) >= 7 && Integer.parseInt(hora) <= 14) {
-                            modeloTabla.addRow(objeto);
-                            total += venta.getPrecio();
-                            continue;
-                        }
-                    }else if (turno.equals("Tarde")) {
-                        if (Integer.parseInt(hora) >= 15 && Integer.parseInt(hora) <= 22) {
-                            modeloTabla.addRow(objeto);
-                            total += venta.getPrecio();
-                            continue;
-                        }
-                    }else if (turno.equals("Noche")) {
-                        if (Integer.parseInt(hora) >= 23 || Integer.parseInt(hora) <= 6) {
-                            modeloTabla.addRow(objeto);
-                            total += venta.getPrecio();
-                            continue;
-                        }
-                    }else{
+                    if (Integer.parseInt(hora) >= 7 && Integer.parseInt(hora) <= 14) {
                         modeloTabla.addRow(objeto);
                         total += venta.getPrecio();
+                        continue;
                     }
+                } else if (turno.equals("Tarde")) {
+                    if (Integer.parseInt(hora) >= 15 && Integer.parseInt(hora) <= 22) {
+                        modeloTabla.addRow(objeto);
+                        total += venta.getPrecio();
+                        continue;
+                    }
+                } else if (turno.equals("Noche")) {
+                    if (Integer.parseInt(hora) >= 23 || Integer.parseInt(hora) <= 6) {
+                        modeloTabla.addRow(objeto);
+                        total += venta.getPrecio();
+                        continue;
+                    }
+                } else {
+                    modeloTabla.addRow(objeto);
+                    total += venta.getPrecio();
+                }
             }
         }
 
@@ -490,11 +491,10 @@ public class VentasTotales extends javax.swing.JFrame {
 
     private void cargarAnio() {
         listaAnio = new ArrayList();
-
-        if (listaVentas != null) {
+        
+        if (!listaVentas.isEmpty()) {
             String anio = String.valueOf(listaVentas.get(0).getFecha().getYear() + 1900);
 
-            listaAnio.add("");
             listaAnio.add(anio);
 
             for (Venta venta : listaVentas) {
@@ -525,5 +525,9 @@ public class VentasTotales extends javax.swing.JFrame {
             formaDePago = null;
         }
         return control.buscarYMostrarResultados(vendedor, anio, mes, dia, formaDePago);
+    }
+    
+    public void limpiarTabla(){
+        modeloTabla.setRowCount(0);
     }
 }
