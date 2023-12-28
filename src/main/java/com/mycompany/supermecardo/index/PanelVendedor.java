@@ -127,7 +127,6 @@ public class PanelVendedor extends javax.swing.JFrame {
         CierreDeCaja cierreDeCaja = new CierreDeCaja(user);
         cierreDeCaja.setVisible(true);
         cierreDeCaja.setLocationRelativeTo(null);
-        this.dispose();
     }//GEN-LAST:event_btnCerrarCajaActionPerformed
 
 
