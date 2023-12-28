@@ -668,6 +668,7 @@ public class VentaVista extends javax.swing.JFrame {
             modeloTabla.addRow(descuento);
             totalVentas += (Double) descuento[3];
             precioMostrar.setText("$ " + (totalVentas));
+            
         }
         tablaProducto.setModel(modeloTabla);
         
