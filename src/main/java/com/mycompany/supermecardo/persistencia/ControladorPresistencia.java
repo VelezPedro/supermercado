@@ -1,5 +1,6 @@
 package com.mycompany.supermecardo.persistencia;
 
+import com.mycompany.supermecardo.entidades.CajaTotal;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Ticket;
 import com.mycompany.supermecardo.entidades.Usuario;
@@ -16,6 +17,7 @@ public class ControladorPresistencia {
     UsuarioJpaController usuJpa = new UsuarioJpaController();
     VentaJpaController ventaJpa = new VentaJpaController();
     TicketJpaController ticketJpa=new TicketJpaController();
+    CajaTotalJpaController cajaTotalJpa = new CajaTotalJpaController();
 
     public void guardar(Producto producto) throws Exception {
         prodJpa.create(producto);
@@ -124,6 +126,10 @@ public class ControladorPresistencia {
 
     public List<Producto> traerListaProductosXNombre(String nombre) {
      return prodJpa.traerListaProductosXNombre(nombre);
+    }
+
+    public void cerrarCaja(CajaTotal caja) {
+        cajaTotalJpa.create(caja);
     }
     
 }

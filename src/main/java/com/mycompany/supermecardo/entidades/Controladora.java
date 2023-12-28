@@ -190,4 +190,8 @@ public class Controladora {
        return contPersis.traerListaProductosXNombre(nombre);
     }
 
+    public void cerrarCaja(CajaTotal caja) {
+        contPersis.cerrarCaja(caja);
+    }
+
 }

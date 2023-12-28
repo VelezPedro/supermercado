@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VentaVista extends javax.swing.JFrame {
+
     Calendar fechaActual = new GregorianCalendar();
     Controladora control;
     Usuario user;
@@ -29,20 +30,18 @@ public class VentaVista extends javax.swing.JFrame {
     private DefaultTableModel modeloTabla;
     private Double totalVentas = 0.0;
     private List<Producto> listProducto;
-    private Object[] desct;
     private List<Object> listaDeInfo;
-   
-    
+
     private Map<Producto, Double> unidadesVendidasPorProducto = new HashMap<>();
 
     public VentaVista(Usuario user) {
         initComponents();
         control = new Controladora();
         listProducto = new ArrayList();
-        this.user=user;
-        this.listaDeInfo=new ArrayList();
+        this.user = user;
+        this.listaDeInfo = new ArrayList();
         lblUsuario.setText(user.getNombreUsuario());
-        
+
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
@@ -264,8 +263,8 @@ public class VentaVista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVolver))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -422,7 +421,7 @@ public class VentaVista extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(7, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -444,7 +443,7 @@ public class VentaVista extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -452,22 +451,22 @@ public class VentaVista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void terminarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarVentaActionPerformed
-        Date dia=new Date();
+        Date dia = new Date();
         SimpleDateFormat horaSdf = new SimpleDateFormat("HH:mm");
         String horario = horaSdf.format(dia);
-        String formaDeVenta= (String) formVenta.getSelectedItem();
-        
+        String formaDeVenta = (String) formVenta.getSelectedItem();
+
         try {
-            
+
             control.actualizarStock(unidadesVendidasPorProducto);
-            Ticket tic=cargarTicket();
+            Ticket tic = cargarTicket();
             control.crearTicket(tic);
-            
-            control.crearVenta(listProducto,totalVentas,descPorcentaje,descPrecio,user,formaDeVenta,dia,horario,tic);
+
+            control.crearVenta(listProducto, totalVentas, descPorcentaje, descPrecio, user, formaDeVenta, dia, horario, tic);
         } catch (ParseException ex) {
             Logger.getLogger(VentaVista.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
@@ -476,11 +475,11 @@ public class VentaVista extends javax.swing.JFrame {
             }
         };
         tablaProducto.setModel(modeloTabla);
-        
+
         precioMostrar.setText("$ ");
         listProducto.clear();
         totalVentas = 0.0;
-        
+
         lblNroVenta.setText(String.valueOf(Integer.parseInt(lblNroVenta.getText()) + 1));
         descPorcentaje.setText("0");
         descPrecio.setText("0");
@@ -492,20 +491,20 @@ public class VentaVista extends javax.swing.JFrame {
         cargarTablaPorProducto(codigoId, unidades);
         limpiarImput();
         precioMostrar.setText("$ " + totalVentas);
-        
+
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-            String rol = user.getRol();
+        String rol = user.getRol();
         if (user != null) {
             if (rol.equals("admin")) {
-                Principal principal=new Principal(control, user);
+                Principal principal = new Principal(control, user);
                 principal.setVisible(true);
                 principal.setLocationRelativeTo(null);
                 this.dispose();
-            }else if (rol.equals("user")) {
-                System.out.println("entra a vendedor");
-                PanelVendedor panelVendedor=new PanelVendedor(control,user);
+            } else if (rol.equals("user")) {
+//                System.out.println("entra a vendedor");
+                PanelVendedor panelVendedor = new PanelVendedor(control, user);
                 panelVendedor.setVisible(true);
                 panelVendedor.setLocationRelativeTo(null);
                 this.dispose();
@@ -521,16 +520,16 @@ public class VentaVista extends javax.swing.JFrame {
                 String nombre = (String) tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 0);
                 Double precioProd = (Double) (tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 3));
                 if (nombre.contains("Descuento")) {
-                    
-                    modeloTabla.removeRow(tablaProducto.getSelectedRow());                
+
+                    modeloTabla.removeRow(tablaProducto.getSelectedRow());
                     totalVentas -= precioProd;
                     precioMostrar.setText("$ " + totalVentas);
-                }else{
-                unidadesVendidasPorProducto.remove(listProducto.get(tablaProducto.getSelectedRow()));
-                listProducto.remove(tablaProducto.getSelectedRow());
-                modeloTabla.removeRow(tablaProducto.getSelectedRow());                
-                totalVentas -= precioProd;
-                precioMostrar.setText("$ " + totalVentas);
+                } else {
+                    unidadesVendidasPorProducto.remove(listProducto.get(tablaProducto.getSelectedRow()));
+                    listProducto.remove(tablaProducto.getSelectedRow());
+                    modeloTabla.removeRow(tablaProducto.getSelectedRow());
+                    totalVentas -= precioProd;
+                    precioMostrar.setText("$ " + totalVentas);
                 }
             } else {
                 mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
@@ -546,19 +545,20 @@ public class VentaVista extends javax.swing.JFrame {
         cargarTablaPorProductoXNombre(nombreP, unidades);
         limpiarImput();
         precioMostrar.setText("$ " + totalVentas);
-        
+
     }//GEN-LAST:event_btnBuscarXNombreActionPerformed
 
     private void btnDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescuentoActionPerformed
-        String nombre=null;
-        Double descuento=null;
-        if (Integer.parseInt(descPorcentaje.getText())>0) {
-            descuento = (Double.valueOf(descPorcentaje.getText())*Double.valueOf(totalVentas))/100;
-            nombre="%" + descPorcentaje.getText();
-        }else if (Integer.parseInt(descPrecio.getText())>0) {
-            descuento=(Double.valueOf(descPrecio.getText()));
-            nombre="$" + descPrecio.getText();
+        String nombre = null;
+        Double descuento = null;
+        if (Integer.parseInt(descPorcentaje.getText()) > 0) {
+            descuento = (Double.valueOf(descPorcentaje.getText()) * Double.valueOf(totalVentas)) / 100;
+            nombre = "%" + descPorcentaje.getText();
+        } else if (Integer.parseInt(descPrecio.getText()) > 0) {
+            descuento = (Double.valueOf(descPrecio.getText()));
+            nombre = "$" + descPrecio.getText();
         }
+
         precioMostrar.setText("$ " + String.valueOf(formatearDoubleConDosDecimales(Double.valueOf(totalVentas))));
         Object[] desct = {"Descuento "+ nombre,"1","1",(-descuento)};
         cargarDescuento(desct);
@@ -606,7 +606,7 @@ public class VentaVista extends javax.swing.JFrame {
     //Para llenar la tabla
     private void cargarTablaPorProducto(String codigoId, Double unidades) {
         Producto producto = control.traerProducto(codigoId);
-        
+
         if (producto != null) {
             if (producto.getFromVenta().equalsIgnoreCase("unidad")) {
             }
@@ -622,7 +622,7 @@ public class VentaVista extends javax.swing.JFrame {
             unidadesVendidasPorProducto.put(producto, unidades);
         }
         tablaProducto.setModel(modeloTabla);
-        
+
     }
 
     private void limpiarImput() {
@@ -631,7 +631,7 @@ public class VentaVista extends javax.swing.JFrame {
         txtCantidadXNombre.setText("");
         txtNombreProducto.setText("");
     }
-    
+
     public void mensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {
@@ -644,10 +644,10 @@ public class VentaVista extends javax.swing.JFrame {
         dialog.setVisible(true);
     }
 
-     private void cargarTablaPorProductoXNombre(String nombre, Double unidades) {
+    private void cargarTablaPorProductoXNombre(String nombre, Double unidades) {
         Producto producto = control.traerProductoXNombre(nombre);
         if (producto != null) {
-            
+
             Object[] objeto = {producto.getNombre(),
                 unidades,
                 producto.getPrecio(),
@@ -661,9 +661,9 @@ public class VentaVista extends javax.swing.JFrame {
         }
         tablaProducto.setModel(modeloTabla);
     }
-     
-      private void cargarDescuento(Object[] descuento) {
-        
+
+    private void cargarDescuento(Object[] descuento) {
+
         if (descuento != null) {
             modeloTabla.addRow(descuento);
             totalVentas += (Double) descuento[3];
@@ -671,7 +671,7 @@ public class VentaVista extends javax.swing.JFrame {
             
         }
         tablaProducto.setModel(modeloTabla);
-        
+
     }
 
     private Ticket cargarTicket() {
@@ -683,8 +683,9 @@ public class VentaVista extends javax.swing.JFrame {
                 System.out.println("Nombre ="+objeto[0].toString()+" Unidades "+ objeto[1].toString()+" Precio: "+objeto[2].toString());
                 this.listaDeInfo.add(objeto);
             }
+
         ticket.setListaDeInfo(listaDeInfo);
-      return ticket;
+        return ticket;
     }
     
     
