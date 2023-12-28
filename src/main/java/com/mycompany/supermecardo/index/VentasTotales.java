@@ -365,7 +365,6 @@ public class VentasTotales extends javax.swing.JFrame {
             Venta venta = listaVentas.get(tablaVentas.getSelectedRow());
 
             VentaDeUna ventaDeUna = new VentaDeUna(venta, this);
-
             ventaDeUna.setVisible(true);
             ventaDeUna.setLocationRelativeTo(null);
 
@@ -377,19 +376,20 @@ public class VentasTotales extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tablaVentasMouseExited
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+    }                                        
+
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
-
+/*
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-    }                                        
-
-    {
+    
     }//GEN-LAST:event_jButton3ActionPerformed
-
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnModificar;

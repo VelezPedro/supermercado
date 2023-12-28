@@ -25,8 +25,6 @@ public class VentaDeUna extends javax.swing.JFrame {
         initComponents();
         this.venta = venta;
         this.ventasTotales = ventasTotales;
-
-
         control = new Controladora();
         String titulos[] = {"Producto", "Unidades", "Precio por Unidad", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
@@ -243,7 +241,6 @@ public class VentaDeUna extends javax.swing.JFrame {
             control.borrarTicket(idTicket);
             ventasTotales.limpiarTabla();
             ventasTotales.cargarTabla();
-
             this.dispose();
             
         } catch (NonexistentEntityException ex) {

@@ -7,6 +7,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+
 public class Usuarios extends javax.swing.JFrame {
     
     private Controladora control;
