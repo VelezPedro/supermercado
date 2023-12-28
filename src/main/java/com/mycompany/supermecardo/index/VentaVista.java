@@ -4,6 +4,8 @@ import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Ticket;
 import com.mycompany.supermecardo.entidades.Usuario;
+import com.mycompany.supermecardo.entidades.Venta;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,8 +23,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class VentaVista extends javax.swing.JFrame {
 
-    private Controladora control;
-    private Usuario user;
+    Calendar fechaActual = new GregorianCalendar();
+    Controladora control;
+    Usuario user;
+    Venta venta;
     private DefaultTableModel modeloTabla;
     private Double totalVentas = 0.0;
     private List<Producto> listProducto;
@@ -554,8 +558,9 @@ public class VentaVista extends javax.swing.JFrame {
             descuento = (Double.valueOf(descPrecio.getText()));
             nombre = "$" + descPrecio.getText();
         }
-        precioMostrar.setText(String.valueOf(totalVentas));
-        Object[] desct = {"Descuento " + nombre, "1", "1", (-descuento)};
+
+        precioMostrar.setText("$ " + String.valueOf(formatearDoubleConDosDecimales(Double.valueOf(totalVentas))));
+        Object[] desct = {"Descuento "+ nombre,"1","1",(-descuento)};
         cargarDescuento(desct);
     }//GEN-LAST:event_btnDescuentoActionPerformed
 
@@ -611,7 +616,7 @@ public class VentaVista extends javax.swing.JFrame {
                 producto.getPrecio() * unidades};
 
             modeloTabla.addRow(objeto);
-            totalVentas += (Double) objeto[3];
+            formatearDoubleConDosDecimales(totalVentas += (Double) objeto[3]);
             producto.setUnidadesVendidas(unidades);
             listProducto.add(producto);
             unidadesVendidasPorProducto.put(producto, unidades);
@@ -646,10 +651,10 @@ public class VentaVista extends javax.swing.JFrame {
             Object[] objeto = {producto.getNombre(),
                 unidades,
                 producto.getPrecio(),
-                producto.getPrecio() * unidades};
+                formatearDoubleConDosDecimales(producto.getPrecio() * unidades)};
 
             modeloTabla.addRow(objeto);
-            totalVentas += (Double) objeto[3];
+            formatearDoubleConDosDecimales(totalVentas += (Double) objeto[3]);
             producto.setUnidadesVendidas(unidades);
             listProducto.add(producto);
             unidadesVendidasPorProducto.put(producto, unidades);
@@ -662,22 +667,31 @@ public class VentaVista extends javax.swing.JFrame {
         if (descuento != null) {
             modeloTabla.addRow(descuento);
             totalVentas += (Double) descuento[3];
-            precioMostrar.setText("$ " + totalVentas);
+            precioMostrar.setText("$ " + (totalVentas));
+            
         }
         tablaProducto.setModel(modeloTabla);
 
     }
 
     private Ticket cargarTicket() {
-        Ticket ticket = new Ticket();
-        for (Map.Entry<Producto, Double> entry : unidadesVendidasPorProducto.entrySet()) {
-            Producto key = entry.getKey();
-            Double value = entry.getValue();
-            Object[] objeto = {key.getNombre(), value.toString(), key.getPrecio(), value * key.getPrecio()};
-            System.out.println("Nombre =" + objeto[0].toString() + " Unidades " + objeto[1].toString() + " Precio: " + objeto[2].toString());
-            this.listaDeInfo.add(objeto);
-        }
+         Ticket ticket =new Ticket();
+     for (Map.Entry<Producto, Double> entry : unidadesVendidasPorProducto.entrySet()) {
+                Producto key = entry.getKey();
+                Double value = entry.getValue();
+                Object[] objeto={key.getNombre(),value.toString(),key.getPrecio(),formatearDoubleConDosDecimales(value *key.getPrecio())};
+                System.out.println("Nombre ="+objeto[0].toString()+" Unidades "+ objeto[1].toString()+" Precio: "+objeto[2].toString());
+                this.listaDeInfo.add(objeto);
+            }
+
         ticket.setListaDeInfo(listaDeInfo);
         return ticket;
+    }
+    
+    
+    public static Double formatearDoubleConDosDecimales(double numero) {
+        DecimalFormat formato = new DecimalFormat("#.##");
+        String numeroFormateadoStr = formato.format(numero);
+        return Double.parseDouble(numeroFormateadoStr);
     }
 }
