@@ -85,8 +85,6 @@ public class VentaVista extends javax.swing.JFrame {
         descPrecio = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        lblNroVenta = new javax.swing.JLabel();
         btnDescuento = new javax.swing.JButton();
         lblUsuario = new javax.swing.JLabel();
 
@@ -298,10 +296,6 @@ public class VentaVista extends javax.swing.JFrame {
 
         jLabel10.setText("$");
 
-        jLabel11.setText("Venta #");
-
-        lblNroVenta.setText("0000000000");
-
         btnDescuento.setText("Aplicar");
         btnDescuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,13 +315,8 @@ public class VentaVista extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNroVenta))
-                            .addComponent(jLabel2))
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel2)
                         .addGap(91, 91, 91))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -365,11 +354,7 @@ public class VentaVista extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(lblNroVenta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(precioMostrar)
@@ -478,9 +463,12 @@ public class VentaVista extends javax.swing.JFrame {
         listProducto.clear();
         totalVentas = 0.0;
 
-        lblNroVenta.setText(String.valueOf(Integer.parseInt(lblNroVenta.getText()) + 1));
         descPorcentaje.setText("0");
         descPrecio.setText("0");
+        VentaVista ventaNueva=new VentaVista(user);
+        ventaNueva.setVisible(true);
+        ventaNueva.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_terminarVentaActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -575,7 +563,6 @@ public class VentaVista extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> formVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -591,7 +578,6 @@ public class VentaVista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblNroVenta;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel precioMostrar;
     private javax.swing.JTable tablaProducto;

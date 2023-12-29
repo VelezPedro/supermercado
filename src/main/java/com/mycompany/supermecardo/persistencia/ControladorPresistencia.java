@@ -17,7 +17,9 @@ public class ControladorPresistencia {
     UsuarioJpaController usuJpa = new UsuarioJpaController();
     VentaJpaController ventaJpa = new VentaJpaController();
     TicketJpaController ticketJpa=new TicketJpaController();
+
     CajaTotalJpaController cajaTotalJpa = new CajaTotalJpaController();
+
 
     public void guardar(Producto producto) throws Exception {
         prodJpa.create(producto);

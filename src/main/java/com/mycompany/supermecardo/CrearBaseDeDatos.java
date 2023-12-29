@@ -30,9 +30,7 @@ public class CrearBaseDeDatos {
                 String nombreBaseDeDatos = "Supermercado";
                 statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + nombreBaseDeDatos);
                 System.out.println("Base de datos creada con éxito.");
-
-            }
-
+        }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
