@@ -11,5 +11,6 @@ public class Supermecardo {
        Login login= new Login();
        login.setVisible(true);
        login.setLocationRelativeTo(null);
+       cbd.crearAdmin();
     }
 }
