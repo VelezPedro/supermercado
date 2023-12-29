@@ -23,7 +23,7 @@ public class CrearBaseDeDatos {
             String contraseña = "root";
             connection = DriverManager.getConnection(url, usuario, contraseña);
 
-            if (!baseDeDatosExiste()) {
+            
                 // Crear la base de datos
                 statement = (Statement) connection.createStatement();
                 String nombreBaseDeDatos = "Supermercado";
@@ -33,7 +33,7 @@ public class CrearBaseDeDatos {
                 String insertDataSQL = "INSERT INTO `supermercado`.`usuario` (`ID`, `NOMBREUSUARIO`, `PASSWORD`, `ROL`) VALUES ('1', 'admin', 'password', 'admin');";
                 statement.executeUpdate(insertDataSQL);
                 System.out.println("Datos insertados exitosamente.");
-            }
+            
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
