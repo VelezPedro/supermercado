@@ -376,16 +376,16 @@ public class VentasTotales extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tablaVentasMouseExited
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }                                        
+    }
 
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
-/*
+    /*
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -427,10 +427,9 @@ public class VentasTotales extends javax.swing.JFrame {
                     venta.getHorario(), "$ " + venta.getPrecio()};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
-                
-               total = total.add(BigDecimal.valueOf(venta.getPrecio()));
-                
-                 
+
+                total = total.add(BigDecimal.valueOf(venta.getPrecio()));
+
             }
         }
 
@@ -441,55 +440,54 @@ public class VentasTotales extends javax.swing.JFrame {
 
     private void cargarTabla(List<Venta> listaBusqueda, String turno) {
 
-    if (listaBusqueda != null) {
+        if (listaBusqueda != null) {
 
-        for (Venta venta : listaBusqueda) {
-            String hora = "";
-            BigDecimal precio = BigDecimal.valueOf(venta.getPrecio());  // Convertir el precio a BigDecimal
-            Object[] objeto = {
+            for (Venta venta : listaBusqueda) {
+                String hora = "";
+                BigDecimal precio = BigDecimal.valueOf(venta.getPrecio());  // Convertir el precio a BigDecimal
+                Object[] objeto = {
                     venta.getVendedor().getNombreUsuario(),
                     venta.getFecha().getYear() + 1900,
                     venta.getFecha().getMonth() + 1,
                     venta.getFecha().getDate(),
                     venta.getHorario(),
                     "$ " + formatearBigDecimalConDosDecimales(precio)
-            };
+                };
 
-            for (int i = 0; i <= 1; i++) {
-                hora += objeto[4].toString().charAt(i);
-            }
+                for (int i = 0; i <= 1; i++) {
+                    hora += objeto[4].toString().charAt(i);
+                }
 
-            if (turno.equals("Mañana")) {
-                if (Integer.parseInt(hora) >= 7 && Integer.parseInt(hora) <= 14) {
+                if (turno.equals("Mañana")) {
+                    if (Integer.parseInt(hora) >= 7 && Integer.parseInt(hora) <= 14) {
+                        modeloTabla.addRow(objeto);
+                        total = total.add(precio);
+                        continue;
+                    }
+                } else if (turno.equals("Tarde")) {
+                    if (Integer.parseInt(hora) >= 15 && Integer.parseInt(hora) <= 22) {
+                        modeloTabla.addRow(objeto);
+                        total = total.add(precio);
+                        continue;
+                    }
+                } else if (turno.equals("Noche")) {
+                    if (Integer.parseInt(hora) >= 23 || Integer.parseInt(hora) <= 6) {
+                        modeloTabla.addRow(objeto);
+                        total = total.add(precio);
+                        continue;
+                    }
+                } else {
                     modeloTabla.addRow(objeto);
                     total = total.add(precio);
-                    continue;
-                }
-            } else if (turno.equals("Tarde")) {
-                if (Integer.parseInt(hora) >= 15 && Integer.parseInt(hora) <= 22) {
-                    modeloTabla.addRow(objeto);
-                    total = total.add(precio);
-                    continue;
-                }
-            } else if (turno.equals("Noche")) {
-                if (Integer.parseInt(hora) >= 23 || Integer.parseInt(hora) <= 6) {
-                    modeloTabla.addRow(objeto);
-                    total = total.add(precio);
-                    continue;
-                }
-            } else {
-                modeloTabla.addRow(objeto);
-                total = total.add(precio);
 
+                }
             }
         }
+
+        actualizarLabelConBigDecimal(lblTotal, total);
+        lblCantidadVentas.setText("Cantidad de ventas: " + String.valueOf(listaBusqueda.size()));
+        tablaVentas.setModel(modeloTabla);
     }
-
-    actualizarLabelConBigDecimal(lblTotal, total);
-    lblCantidadVentas.setText("Cantidad de ventas: " + String.valueOf(listaBusqueda.size()));
-    tablaVentas.setModel(modeloTabla);
-}
-
 
     private void cargarListaUsuarios() {
         listaUsuarios = control.traerUsuarios();
@@ -515,7 +513,7 @@ public class VentasTotales extends javax.swing.JFrame {
 
     private void cargarAnio() {
         listaAnio = new ArrayList();
-        
+
         if (!listaVentas.isEmpty()) {
             String anio = String.valueOf(listaVentas.get(0).getFecha().getYear() + 1900);
 
@@ -550,21 +548,20 @@ public class VentasTotales extends javax.swing.JFrame {
         }
         return control.buscarYMostrarResultados(vendedor, anio, mes, dia, formaDePago);
     }
-    
 
-    public void limpiarTabla(){
+    public void limpiarTabla() {
         modeloTabla.setRowCount(0);
     }
 
     private void actualizarLabelConBigDecimal(JLabel label, BigDecimal numero) {
-    DecimalFormat formato = new DecimalFormat("#.00");
-    String numeroFormateado = formato.format(numero);
-    label.setText("Total $" + numeroFormateado);
-}
+        DecimalFormat formato = new DecimalFormat("#.00");
+        String numeroFormateado = formato.format(numero);
+        label.setText("Total $" + numeroFormateado);
+    }
 
-private String formatearBigDecimalConDosDecimales(BigDecimal numero) {
-    DecimalFormat formato = new DecimalFormat("#.00");
-    return formato.format(numero);
-}
+    private String formatearBigDecimalConDosDecimales(BigDecimal numero) {
+        DecimalFormat formato = new DecimalFormat("#.00");
+        return formato.format(numero);
+    }
 
 }

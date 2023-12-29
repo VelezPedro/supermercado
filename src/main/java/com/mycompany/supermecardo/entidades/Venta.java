@@ -1,7 +1,6 @@
 package com.mycompany.supermecardo.entidades;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -13,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 @Entity
 public class Venta implements Serializable {

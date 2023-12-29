@@ -7,19 +7,17 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Usuarios extends javax.swing.JFrame {
-    
+
     private Controladora control;
     private Usuario user;
-    
+
     public Usuarios(Controladora control, Usuario user) {
         initComponents();
         this.control = control;
         this.user = user;
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -187,7 +185,7 @@ public class Usuarios extends javax.swing.JFrame {
         this.txtNombreUsuario.setText(user.getNombreUsuario());
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
-    
+
     private void cargarTabla() {
         DefaultTableModel modeloTabla = new DefaultTableModel() {
             @Override
@@ -199,14 +197,14 @@ public class Usuarios extends javax.swing.JFrame {
         modeloTabla.setColumnIdentifiers(titulos);
 
         List<Usuario> listaUsuarios = control.traerUsuarios();
-        
+
         if (listaUsuarios != null) {
             for (Usuario usu : listaUsuarios) {
                 Object[] objeto = {usu.getId(), usu.getNombreUsuario(), usu.getPassword(), usu.getRol()};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
             }
-        }        
+        }
         tablaUsuarios.setModel(modeloTabla);
     }
 
@@ -222,18 +220,18 @@ public class Usuarios extends javax.swing.JFrame {
         AltaUsuario altaUsu = new AltaUsuario(control, user);
         altaUsu.setVisible(true);
         altaUsu.setLocationRelativeTo(null);
-        this.dispose();        
+        this.dispose();
     }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
 
     private void btnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUsuarioActionPerformed
         if (tablaUsuarios.getRowCount() > 0) {
             if (tablaUsuarios.getSelectedRow() != -1) {
                 int idUsuario = (int) tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 0);
-                
+
                 EdicionUsuario pantallaEdit = new EdicionUsuario(control, idUsuario);
                 pantallaEdit.setVisible(true);
                 pantallaEdit.setLocationRelativeTo(null);
-                
+
             } else {
                 mostrarMensaje("No seleccionó ningún registro", "Error", "Error al borrar");
             }

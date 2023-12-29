@@ -15,12 +15,12 @@ public class ModificarProducto extends javax.swing.JFrame {
     Producto producto;
     Usuario user;
 
-    public ModificarProducto(String codigoId,Usuario user) {
+    public ModificarProducto(String codigoId, Usuario user) {
         control = new Controladora();
         initComponents();
         //se cargan los datos cuando se inicia el modificar productos
         cargarDatos(codigoId);
-        this.user=user;
+        this.user = user;
     }
 
     @SuppressWarnings("unchecked")
@@ -211,7 +211,7 @@ public class ModificarProducto extends javax.swing.JFrame {
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         // TODO add your handling code here:
-        Principal principal = new Principal(control,user);
+        Principal principal = new Principal(control, user);
         principal.setVisible(true);
         principal.setLocationRelativeTo(null);
     }//GEN-LAST:event_volverActionPerformed
@@ -220,12 +220,11 @@ public class ModificarProducto extends javax.swing.JFrame {
         try {
             String catego = (String) categoria.getSelectedItem();
             String formaDeVenta = (String) formVenta.getSelectedItem();
-            
-            
+
             control.modificarProducto(producto, nbrProducto, stock, costo, precioVenta, catego, formaDeVenta);
-            
+
             mensaje("Edicion correcta", "Info", "Edicion Correcta");
-            VerProductos pantalla=new VerProductos(user);
+            VerProductos pantalla = new VerProductos(user);
             pantalla.setVisible(true);
             pantalla.setLocationRelativeTo(null);
             this.dispose();
@@ -233,7 +232,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             mensaje("Edicion incorrecta", "Error", "Edicion Incorrecta");
             Logger.getLogger(ModificarProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
 
@@ -284,8 +283,8 @@ public class ModificarProducto extends javax.swing.JFrame {
             categoria.setSelectedIndex(0);
         }
     }
-    
-     public void mensaje(String mensaje, String tipo, String titulo) {
+
+    public void mensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);

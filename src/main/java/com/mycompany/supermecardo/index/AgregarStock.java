@@ -1,24 +1,22 @@
-
 package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
 
-
 public class AgregarStock extends javax.swing.JFrame {
-Controladora control;
-Producto producto;
-Usuario user;
 
-    public AgregarStock(Producto producto, Controladora control,Usuario user) {
+    Controladora control;
+    Producto producto;
+    Usuario user;
+
+    public AgregarStock(Producto producto, Controladora control, Usuario user) {
         initComponents();
-        this.producto=producto;
-        this.control= control;
-        this.user=user;
+        this.producto = producto;
+        this.control = control;
+        this.user = user;
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -141,20 +139,20 @@ Usuario user;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtStockNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockNuevoActionPerformed
-        
+
     }//GEN-LAST:event_txtStockNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-        control.agregarStock(producto, Double.valueOf(txtStockNuevo.getText())+ producto.getStock());
-        VerProductos verProductos= new VerProductos(user);
+        control.agregarStock(producto, Double.valueOf(txtStockNuevo.getText()) + producto.getStock());
+        VerProductos verProductos = new VerProductos(user);
         verProductos.setVisible(true);
         verProductos.setLocationRelativeTo(null);
         this.dispose();
-        
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;

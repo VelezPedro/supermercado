@@ -3,18 +3,17 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 
-
 public class PanelVendedor extends javax.swing.JFrame {
+
     Controladora control;
     Usuario user;
 
-    public PanelVendedor(Controladora control,Usuario user) {
+    public PanelVendedor(Controladora control, Usuario user) {
         initComponents();
-        this.user=user;
-        this.control=control;
+        this.user = user;
+        this.control = control;
         lblUsuario.setText(user.getNombreUsuario());
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -110,17 +109,17 @@ public class PanelVendedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
-        VentaVista venta=new VentaVista(user);
+        VentaVista venta = new VentaVista(user);
         venta.setVisible(true);
         venta.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-       Login login = new Login();
-       login.setVisible(true);
-       login.setLocationRelativeTo(null);
-       this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnCerrarCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarCajaActionPerformed
@@ -128,7 +127,6 @@ public class PanelVendedor extends javax.swing.JFrame {
         cierreDeCaja.setVisible(true);
         cierreDeCaja.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnCerrarCajaActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

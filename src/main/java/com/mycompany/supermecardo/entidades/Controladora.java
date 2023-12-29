@@ -1,7 +1,6 @@
 package com.mycompany.supermecardo.entidades;
 
 import com.mycompany.supermecardo.persistencia.ControladorPresistencia;
-import com.mycompany.supermecardo.persistencia.VentaJpaController;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 public class Controladora {
@@ -60,14 +58,12 @@ public class Controladora {
     }
 
     public Usuario validarUsuario(String usuario, String password) {
-        //String mensaje="";
         Usuario user = null;
 
         List<Usuario> listaUsuarios = contPersis.traerUsuarios();
         for (Usuario usu : listaUsuarios) {
             if (usu.getNombreUsuario().equals(usuario)) {
                 if (usu.getPassword().equals(password)) {
-                    //mensaje= "Usuario y contraseña correctos. Bienvenido/a!";
                     user = usu;
                     return user;
                 } else {

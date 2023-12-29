@@ -132,14 +132,14 @@ public class BuscarPorCodigo extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         String codigoId = codigoProducto.getText();
-        Integer unidades= Integer.valueOf(unidad.getText());
-        cargarTablaPorProducto(codigoId,unidades);
+        Integer unidades = Integer.valueOf(unidad.getText());
+        cargarTablaPorProducto(codigoId, unidades);
         limpiarImput();
 
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
-        
+
     }//GEN-LAST:event_cargarActionPerformed
 
 
@@ -157,24 +157,23 @@ public class BuscarPorCodigo extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Para llenar la tabla
-    private void cargarTablaPorProducto(String codigoId,Integer unidades) {    
+    private void cargarTablaPorProducto(String codigoId, Integer unidades) {
         Producto producto = control.traerProducto(codigoId);
         if (producto != null) {
             Object[] objeto = {producto.getNombre(),
                 unidades,
                 producto.getPrecio(),
-                producto.getPrecio() *unidades };
+                producto.getPrecio() * unidades};
 
             modeloTabla.addRow(objeto);
 
         }
         tablaProducto.setModel(modeloTabla);
     }
-    
-    private void limpiarImput(){
+
+    private void limpiarImput() {
         codigoProducto.setText("");
         unidad.setText("");
     }
-    
 
 }

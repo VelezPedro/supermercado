@@ -23,10 +23,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class VentaVista extends javax.swing.JFrame {
 
-    Calendar fechaActual = new GregorianCalendar();
-    Controladora control;
-    Usuario user;
-    Venta venta;
+    private Controladora control;
+    private Usuario user;
     private DefaultTableModel modeloTabla;
     private Double totalVentas = 0.0;
     private List<Producto> listProducto;
@@ -552,15 +550,15 @@ public class VentaVista extends javax.swing.JFrame {
         String nombre = null;
         Double descuento = null;
         if (Integer.parseInt(descPorcentaje.getText()) > 0) {
-            descuento = (Double.valueOf(descPorcentaje.getText()) * Double.valueOf(totalVentas)) / 100;
+            descuento = (Double.valueOf(descPorcentaje.getText()) * totalVentas) / 100;
             nombre = "%" + descPorcentaje.getText();
         } else if (Integer.parseInt(descPrecio.getText()) > 0) {
             descuento = (Double.valueOf(descPrecio.getText()));
             nombre = "$" + descPrecio.getText();
         }
 
-        precioMostrar.setText("$ " + String.valueOf(formatearDoubleConDosDecimales(Double.valueOf(totalVentas))));
-        Object[] desct = {"Descuento "+ nombre,"1","1",(-descuento)};
+        precioMostrar.setText("$ " + String.valueOf(formatearDoubleConDosDecimales(totalVentas)));
+        Object[] desct = {"Descuento " + nombre, "1", "1", (-descuento)};
         cargarDescuento(desct);
     }//GEN-LAST:event_btnDescuentoActionPerformed
 
@@ -668,30 +666,29 @@ public class VentaVista extends javax.swing.JFrame {
             modeloTabla.addRow(descuento);
             totalVentas += (Double) descuento[3];
             precioMostrar.setText("$ " + (totalVentas));
-            
+
         }
         tablaProducto.setModel(modeloTabla);
 
     }
 
     private Ticket cargarTicket() {
-         Ticket ticket =new Ticket();
-     for (Map.Entry<Producto, Double> entry : unidadesVendidasPorProducto.entrySet()) {
-                Producto key = entry.getKey();
-                Double value = entry.getValue();
-                Object[] objeto={key.getNombre(),value.toString(),key.getPrecio(),formatearDoubleConDosDecimales(value *key.getPrecio())};
-                System.out.println("Nombre ="+objeto[0].toString()+" Unidades "+ objeto[1].toString()+" Precio: "+objeto[2].toString());
-                this.listaDeInfo.add(objeto);
-            }
+        Ticket ticket = new Ticket();
+        for (Map.Entry<Producto, Double> entry : unidadesVendidasPorProducto.entrySet()) {
+            Producto key = entry.getKey();
+            Double value = entry.getValue();
+            Object[] objeto = {key.getNombre(), value.toString(), key.getPrecio(), formatearDoubleConDosDecimales(value * key.getPrecio())};
+            System.out.println("Nombre =" + objeto[0].toString() + " Unidades " + objeto[1].toString() + " Precio: " + objeto[2].toString());
+            this.listaDeInfo.add(objeto);
+        }
 
         ticket.setListaDeInfo(listaDeInfo);
         return ticket;
     }
-    
-    
+
     public static Double formatearDoubleConDosDecimales(double numero) {
         DecimalFormat formato = new DecimalFormat("#.##");
         String numeroFormateadoStr = formato.format(numero);
-        return Double.parseDouble(numeroFormateadoStr);
+        return Double.valueOf(numeroFormateadoStr);
     }
 }

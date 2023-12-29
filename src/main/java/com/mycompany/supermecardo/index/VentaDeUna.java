@@ -1,15 +1,12 @@
 package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
-import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Ticket;
-import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class VentaDeUna extends javax.swing.JFrame {
@@ -18,8 +15,6 @@ public class VentaDeUna extends javax.swing.JFrame {
     private Venta venta;
     private DefaultTableModel modeloTabla;
     private Controladora control;
-    private Usuario usuario;
-
 
     public VentaDeUna(Venta venta, VentasTotales ventasTotales) {
         initComponents();
@@ -227,25 +222,21 @@ public class VentaDeUna extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-    
+
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
-            VentasTotales ventasTotales = new VentasTotales(usuario);
-//            ventasTotales.remove(modeloTabla.removeRow(tablaVentas));
-//            ;
-//            tablaVentas.setModel(modeloTabla);
-            
-            String idTicket=venta.getTicket().getId();
+
+            String idTicket = venta.getTicket().getId();
             control.borrarVenta(venta.getId());
 
             control.borrarTicket(idTicket);
             ventasTotales.limpiarTabla();
             ventasTotales.cargarTabla();
             this.dispose();
-            
+
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(VentaDeUna.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
 
@@ -274,10 +265,10 @@ public class VentaDeUna extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarVenta(Venta venta) {
-        
+
         if (venta != null) {
-            Ticket ticket =control.buscarTicket(venta.getTicket().getId());
-            List<Object> info= ticket.getListaDeInfo();
+            Ticket ticket = control.buscarTicket(venta.getTicket().getId());
+            List<Object> info = ticket.getListaDeInfo();
             for (Object objetos : info) {
                 modeloTabla.addRow((Object[]) objetos);
             }
@@ -286,14 +277,14 @@ public class VentaDeUna extends javax.swing.JFrame {
     }
 
     private void cargarLbl(Venta venta) {
-        lblNombre.setText("Numero de venta #"+venta.getId());
+        lblNombre.setText("Numero de venta #" + venta.getId());
         lblNombreVendedor.setText(venta.getVendedor().getNombreUsuario());
-        lblAnio.setText(String.valueOf(venta.getFecha().getYear()+1900));
-        lblMes.setText(String.valueOf(venta.getFecha().getMonth()+1));
+        lblAnio.setText(String.valueOf(venta.getFecha().getYear() + 1900));
+        lblMes.setText(String.valueOf(venta.getFecha().getMonth() + 1));
         lblDia.setText(String.valueOf(venta.getFecha().getDate()));
         lblHora.setText(String.valueOf(venta.getHorario()));
         lblTotal.setText(String.valueOf(venta.getPrecio()));
-        lblDescuento.setText("Descuento % "+venta.getDescuentoPorPorcentaje() + " $ " + venta.getDescuentoPorPrecio());
+        lblDescuento.setText("Descuento % " + venta.getDescuentoPorPorcentaje() + " $ " + venta.getDescuentoPorPrecio());
         lblFormaDePago.setText(String.valueOf(venta.getFormpago()));
     }
 }

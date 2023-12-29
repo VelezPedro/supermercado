@@ -3,17 +3,16 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 
-
 public class Principal extends javax.swing.JFrame {
-private Controladora control;
-private Usuario user;
+
+    private Controladora control;
+    private Usuario user;
 
     public Principal(Controladora control, Usuario user) {
         initComponents();
-        this.control= control;
-        this.user= user;
+        this.control = control;
+        this.user = user;
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -202,12 +201,10 @@ private Usuario user;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
-    
-    
+
     private void verVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verVentaActionPerformed
         System.out.println(user.getNombreUsuario());
-        VentasTotales ventasTotales=new VentasTotales(user);
+        VentasTotales ventasTotales = new VentasTotales(user);
         ventasTotales.setVisible(true);
         ventasTotales.setLocationRelativeTo(null);
         this.dispose();
@@ -225,14 +222,14 @@ private Usuario user;
     }//GEN-LAST:event_crearProductoActionPerformed
 
     private void verProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verProductosActionPerformed
-        VerProductos verProdu=new VerProductos(user);
+        VerProductos verProdu = new VerProductos(user);
         verProdu.setVisible(true);
         verProdu.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_verProductosActionPerformed
 
     private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
-        VentaVista venta=new VentaVista(user);
+        VentaVista venta = new VentaVista(user);
         venta.setVisible(true);
         venta.setLocationRelativeTo(null);
         this.dispose();
@@ -254,13 +251,12 @@ private Usuario user;
     }//GEN-LAST:event_txtNombreUsuarioActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        Usuarios usuarios = new Usuarios(control,user);
+        Usuarios usuarios = new Usuarios(control, user);
         usuarios.setVisible(true);
         usuarios.setLocationRelativeTo(null);
-        
+
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnUsuarios;
