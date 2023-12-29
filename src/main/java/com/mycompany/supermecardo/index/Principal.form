@@ -191,7 +191,7 @@
             <Component class="javax.swing.JButton" name="verVenta">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons8-editar2-32.png"/>
+                  <Image iconType="3" name="/icons8-ojo-48.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="VER VENTAS"/>
               </Properties>
@@ -241,7 +241,7 @@
             <Component class="javax.swing.JButton" name="btnCaja">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons8-usuarios2-48.png"/>
+                  <Image iconType="3" name="/icons8-caja-64.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CAJA"/>
               </Properties>

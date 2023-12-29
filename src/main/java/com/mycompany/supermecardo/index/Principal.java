@@ -67,7 +67,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        verVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-editar2-32.png"))); // NOI18N
+        verVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-ojo-48.png"))); // NOI18N
         verVenta.setText("VER VENTAS");
         verVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +102,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnCaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-usuarios2-48.png"))); // NOI18N
+        btnCaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-caja-64.png"))); // NOI18N
         btnCaja.setText("CAJA");
         btnCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
