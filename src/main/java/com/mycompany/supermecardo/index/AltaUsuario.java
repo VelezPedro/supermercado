@@ -63,6 +63,7 @@ public class AltaUsuario extends javax.swing.JFrame {
         txtPassword.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         cmbRol.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        cmbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "user" }));
         cmbRol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbRolActionPerformed(evt);
@@ -70,6 +71,7 @@ public class AltaUsuario extends javax.swing.JFrame {
         });
 
         btnGuardarUsuario.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnGuardarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-guardar-48.png"))); // NOI18N
         btnGuardarUsuario.setText("Guardar");
         btnGuardarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +80,7 @@ public class AltaUsuario extends javax.swing.JFrame {
         });
 
         btnLimpiar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-escoba-50.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +89,7 @@ public class AltaUsuario extends javax.swing.JFrame {
         });
 
         btnVolver.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-volver-48.png"))); // NOI18N
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,13 +176,6 @@ public class AltaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        List<String> listaRoles = control.traerRoles();
-        if (listaRoles != null) {
-            for (String rol : listaRoles) {
-                cmbRol.addItem(rol);
-            }
-        }
-
 
     }//GEN-LAST:event_formWindowOpened
 
