@@ -230,8 +230,8 @@ public class CierreDeCaja extends javax.swing.JFrame {
             }
         };
 
-        List<Venta> ventasUsuario = control.traerVentasVendedor(user.getNombreUsuario());        
-        
+        List<Venta> ventasUsuario = control.traerVentasVendedor(user.getNombreUsuario());
+
         String hora = hora(horaCierre);
         String minutos = minutos(horaCierre);
         Double totalCaja = 0.0;
@@ -242,11 +242,11 @@ public class CierreDeCaja extends javax.swing.JFrame {
 
         if (!ventasUsuario.isEmpty()) {
             for (Venta venta : ventasUsuario) {
-            
+
                 String horaVenta = hora(venta.getHorario());
                 String minutosVenta = minutos(venta.getHorario());
 
-                if ( venta.getFecha().getDate() == (new Date().getDate()) ) {
+                if (venta.getFecha().getDate() == (new Date().getDate())) {
                     if (Integer.parseInt(horaVenta) <= Integer.parseInt(hora) && Integer.parseInt(minutosVenta) <= Integer.parseInt(minutos)) {
                         Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
                             venta.getFecha().getMonth() + 1, venta.getFecha().getDate(),
@@ -254,21 +254,21 @@ public class CierreDeCaja extends javax.swing.JFrame {
                             venta.getFormpago()};
                         ventaPorCaja.add(venta);
                         totalCaja += venta.getPrecio();
-                        
-                        if(venta.getFormpago().equalsIgnoreCase("transferencia")){
+
+                        if (venta.getFormpago().equalsIgnoreCase("transferencia")) {
                             totalTransferencia += venta.getPrecio();
-                        }else if(venta.getFormpago().equalsIgnoreCase("débito")){
+                        } else if (venta.getFormpago().equalsIgnoreCase("débito")) {
                             totalDebito += venta.getPrecio();
-                        }else if(venta.getFormpago().equalsIgnoreCase("crédito")){
+                        } else if (venta.getFormpago().equalsIgnoreCase("crédito")) {
                             totalCredito += venta.getPrecio();
-                        }else if(venta.getFormpago().equalsIgnoreCase("efectivo")){
+                        } else if (venta.getFormpago().equalsIgnoreCase("efectivo")) {
                             totalEfectivo += venta.getPrecio();
                         }
-                        
+
                         modeloTabla.addRow(objeto);
                     }
                 }
-                
+
             }
         }
         lblTotalCaja.setText("Total caja: $" + totalCaja);
@@ -278,29 +278,29 @@ public class CierreDeCaja extends javax.swing.JFrame {
         lblTrans.setText("Total Transferencia: $" + totalTransferencia);
         tblVentas.setModel(modeloTabla);
     }
-    
-    private String hora(String horaModificar){        
-        String hora = "";        
+
+    private String hora(String horaModificar) {
+        String hora = "";
 
         for (int i = 0; i <= 1; i++) {
-            hora += horaModificar.charAt(i);            
+            hora += horaModificar.charAt(i);
         }
-        
+
         return hora;
     }
-    
-    private String minutos(String horaModificar){
+
+    private String minutos(String horaModificar) {
         String minutos = "";
-        
+
         for (int i = 3; i <= 4; i++) {
             minutos += horaModificar.charAt(i);
         }
-        
+
         return minutos;
     }
-    
-    public void observacionVenta(String obs){
+
+    public void observacionVenta(String obs) {
         this.observacion = obs;
     }
-    
+
 }
