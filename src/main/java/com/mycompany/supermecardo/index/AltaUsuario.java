@@ -6,18 +6,16 @@ import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-
 public class AltaUsuario extends javax.swing.JFrame {
 
     Controladora control;
     Usuario user;
-  
+
     public AltaUsuario(Controladora control, Usuario user) {
         initComponents();
-        this.control=control;
+        this.control = control;
         this.user = user;
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -175,31 +173,30 @@ public class AltaUsuario extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         List<String> listaRoles = control.traerRoles();
-        if(listaRoles!=null){
-            for(String rol: listaRoles){
-            cmbRol.addItem(rol);
+        if (listaRoles != null) {
+            for (String rol : listaRoles) {
+                cmbRol.addItem(rol);
             }
         }
-        
-       
-        
+
+
     }//GEN-LAST:event_formWindowOpened
 
     private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
-        String usuario= txtUsuario.getText();
-        String password= txtPassword.getText();
-        String rol= (String) cmbRol.getSelectedItem();
-        
-        control.crearUsuario(usuario,password,rol);
-        
+        String usuario = txtUsuario.getText();
+        String password = txtPassword.getText();
+        String rol = (String) cmbRol.getSelectedItem();
+
+        control.crearUsuario(usuario, password, rol);
+
         mostrarMensaje("Usuario creado correctamente", "Info", "Creación exitosa");
-        
+
     }//GEN-LAST:event_btnGuardarUsuarioActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         txtUsuario.setText("");
         txtPassword.setText("");
-        
+
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void cmbRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRolActionPerformed
@@ -207,25 +204,24 @@ public class AltaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbRolActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        Usuarios principal=new Usuarios(control,user);
+        Usuarios principal = new Usuarios(control, user);
         principal.setVisible(true);
         principal.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    public void mostrarMensaje(String mensaje, String tipo, String titulo){
-        JOptionPane optionPane= new JOptionPane(mensaje);
-        if(tipo.equals("Info")){
+    public void mostrarMensaje(String mensaje, String tipo, String titulo) {
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")) {
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-        }
-        else if (tipo.equals("Error")){
+        } else if (tipo.equals("Error")) {
             optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
         }
         JDialog dialog = optionPane.createDialog(titulo);
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true);
     }
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardarUsuario;

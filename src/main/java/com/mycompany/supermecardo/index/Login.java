@@ -3,16 +3,12 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
@@ -162,13 +158,13 @@ public class Login extends javax.swing.JFrame {
         if (user != null) {
             String rol = user.getRol();
             if (rol.equals("admin")) {
-                Principal principal=new Principal(control, user);
+                Principal principal = new Principal(control, user);
                 principal.setVisible(true);
                 principal.setLocationRelativeTo(null);
                 this.dispose();
             }
             if (rol.equals("user")) {
-                PanelVendedor panelVendedor=new PanelVendedor(control,user);
+                PanelVendedor panelVendedor = new PanelVendedor(control, user);
                 panelVendedor.setVisible(true);
                 panelVendedor.setLocationRelativeTo(null);
                 this.dispose();
@@ -178,7 +174,7 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
@@ -201,12 +197,12 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(txtPassword);
 
         getContentPane().add(jPanel1);
-        
+
         jLabel1.requestFocusInWindow();
     }
 
-    
     private class PlaceholderFocusListener implements FocusListener {
+
         private String placeholder;
         private JTextField textField;
 

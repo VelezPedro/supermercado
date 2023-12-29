@@ -16,15 +16,13 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 public class VerProductos extends javax.swing.JFrame {
-    
+
     Controladora control;
     Usuario user;
     List<Producto> listaProductos;
-    
-    
+
     public VerProductos(Usuario user) {
         control = new Controladora();
         this.user = user;
@@ -32,7 +30,7 @@ public class VerProductos extends javax.swing.JFrame {
         initComponents();
         PlaceholderExample();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -288,7 +286,7 @@ public class VerProductos extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         cargarTabla();
         rellenarCategoria();
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -315,7 +313,7 @@ public class VerProductos extends javax.swing.JFrame {
             //controlo que haya algo seleccionado
             if (tablaProductos.getSelectedRow() != -1) {
                 String codigoId = (String) (tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
-                
+
                 ModificarProducto pantallModf = new ModificarProducto(codigoId, user);
                 pantallModf.setVisible(true);
                 pantallModf.setLocationRelativeTo(null);
@@ -330,7 +328,7 @@ public class VerProductos extends javax.swing.JFrame {
         } else {
             mensaje("No hay elementos cargados", "Error", "Error de Tabla");
         }
-        
+
     }//GEN-LAST:event_editarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -350,24 +348,23 @@ public class VerProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarStockActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        List<Producto> productoBusqueda =new ArrayList<>();
+        List<Producto> productoBusqueda = new ArrayList<>();
         String codigo = txtCodigo.getText();
         String nombre = txtNombre.getText();
         String categoria = (String) cmbCategorias.getSelectedItem();
         int stock = cmbStock.getSelectedIndex();
-        
-        
+
         if (!codigo.equalsIgnoreCase("CODIGO # 00")) {
             productoBusqueda.add(control.traerProducto(codigo));
-            cargarTabla(productoBusqueda); 
-        }else if (!nombre.equals("NOMBRE")) {
+            cargarTabla(productoBusqueda);
+        } else if (!nombre.equals("NOMBRE")) {
             for (Producto produ : listaProductos) {
                 if (produ.getNombre().contains(nombre)) {
                     productoBusqueda.add(produ);
                 }
             }
             cargarTabla(productoBusqueda);
-        }else if (!categoria.equals("-")){
+        } else if (!categoria.equals("-")) {
             for (Producto listaProducto : listaProductos) {
                 if (listaProducto.getCategoria().contains(categoria)) {
                     productoBusqueda.add(listaProducto);
@@ -375,13 +372,13 @@ public class VerProductos extends javax.swing.JFrame {
             }
             cargarTabla(productoBusqueda);
         }
-        System.out.println("Stock "+stock);
-        if(stock!=0){
-            if (stock==1) {
+        System.out.println("Stock " + stock);
+        if (stock != 0) {
+            if (stock == 1) {
                 Collections.sort(productoBusqueda, new StockComparator().reversed());
                 cargarTabla(productoBusqueda);
             }
-            if (stock==2) {
+            if (stock == 2) {
                 Collections.sort(productoBusqueda, new StockComparator());
                 cargarTabla(productoBusqueda);
             }
@@ -390,11 +387,11 @@ public class VerProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-       PlaceholderExample();
-       cmbCategorias.setSelectedIndex(0);
-       cmbStock.setSelectedIndex(0);
+        PlaceholderExample();
+        cmbCategorias.setSelectedIndex(0);
+        cmbStock.setSelectedIndex(0);
     }//GEN-LAST:event_btnLimpiarActionPerformed
-    
+
     public void mensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {
@@ -431,32 +428,32 @@ public class VerProductos extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
-        
+
         DefaultTableModel modeloTabla = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        
+
         String titulos[] = {"Codigo ID", "Nombre", "Stock", "Costo", "Precio", "Categoria", "Forma de Venta"};
         modeloTabla.setColumnIdentifiers(titulos);
-        
+
         this.listaProductos = control.traerProductos();
-        
+
         if (listaProductos != null) {
             for (Producto productos : listaProductos) {
                 Object[] objeto = {productos.getCodigoId(), productos.getNombre(),
                     productos.getStock(), productos.getCosto(),
                     productos.getPrecio(), productos.getCategoria(),
                     productos.getFromVenta()};
-                
+
                 modeloTabla.addRow(objeto);
             }
         }
         tablaProductos.setModel(modeloTabla);
     }
-    
+
     public void rellenarCategoria() {
         Set<String> categorias = new HashSet<>();
         for (Producto producto : listaProductos) {
@@ -467,7 +464,7 @@ public class VerProductos extends javax.swing.JFrame {
             cmbCategorias.addItem(string);
         }
     }
-    
+
     public void PlaceholderExample() {
         txtCodigo.addFocusListener((FocusListener) new PlaceholderFocusListener("CODIGO # 00", txtCodigo));
         txtNombre.addFocusListener(new PlaceholderFocusListener("NOMBRE", txtNombre));
@@ -478,30 +475,30 @@ public class VerProductos extends javax.swing.JFrame {
 
         private String placeholder;
         private JTextField textField;
-        
+
         public PlaceholderFocusListener(String placeholder, JTextField textField) {
             this.placeholder = placeholder;
             this.textField = textField;
             mostrarPlaceholder();
         }
-        
+
         private void mostrarPlaceholder() {
             textField.setForeground(Color.GRAY);
             textField.setText(placeholder);
         }
-        
+
         private void ocultarPlaceholder() {
             textField.setForeground(Color.BLACK);
             textField.setText("");
         }
-        
+
         @Override
         public void focusGained(FocusEvent e) {
             if (textField.getText().equals(placeholder)) {
                 ocultarPlaceholder();
             }
         }
-        
+
         @Override
         public void focusLost(FocusEvent e) {
             if (textField.getText().isEmpty()) {
@@ -509,16 +506,16 @@ public class VerProductos extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void cargarTabla(List<Producto> productos) {
-        
+
         DefaultTableModel modeloTabla = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        
+
         String titulos[] = {"Codigo ID", "Nombre", "Stock", "Costo", "Precio", "Categoria", "Forma de Venta"};
         modeloTabla.setColumnIdentifiers(titulos);
 
@@ -529,19 +526,20 @@ public class VerProductos extends javax.swing.JFrame {
                     producto.getStock(), producto.getCosto(),
                     producto.getPrecio(), producto.getCategoria(),
                     producto.getFromVenta()};
-                
+
                 modeloTabla.addRow(objeto);
             }
         }
         tablaProductos.setModel(modeloTabla);
     }
-    
+
     ////////////////////////////////////////////PARA ORDENAR EL STOCK///////////////////////////////////////////
     class StockComparator implements Comparator<Producto> {
-    @Override
-    public int compare(Producto producto1, Producto producto2) {
-        // Comparar por stock de menor a mayor
-        return Double.compare(producto1.getStock(), producto2.getStock());
+
+        @Override
+        public int compare(Producto producto1, Producto producto2) {
+            // Comparar por stock de menor a mayor
+            return Double.compare(producto1.getStock(), producto2.getStock());
+        }
     }
-}
 }

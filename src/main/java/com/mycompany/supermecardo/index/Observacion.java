@@ -3,7 +3,7 @@ package com.mycompany.supermecardo.index;
 public class Observacion extends javax.swing.JFrame {
 
     private CierreDeCaja caja;
-    
+
     public Observacion(CierreDeCaja caja) {
         initComponents();
         this.caja = caja;
