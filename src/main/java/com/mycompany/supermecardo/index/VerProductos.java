@@ -148,7 +148,7 @@ public class VerProductos extends javax.swing.JFrame {
                         .addGap(12, 12, 12))))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Buscar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jLabel2.setText("CODIGO");
 
@@ -340,11 +340,23 @@ public class VerProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnAgregarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarStockActionPerformed
-        Producto producto = control.traerProducto((String) tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
-        AgregarStock agregarStock = new AgregarStock(producto, control, user);
-        agregarStock.setVisible(true);
-        agregarStock.setLocationRelativeTo(null);
-        this.dispose();
+
+        if (tablaProductos.getRowCount() > 0) {
+
+            if (tablaProductos.getSelectedRow() != -1) {
+                Producto producto = control.traerProducto((String) tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
+                AgregarStock agregarStock = new AgregarStock(producto, control, user);
+                agregarStock.setVisible(true);
+                agregarStock.setLocationRelativeTo(null);
+
+            } else {
+                mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
+            }
+        } else {
+            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
+        }
+
+
     }//GEN-LAST:event_btnAgregarStockActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -369,22 +381,37 @@ public class VerProductos extends javax.swing.JFrame {
                 if (listaProducto.getCategoria().contains(categoria)) {
                     productoBusqueda.add(listaProducto);
                 }
-            }
-            cargarTabla(productoBusqueda);
-        }
-        System.out.println("Stock " + stock);
-        if (stock != 0) {
-            if (stock == 1) {
-                Collections.sort(productoBusqueda, new StockComparator().reversed());
+
                 cargarTabla(productoBusqueda);
             }
-            if (stock == 2) {
-                Collections.sort(productoBusqueda, new StockComparator());
-                cargarTabla(productoBusqueda);
+            System.out.println("Stock " + stock);
+            if (stock != 0) {
+                if (stock == 1) {
+                    Collections.sort(productoBusqueda, new StockComparator().reversed());
+                    cargarTabla(productoBusqueda);
+                }
+                if (stock == 2) {
+                    Collections.sort(productoBusqueda, new StockComparator());
+                    cargarTabla(productoBusqueda);
+                }
+            }
+
+            PlaceholderExample();
+        }else{
+            if (stock != 0) {
+                productoBusqueda= control.traerProductos();
+                if (stock == 1) {
+                    Collections.sort(productoBusqueda, new StockComparator().reversed());
+                    cargarTabla(productoBusqueda);
+                }
+                if (stock == 2) {
+                    Collections.sort(productoBusqueda, new StockComparator());
+                    cargarTabla(productoBusqueda);
+                }
             }
         }
-        PlaceholderExample();
     }//GEN-LAST:event_btnBuscarActionPerformed
+    
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         PlaceholderExample();
@@ -531,6 +558,7 @@ public class VerProductos extends javax.swing.JFrame {
             }
         }
         tablaProductos.setModel(modeloTabla);
+
     }
 
     ////////////////////////////////////////////PARA ORDENAR EL STOCK///////////////////////////////////////////
@@ -542,4 +570,5 @@ public class VerProductos extends javax.swing.JFrame {
             return Double.compare(producto1.getStock(), producto2.getStock());
         }
     }
+
 }
