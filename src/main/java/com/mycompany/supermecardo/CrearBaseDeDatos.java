@@ -10,6 +10,35 @@ import java.sql.Statement;
 
 public class CrearBaseDeDatos {
 
+    public void crearBD() {
+        Connection connection = null;
+        Statement statement = null;
+
+        try {
+            // Cargar el controlador JDBC
+            Class.forName("org.sqlite.JDBC");
+
+            // Establecer la conexión a la base de datos
+            String url = "jdbc:sqlite:supermercado.db";
+            connection = DriverManager.getConnection(url);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Cerrar recursos
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
     public void crearAdmin() {
         Connection connection = null;
         Statement statement = null;

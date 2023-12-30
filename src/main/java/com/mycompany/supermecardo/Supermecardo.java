@@ -7,6 +7,7 @@ public class Supermecardo {
 
     public static void main(String[] args) {
        CrearBaseDeDatos cbd = new CrearBaseDeDatos();
+       cbd.crearBD();
        Login login= new Login();
        login.setVisible(true);
        login.setLocationRelativeTo(null);
