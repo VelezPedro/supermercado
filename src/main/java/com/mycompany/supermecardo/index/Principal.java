@@ -41,7 +41,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jPanel2.setBackground(new java.awt.Color(198, 196, 226));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
 
         crearProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-agregar-propiedad-48.png"))); // NOI18N
         crearProducto.setText("Crear PRODUCTO");
@@ -67,7 +67,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        verVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-ojo-48.png"))); // NOI18N
+        verVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-lupa-64.png"))); // NOI18N
         verVenta.setText("VER VENTAS");
         verVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
