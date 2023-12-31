@@ -22,11 +22,13 @@ public class VentasTotales extends javax.swing.JFrame {
     private List<Usuario> listaUsuarios;
     private List<String> listaAnio;
     private List<Venta> listaVentas;
+    private List<Venta> busqueda;
 
     public VentasTotales(Usuario user) {
         initComponents();
         control = new Controladora();
         this.user = user;
+        
         String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia", "Hora", "Monto $"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
@@ -330,6 +332,7 @@ public class VentasTotales extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbVendedorActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        busqueda=null;
         this.total = BigDecimal.ZERO;
         String vendedor = (String) cmbVendedor.getSelectedItem();
         String anio = (String) cmbAnio.getSelectedItem();
@@ -347,7 +350,7 @@ public class VentasTotales extends javax.swing.JFrame {
             }
         };
 
-        List<Venta> busqueda = cargarTablaVariables(vendedor, anio, mes, dia, formaDePago);
+        busqueda = cargarTablaVariables(vendedor, anio, mes, dia, formaDePago);
         cargarTabla(busqueda, turno);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -358,11 +361,11 @@ public class VentasTotales extends javax.swing.JFrame {
     private void cbmPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmPagoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbmPagoActionPerformed
-
+        //METODO DOBLE CLICK PARA BUSCAR UNA VENTA EN LA TABLA------------------------------------------------------------
     private void tablaVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseClicked
 
         if (evt.getClickCount() == 2) {
-            Venta venta = listaVentas.get(tablaVentas.getSelectedRow());
+            Venta venta = busqueda.get(tablaVentas.getSelectedRow());
 
             VentaDeUna ventaDeUna = new VentaDeUna(venta, this);
             ventaDeUna.setVisible(true);
@@ -419,7 +422,7 @@ public class VentasTotales extends javax.swing.JFrame {
     public void cargarTabla() {
         total = BigDecimal.ZERO;
         listaVentas = control.traerVentas();
-
+        busqueda=listaVentas;
         if (!listaVentas.isEmpty()) {
             for (Venta venta : listaVentas) {
                 Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
