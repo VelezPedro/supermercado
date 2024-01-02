@@ -133,5 +133,13 @@ public class ControladorPresistencia {
     public void cerrarCaja(CajaTotal caja) {
         cajaTotalJpa.create(caja);
     }
+
+    public void cambiarFormaDePago(Venta venta) throws Exception {
+        ventaJpa.edit(venta);
+    }
+
+    
+
+    
     
 }
