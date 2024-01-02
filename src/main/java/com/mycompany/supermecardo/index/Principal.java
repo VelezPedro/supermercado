@@ -271,7 +271,10 @@ public class Principal extends javax.swing.JFrame {
 
 
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
-           
+           VerCajas verCajas= new VerCajas(control,user);
+           verCajas.setVisible(true);
+           verCajas.setLocationRelativeTo(null);
+           this.dispose();
     }//GEN-LAST:event_btnCajaActionPerformed
 
 

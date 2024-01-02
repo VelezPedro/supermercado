@@ -17,7 +17,6 @@ public class ControladorPresistencia {
     UsuarioJpaController usuJpa = new UsuarioJpaController();
     VentaJpaController ventaJpa = new VentaJpaController();
     TicketJpaController ticketJpa=new TicketJpaController();
-
     CajaTotalJpaController cajaTotalJpa = new CajaTotalJpaController();
 
 
@@ -133,5 +132,10 @@ public class ControladorPresistencia {
     public void cerrarCaja(CajaTotal caja) {
         cajaTotalJpa.create(caja);
     }
-    
+
+    public List<CajaTotal> traerTodasCajas() {
+        return cajaTotalJpa.findCajaTotalEntities();
+    }
+
+   
 }

@@ -18,6 +18,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
     private String horaCierre;
     private String observacion;
     private List<Venta> ventaPorCaja;
+    Double totalCaja;
 
     public CierreDeCaja(Usuario user) {
         initComponents();
@@ -47,6 +48,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
         lblDebit = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
         btnObservacion = new javax.swing.JButton();
+        lblTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +103,8 @@ public class CierreDeCaja extends javax.swing.JFrame {
             }
         });
 
+        lblTotal.setText("total");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -135,6 +139,10 @@ public class CierreDeCaja extends javax.swing.JFrame {
                     .addComponent(lblTrans, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblEfete, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(64, 64, 64))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,17 +155,19 @@ public class CierreDeCaja extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotalCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEfete))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTrans)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblCred)
                         .addGap(18, 18, 18)
                         .addComponent(lblDebit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTotal)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addGap(0, 7, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnObservacion)
@@ -189,7 +199,9 @@ public class CierreDeCaja extends javax.swing.JFrame {
         caja.setFecha(new Date());
         caja.setHoraCierre(horaCierre);
         caja.setObservacion(observacion);
+        caja.setTotal(String.valueOf(totalCaja));
         control.cerrarCaja(caja);
+        
         ventaPorCaja.clear();
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -215,6 +227,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
     private javax.swing.JLabel lblCred;
     private javax.swing.JLabel lblDebit;
     private javax.swing.JLabel lblEfete;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotalCaja;
     private javax.swing.JLabel lblTrans;
     private javax.swing.JTable tblVentas;
@@ -234,7 +247,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
 
         String hora = hora(horaCierre);
         String minutos = minutos(horaCierre);
-        Double totalCaja = 0.0;
+        totalCaja = 0.0;
         Double totalTransferencia = 0.0;
         Double totalEfectivo = 0.0;
         Double totalDebito = 0.0;
@@ -271,6 +284,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
 
             }
         }
+        lblTotal.setText(String.valueOf(totalCaja));
         lblTotalCaja.setText("Total caja: $" + totalCaja);
         lblCred.setText("Total Crédito: $" + totalCredito);
         lblDebit.setText("Total Debito: $" + totalDebito);

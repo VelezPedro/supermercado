@@ -190,5 +190,9 @@ public class Controladora {
         contPersis.cerrarCaja(caja);
     }
 
+    public List<CajaTotal> traerTodasCajas() {
+       return contPersis.traerTodasCajas();
+    }
+
 
 }
