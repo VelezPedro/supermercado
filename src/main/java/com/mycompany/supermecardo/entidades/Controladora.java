@@ -190,5 +190,13 @@ public class Controladora {
         contPersis.cerrarCaja(caja);
     }
 
+    public void cambiarFormaDePago(Venta venta) throws Exception {
+        contPersis.cambiarFormaDePago(venta);
+         }
+
+    
+
+    
+
 
 }
