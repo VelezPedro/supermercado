@@ -147,26 +147,26 @@ public class VentaJpaController implements Serializable {
         
         try {
             // Construir la consulta de forma dinámica con JPQL
-            StringBuilder jpql = new StringBuilder("SELECT v FROM Venta v WHERE 1=1");
+            StringBuilder jpql = new StringBuilder("SELECT * FROM Venta WHERE 1=1");
 
             if (vendedor != null && !vendedor.isEmpty()) {
-                jpql.append(" AND v.vendedor.nombreUsuario = :vendedor");
+                jpql.append(" AND Venta.vendedor.nombreUsuario = '").append(vendedor).append("'");
             }
 
             if (anio != null && !anio.isEmpty()) {
-                jpql.append(" AND FUNC('YEAR', v.fecha) = :anio");
+                jpql.append(" AND FUNC('YEAR', Venta.fecha) = '").append(anio).append("'");
             }
 
             if (mes != null && !mes.isEmpty()) {
-                jpql.append(" AND FUNC('MONTH', v.fecha) = :mes");
+                jpql.append(" AND FUNC('MONTH', Venta.fecha) = '").append(mes).append("'");
             }
 
             if (dia != null && !dia.isEmpty()) {
-                jpql.append(" AND FUNC('DAY', v.fecha) = :dia");
+                jpql.append(" AND FUNC('DAY', Venta.fecha) = '").append(dia).append("'");
             }
 
             if (formaDePago != null && !formaDePago.isEmpty()) {
-                jpql.append(" AND v.formpago = :formaDePago");
+                jpql.append(" AND Venta.formpago =  '").append(formaDePago).append("'");
             }
 
             TypedQuery<Venta> query = em.createQuery(jpql.toString(), Venta.class);
