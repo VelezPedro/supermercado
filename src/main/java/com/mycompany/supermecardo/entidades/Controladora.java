@@ -197,6 +197,10 @@ public class Controladora {
         contPersis.cambiarFormaDePago(venta);
          }
 
+    public List<CajaTotal> buscarYMostrarResultadosParaCaja(String anio, String mes, String dia) {
+        return contPersis.buscarYMostrarResultadosParaCaja(anio,mes,dia);
+    }
+
 
 
 }
