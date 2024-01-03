@@ -4,6 +4,7 @@ import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class AltaUsuario extends javax.swing.JFrame {
@@ -15,6 +16,7 @@ public class AltaUsuario extends javax.swing.JFrame {
         initComponents();
         this.control = control;
         this.user = user;
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")

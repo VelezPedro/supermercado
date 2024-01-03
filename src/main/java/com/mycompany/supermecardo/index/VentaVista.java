@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,6 +39,7 @@ public class VentaVista extends javax.swing.JFrame {
         listProducto = new ArrayList();
         this.user = user;
         this.listaDeInfo = new ArrayList();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         lblUsuario.setText(user.getNombreUsuario());
 
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
@@ -438,7 +440,6 @@ public class VentaVista extends javax.swing.JFrame {
         SimpleDateFormat horaSdf = new SimpleDateFormat("HH:mm");
         String horario = horaSdf.format(dia);
         String formaDeVenta = (String) formVenta.getSelectedItem();
-
         try {
 
             control.actualizarStock(unidadesVendidasPorProducto);
