@@ -160,7 +160,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
                         .addComponent(lblDebit)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnVolver)
                     .addComponent(btnAceptar))
                 .addGap(23, 23, 23))
