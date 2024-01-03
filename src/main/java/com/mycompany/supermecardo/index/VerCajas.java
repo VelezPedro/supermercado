@@ -4,6 +4,7 @@ import com.mycompany.supermecardo.entidades.CajaTotal;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -22,10 +23,10 @@ public class VerCajas extends javax.swing.JFrame {
         initComponents();
         this.control = control;
         this.user = user;
-        this.listaAnio=new ArrayList<>();
-        this.listaUsuarios=new ArrayList<>();
-                
-        String titulos[] = {"Año", "Mes", "Dia", "Hora", "Monto $","Observacion"};
+        this.listaAnio = new ArrayList<>();
+        this.listaUsuarios = new ArrayList<>();
+
+        String titulos[] = {"Año", "Mes", "Dia", "Hora", "Monto $", "Observacion"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -35,7 +36,6 @@ public class VerCajas extends javax.swing.JFrame {
         };
         cargarTabla();
         cargarAnio();
-        cargarListaUsuarios();
     }
 
 
@@ -52,8 +52,6 @@ public class VerCajas extends javax.swing.JFrame {
         cmbAnio = new javax.swing.JComboBox<>();
         cmbDia = new javax.swing.JComboBox<>();
         cmbMes = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        cmbVendedor = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCajas = new javax.swing.JTable();
@@ -74,40 +72,40 @@ public class VerCajas extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-lupa-64.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         cmbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         cmbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        jLabel5.setText("Vendedor");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel3))
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(42, 42, 42)
+                        .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(cmbDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmbVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel3)
                         .addGap(107, 107, 107)
-                        .addComponent(jLabel4)
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(cmbDia, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
                 .addComponent(btnBuscar)
                 .addGap(68, 68, 68))
         );
@@ -120,14 +118,12 @@ public class VerCajas extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(btnBuscar)))
@@ -145,6 +141,11 @@ public class VerCajas extends javax.swing.JFrame {
 
             }
         ));
+        tblCajas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCajasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCajas);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -226,6 +227,36 @@ public class VerCajas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        busqueda = null;
+
+        String anio = (String) cmbAnio.getSelectedItem();
+        String mes = (String) cmbMes.getSelectedItem();
+        String dia = (String) cmbDia.getSelectedItem();
+
+        String titulos[] = {"Año", "Mes", "Dia", "Hora", "Monto $", "Observacion"};
+        modeloTabla = new DefaultTableModel(titulos, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //return column == 1;      CON ESTO PERMITE EDITAR LA COLUMNA QUE SE DESEE
+                return false;
+            }
+        };
+
+        busqueda = cargarTablaVariablesCaja(anio, mes, dia);
+        cargarTabla(busqueda);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tblCajasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCajasMouseClicked
+        if (evt.getClickCount() == 2) {
+            CajaTotal cajaTotal = busqueda.get(tblCajas.getSelectedRow());
+            System.out.println(cajaTotal.getTotal());
+            VerCajaUnica cajaUnica = new VerCajaUnica(cajaTotal, this);
+            cajaUnica.setVisible(true);
+
+        }
+    }//GEN-LAST:event_tblCajasMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -233,12 +264,10 @@ public class VerCajas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbAnio;
     private javax.swing.JComboBox<String> cmbDia;
     private javax.swing.JComboBox<String> cmbMes;
-    private javax.swing.JComboBox<String> cmbVendedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -267,41 +296,68 @@ public class VerCajas extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void cargarListaUsuarios() {
-        listaUsuarios = control.traerUsuarios();
-        cmbVendedor.addItem("");
-        if (listaUsuarios != null) {
-            for (Usuario vendedor : listaUsuarios) {
-                cmbVendedor.addItem(vendedor.getNombreUsuario());
-            }
-        }
-    }
-    
+
     public void cargarTabla() {
         //total = BigDecimal.ZERO;
         listaCajas = control.traerTodasCajas();
-        busqueda=listaCajas;
+        busqueda = listaCajas;
         if (!listaCajas.isEmpty()) {
             for (CajaTotal caja : listaCajas) {
                 Object[] objeto = {
                     caja.getFecha().getYear() + 1900,
-                    caja.getFecha().getMonth() + 1, 
+                    caja.getFecha().getMonth() + 1,
                     caja.getFecha().getDate(),
                     caja.getHoraCierre(),
-                    "$ "+caja.getTotal(),
-                    !caja.getObservacion().isEmpty(),
-                };
+                    "$ " + caja.getTotal(),
+                    !caja.getObservacion().isEmpty(),};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
 
                 //total = total.add(BigDecimal.valueOf(venta.getPrecio()));
-
             }
         }
 
         //lblTotal.setText("Total $" + total);
         //lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaVentas.size()));
+        tblCajas.setRowHeight(30);
         tblCajas.setModel(modeloTabla);
     }
+
+    private void cargarTabla(List<CajaTotal> listaBusqueda) {
+
+        if (listaBusqueda != null) {
+
+            for (CajaTotal caja : listaBusqueda) {
+                String hora = "";
+                Object[] objeto = {
+                    caja.getFecha().getYear() + 1900,
+                    caja.getFecha().getMonth() + 1,
+                    caja.getFecha().getDate(),
+                    caja.getHoraCierre(),
+                    "$ " + caja.getTotal(),
+                    !caja.getObservacion().isEmpty()
+                };
+                modeloTabla.addRow(objeto);
+            }
+        }
+        tblCajas.setRowHeight(30);
+        tblCajas.setModel(modeloTabla);
+    }
+
+    private List<CajaTotal> cargarTablaVariablesCaja(String anio, String mes, String dia) {
+    if (anio.equals(" ")) {
+            anio = null;
+            mes = null;
+            dia = null;
+        } else if (mes.equals(" ")) {
+            mes = null;
+            dia = null;
+        } else if (dia.equals(" ")) {
+            dia = null;
+        }
+        return control.buscarYMostrarResultadosParaCaja(anio, mes, dia);
+    }
+    
+    
+    
 }

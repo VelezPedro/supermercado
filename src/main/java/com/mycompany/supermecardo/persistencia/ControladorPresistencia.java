@@ -142,4 +142,8 @@ public class ControladorPresistencia {
         ventaJpa.edit(venta);
     }
 
+    public List<CajaTotal> buscarYMostrarResultadosParaCaja(String anio, String mes, String dia) {
+        return cajaTotalJpa.buscarYMostrarResultadosParaCaja(anio,mes,dia);
+    }
+
 }
