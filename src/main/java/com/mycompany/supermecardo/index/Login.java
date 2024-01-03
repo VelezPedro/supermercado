@@ -9,7 +9,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
@@ -159,8 +158,8 @@ public class Login extends javax.swing.JFrame {
         if (user != null) {
             String rol = user.getRol();
             if (rol.equals("admin")) {
-                Principal principal = new Principal(control, user);                
-                principal.setVisible(true);                
+                Principal principal = new Principal(control, user);
+                principal.setVisible(true);
                 this.dispose();
             }
             if (rol.equals("user")) {
