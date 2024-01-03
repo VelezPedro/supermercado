@@ -166,5 +166,5 @@ public class PanelVendedor extends javax.swing.JFrame {
         JPanel emptyPanel = new JPanel();
         this.add(emptyPanel, gbc);
     }
-    
+
 }
