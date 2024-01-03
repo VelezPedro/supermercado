@@ -5,10 +5,8 @@ import com.mycompany.supermecardo.entidades.Usuario;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
-import javax.swing.GroupLayout;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -19,8 +17,8 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.control = control;
         this.user = user;
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setLocationRelativeTo(null);
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -229,32 +227,26 @@ public class Principal extends javax.swing.JFrame {
         System.out.println(user.getNombreUsuario());
         VentasTotales ventasTotales = new VentasTotales(user);
         ventasTotales.setVisible(true);
-        ventasTotales.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_verVentaActionPerformed
 
     private void crearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearProductoActionPerformed
-        // Metodo action de botom crear prodcutos
         //Creamos la instancia de la pantalla a que nos va a dirigir
         CrearProducto crearProduc = new CrearProducto(user);
         //setVisible cuando me cargue la pantalla , lo hace visible
         crearProduc.setVisible(true);
-        //Cuando la pantalla se abra lo hace en el medio
-        crearProduc.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_crearProductoActionPerformed
 
     private void verProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verProductosActionPerformed
         VerProductos verProdu = new VerProductos(user);
         verProdu.setVisible(true);
-        verProdu.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_verProductosActionPerformed
 
     private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
         VentaVista venta = new VentaVista(user);
         venta.setVisible(true);
-        venta.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_ventaActionPerformed
 
@@ -265,7 +257,6 @@ public class Principal extends javax.swing.JFrame {
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         Login login = new Login();
         login.setVisible(true);
-        login.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_salirActionPerformed
 
@@ -276,7 +267,6 @@ public class Principal extends javax.swing.JFrame {
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         Usuarios usuarios = new Usuarios(control, user);
         usuarios.setVisible(true);
-        usuarios.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
@@ -303,17 +293,25 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton verVenta;
     // End of variables declaration//GEN-END:variables
 
-    // Método opcional para centrar el contenido dentro de jPanel2
-    private void centerContent() {
-        // Obtener el tamaño preferido de jPanel1 (o cualquier otro componente contenedor)
-        Dimension contentSize = jPanel1.getPreferredSize();
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
 
-        // Calcular la ubicación centrada
-        int centerX = (int) ((jPanel2.getWidth() - contentSize.getWidth()) / 2);
-        int centerY = (int) ((jPanel2.getHeight() - contentSize.getHeight()) / 2);
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
 
-        // Establecer la ubicación centrada para jPanel1 (o cualquier otro componente contenedor)
-        jPanel1.setLocation(centerX, centerY);
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
     }
 
 }

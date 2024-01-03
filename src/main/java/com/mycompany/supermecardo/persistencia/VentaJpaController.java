@@ -156,9 +156,6 @@ public class VentaJpaController implements Serializable {
             consulta += " AND v.vendedor.nombreUsuario = :vendedor";
         }
 
-//        if (anio != null && mes != null && dia != null) {
-//            consulta += " AND v.fecha = :fecha";
-//        }
         if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
             LocalDate fechaBusqueda = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
             fechaInicio = Date.from(fechaBusqueda.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -179,9 +176,6 @@ public class VentaJpaController implements Serializable {
             query.setParameter("vendedor", vendedor);
         }
 
-//        if (anio != null && mes != null && dia != null) {
-//            query.setParameter("fecha", java.sql.Date.valueOf(LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia))));
-//        }
         if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
             query.setParameter("fechaInicio", fechaInicio);
             query.setParameter("fechaFin", fechaFin);
