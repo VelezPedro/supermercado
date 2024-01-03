@@ -142,7 +142,7 @@ public class VentaJpaController implements Serializable {
         return listaVentas;
     }
 
-    public List<Venta> buscarTodo(String vendedor, String anio, String mes, String dia, String formaDePago) {
+    /*public List<Venta> buscarTodo(String vendedor, String anio, String mes, String dia, String formaDePago) {
         EntityManager em = getEntityManager();
         
         try {
@@ -198,10 +198,67 @@ public class VentaJpaController implements Serializable {
         } finally {
             em.close();
         }
-    }
+    }*/
 
-    
-    
+
+public List<Venta> buscarTodo(String vendedor, String anio, String mes, String dia, String formaDePago) {
+    EntityManager em = getEntityManager();
+
+    try {
+        // Iniciar la construcción de la consulta JPQL
+        String jpql = "SELECT v FROM Venta v WHERE v.vendedor.nombreUsuario = :nombreUsuario AND strftime('%Y', v.fecha) = :anio";
+
+        // Completar la construcción de la consulta con condiciones opcionales
+        if (mes != null && !mes.isEmpty()) {
+            jpql += " AND strftime('%m', v.fecha) = :mes";
+        }
+
+        if (dia != null && !dia.isEmpty()) {
+            jpql += " AND strftime('%d', v.fecha) = :dia";
+        }
+
+        if (formaDePago != null && !formaDePago.isEmpty()) {
+            jpql += " AND v.formaPago = :formaDePago";
+        }
+
+        // Agregar el parámetro vendedor solo si está presente en la consulta
+        if (vendedor != null && !vendedor.isEmpty()) {
+            jpql += " AND v.vendedor.nombreUsuario = :vendedor";
+        }
+
+        // Crear la consulta JPA
+        TypedQuery<Venta> query = em.createQuery(jpql, Venta.class);
+
+        // Establecer los parámetros comunes
+        query.setParameter("nombreUsuario", "admin");
+        query.setParameter("anio", anio);
+
+        // Establecer los parámetros opcionales
+        if (mes != null && !mes.isEmpty()) {
+            query.setParameter("mes", mes);
+        }
+
+        if (dia != null && !dia.isEmpty()) {
+            query.setParameter("dia", dia);
+        }
+
+        if (formaDePago != null && !formaDePago.isEmpty()) {
+            query.setParameter("formaDePago", formaDePago);
+        }
+
+        // Establecer el parámetro vendedor solo si está presente en la consulta
+        if (vendedor != null && !vendedor.isEmpty()) {
+            query.setParameter("vendedor", vendedor);
+        }
+
+        // Obtener y devolver los resultados
+        List<Venta> resultados = query.getResultList();
+        return resultados;
+    } finally {
+        em.close();
+    }
+}
+
     
 }
 
