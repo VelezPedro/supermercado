@@ -2,6 +2,7 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
+import javax.swing.JFrame;
 
 public class PanelVendedor extends javax.swing.JFrame {
 
@@ -12,6 +13,7 @@ public class PanelVendedor extends javax.swing.JFrame {
         initComponents();
         this.user = user;
         this.control = control;
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         lblUsuario.setText(user.getNombreUsuario());
     }
 

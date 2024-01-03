@@ -6,6 +6,7 @@ import com.mycompany.supermecardo.entidades.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class ModificarProducto extends javax.swing.JFrame {
@@ -21,6 +22,7 @@ public class ModificarProducto extends javax.swing.JFrame {
         //se cargan los datos cuando se inicia el modificar productos
         cargarDatos(codigoId);
         this.user = user;
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")

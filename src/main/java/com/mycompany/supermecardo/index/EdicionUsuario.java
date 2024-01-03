@@ -5,6 +5,7 @@ import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -18,6 +19,7 @@ public class EdicionUsuario extends javax.swing.JFrame {
         initComponents();
         this.idUsuario = idUsuario;
         this.control = control;
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         usu = control.traerUsuario(idUsuario);
         txtUsuario.setText(usu.getNombreUsuario());
         txtPassword.setText(usu.getPassword());

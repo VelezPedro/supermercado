@@ -1,7 +1,6 @@
 package com.mycompany.supermecardo;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,6 +38,7 @@ public class CrearBaseDeDatos {
         }
 
     }
+
     public void crearAdmin() {
         Connection connection = null;
         Statement statement = null;
@@ -73,34 +73,6 @@ public class CrearBaseDeDatos {
             }
         }
 
-    }
-
-    public static boolean usuarioExiste() {
-        Connection connection = null;
-        try {
-            String url = "jdbc:sqlite:supermercado.db";
-            connection = DriverManager.getConnection(url);
-            // Comprobar si la base de datos existe
-            DatabaseMetaData metadata = connection.getMetaData();
-            ResultSet resultSet = metadata.getCatalogs();
-            while (resultSet.next()) {
-                String databaseName = resultSet.getString(1);
-                if ("supermercado".equalsIgnoreCase(databaseName)) {
-                    return true; // La base de datos existe
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return false; // La base de datos no existe
     }
 
     private static boolean existeAdmin(Connection conexion) throws SQLException {

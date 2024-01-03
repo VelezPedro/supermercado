@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -25,10 +26,11 @@ public class VerProductos extends javax.swing.JFrame {
 
     public VerProductos(Usuario user) {
         control = new Controladora();
-        this.user = user;
+        this.user = user;        
         listaProductos = null;
         initComponents();
         PlaceholderExample();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")

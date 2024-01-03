@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -25,6 +26,7 @@ public class CrearProducto extends javax.swing.JFrame {
     public CrearProducto(Usuario user) {
         initComponents();
         this.user = user;
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         PlaceholderExample();
         // Configurar el botón como predeterminado y agregar ActionListener para la tecla Enter
         getRootPane().setDefaultButton(guardar);
