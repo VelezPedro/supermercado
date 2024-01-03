@@ -4,6 +4,10 @@ import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -12,6 +16,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class VentasTotales extends javax.swing.JFrame {
@@ -32,7 +37,8 @@ public class VentasTotales extends javax.swing.JFrame {
         initComponents();
         control = new Controladora();
         this.user = user;
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
 
         String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia", "Hora", "Monto $", "Forma de Pago"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
@@ -552,6 +558,27 @@ public class VentasTotales extends javax.swing.JFrame {
     private String formatearBigDecimalConDosDecimales(BigDecimal numero) {
         DecimalFormat formato = new DecimalFormat("#.00");
         return formato.format(numero);
+    }
+    
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
     }
 
 }

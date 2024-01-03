@@ -4,6 +4,10 @@ import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
@@ -15,6 +19,7 @@ import java.util.Set;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +35,8 @@ public class VerProductos extends javax.swing.JFrame {
         listaProductos = null;
         initComponents();
         PlaceholderExample();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -571,6 +577,27 @@ public class VerProductos extends javax.swing.JFrame {
             // Comparar por stock de menor a mayor
             return Double.compare(producto1.getStock(), producto2.getStock());
         }
+    }
+    
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
     }
 
 }

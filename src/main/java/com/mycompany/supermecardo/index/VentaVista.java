@@ -5,6 +5,10 @@ import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Ticket;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class VentaVista extends javax.swing.JFrame {
@@ -39,7 +44,8 @@ public class VentaVista extends javax.swing.JFrame {
         listProducto = new ArrayList();
         this.user = user;
         this.listaDeInfo = new ArrayList();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
         lblUsuario.setText(user.getNombreUsuario());
 
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
@@ -678,4 +684,26 @@ public class VentaVista extends javax.swing.JFrame {
         String numeroFormateadoStr = formato.format(numero);
         return Double.valueOf(numeroFormateadoStr);
     }
+    
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
+    }
+    
 }
