@@ -2,6 +2,11 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import javax.swing.JPanel;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -12,6 +17,8 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.control = control;
         this.user = user;
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -30,8 +37,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnUsuarios = new javax.swing.JButton();
         btnCaja = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -157,44 +164,46 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.pdf (1).png"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.pdf (1).png"))); // NOI18N
+        lblImagen.setText("jLabel3");
+        lblImagen.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel1.setFont(new java.awt.Font("Ravie", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(199, 21, 57));
-        jLabel1.setText("M & M DRUGSTORE");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblTitulo.setFont(new java.awt.Font("Ravie", 0, 36)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(199, 21, 57));
+        lblTitulo.setText("M & M DRUGSTORE");
+        lblTitulo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(44, 44, 44)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(20, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addComponent(lblTitulo)
                         .addGap(172, 172, 172))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel1)
+                        .addComponent(lblTitulo)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,7 +211,7 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -218,32 +227,26 @@ public class Principal extends javax.swing.JFrame {
         System.out.println(user.getNombreUsuario());
         VentasTotales ventasTotales = new VentasTotales(user);
         ventasTotales.setVisible(true);
-        ventasTotales.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_verVentaActionPerformed
 
     private void crearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearProductoActionPerformed
-        // Metodo action de botom crear prodcutos
         //Creamos la instancia de la pantalla a que nos va a dirigir
         CrearProducto crearProduc = new CrearProducto(user);
         //setVisible cuando me cargue la pantalla , lo hace visible
         crearProduc.setVisible(true);
-        //Cuando la pantalla se abra lo hace en el medio
-        crearProduc.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_crearProductoActionPerformed
 
     private void verProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verProductosActionPerformed
         VerProductos verProdu = new VerProductos(user);
         verProdu.setVisible(true);
-        verProdu.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_verProductosActionPerformed
 
     private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
         VentaVista venta = new VentaVista(user);
         venta.setVisible(true);
-        venta.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_ventaActionPerformed
 
@@ -254,7 +257,6 @@ public class Principal extends javax.swing.JFrame {
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         Login login = new Login();
         login.setVisible(true);
-        login.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_salirActionPerformed
 
@@ -265,16 +267,17 @@ public class Principal extends javax.swing.JFrame {
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         Usuarios usuarios = new Usuarios(control, user);
         usuarios.setVisible(true);
-        usuarios.setLocationRelativeTo(null);
-
+        this.dispose();
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
 
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
+
            VerCajas verCajas= new VerCajas(control,user);
            verCajas.setVisible(true);
            verCajas.setLocationRelativeTo(null);
            this.dispose();
+
     }//GEN-LAST:event_btnCajaActionPerformed
 
 
@@ -282,16 +285,38 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnCaja;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton crearProducto;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblImagen;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JButton salir;
     private javax.swing.JTextField txtNombreUsuario;
     private javax.swing.JButton venta;
     private javax.swing.JButton verProductos;
     private javax.swing.JButton verVenta;
     // End of variables declaration//GEN-END:variables
+
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
+    }
+
 }

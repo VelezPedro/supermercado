@@ -3,6 +3,7 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
+import javax.swing.JFrame;
 
 public class AgregarStock extends javax.swing.JFrame {
 
@@ -165,7 +166,6 @@ public class AgregarStock extends javax.swing.JFrame {
         control.agregarStock(producto, Double.valueOf(txtStockNuevo.getText()) + producto.getStock());
         VerProductos verProductos = new VerProductos(user);
         verProductos.setVisible(true);
-        verProductos.setLocationRelativeTo(null);
         this.dispose();
 
     }//GEN-LAST:event_btnGuardarActionPerformed

@@ -4,10 +4,14 @@ import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class ModificarProducto extends javax.swing.JFrame {
 
@@ -22,6 +26,8 @@ public class ModificarProducto extends javax.swing.JFrame {
         //se cargan los datos cuando se inicia el modificar productos
         cargarDatos(codigoId);
         this.user = user;
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -259,7 +265,6 @@ public class ModificarProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
         VerProductos verProductos = new VerProductos(user);
         verProductos.setVisible(true);
-        verProductos.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 
@@ -273,7 +278,6 @@ public class ModificarProducto extends javax.swing.JFrame {
             mensaje("Edicion correcta", "Info", "Edicion Correcta");
             VerProductos pantalla = new VerProductos(user);
             pantalla.setVisible(true);
-            pantalla.setLocationRelativeTo(null);
             this.dispose();
         } catch (Exception ex) {
             mensaje("Edicion incorrecta", "Error", "Edicion Incorrecta");
@@ -352,4 +356,26 @@ public class ModificarProducto extends javax.swing.JFrame {
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true);
     }
+
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
+    }
+
 }

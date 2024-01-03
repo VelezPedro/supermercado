@@ -1,19 +1,16 @@
-
 package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
-import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-
 public class EdicionUsuario extends javax.swing.JFrame {
-    
+
     private int idUsuario;
     private Controladora control;
     private Usuario usu;
-    
+
     public EdicionUsuario(Controladora control, int idUsuario) {
         initComponents();
         this.idUsuario = idUsuario;
@@ -23,7 +20,6 @@ public class EdicionUsuario extends javax.swing.JFrame {
         txtPassword.setText(usu.getPassword());
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -172,10 +168,7 @@ public class EdicionUsuario extends javax.swing.JFrame {
         mostrarMensaje("Usuario editado correctamente", "Info", "Creación de Usuario exitosa");
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-    
-    
-    
-   
+
     public void mostrarMensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {

@@ -289,7 +289,7 @@ public class VerCajas extends javax.swing.JFrame {
                     caja.getFecha().getMonth() + 1, 
                     caja.getFecha().getDate(),
                     caja.getHoraCierre(),
-                    caja.getTotal(),
+                    "$ "+caja.getTotal(),
                     !caja.getObservacion().isEmpty(),
                 };
                 //agrega una fila nueva cada vez que ingresa al ciclo.

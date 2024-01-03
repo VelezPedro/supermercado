@@ -133,9 +133,13 @@ public class ControladorPresistencia {
         cajaTotalJpa.create(caja);
     }
 
+
     public List<CajaTotal> traerTodasCajas() {
         return cajaTotalJpa.findCajaTotalEntities();
     }
 
-   
+    public void cambiarFormaDePago(Venta venta) throws Exception {
+        ventaJpa.edit(venta);
+    }
+
 }

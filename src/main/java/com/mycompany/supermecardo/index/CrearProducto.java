@@ -3,6 +3,10 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -13,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
@@ -25,6 +30,9 @@ public class CrearProducto extends javax.swing.JFrame {
     public CrearProducto(Usuario user) {
         initComponents();
         this.user = user;
+        this.setLocationRelativeTo(null);
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
         PlaceholderExample();
         // Configurar el botón como predeterminado y agregar ActionListener para la tecla Enter
         getRootPane().setDefaultButton(guardar);
@@ -248,7 +256,6 @@ public class CrearProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
         Principal principal = new Principal(control, user);
         principal.setVisible(true);
-        principal.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 
@@ -336,6 +343,27 @@ public class CrearProducto extends javax.swing.JFrame {
                 mostrarPlaceholder();
             }
         }
+    }
+
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
     }
 
 }

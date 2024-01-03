@@ -193,6 +193,10 @@ public class Controladora {
     public List<CajaTotal> traerTodasCajas() {
        return contPersis.traerTodasCajas();
     }
+    public void cambiarFormaDePago(Venta venta) throws Exception {
+        contPersis.cambiarFormaDePago(venta);
+         }
+
 
 
 }

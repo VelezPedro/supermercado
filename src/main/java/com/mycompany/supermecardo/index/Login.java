@@ -160,13 +160,11 @@ public class Login extends javax.swing.JFrame {
             if (rol.equals("admin")) {
                 Principal principal = new Principal(control, user);
                 principal.setVisible(true);
-                principal.setLocationRelativeTo(null);
                 this.dispose();
             }
             if (rol.equals("user")) {
                 PanelVendedor panelVendedor = new PanelVendedor(control, user);
                 panelVendedor.setVisible(true);
-                panelVendedor.setLocationRelativeTo(null);
                 this.dispose();
             }
         } else {
