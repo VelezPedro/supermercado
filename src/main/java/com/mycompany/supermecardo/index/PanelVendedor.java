@@ -2,6 +2,11 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import javax.swing.JPanel;
 
 public class PanelVendedor extends javax.swing.JFrame {
 
@@ -12,6 +17,8 @@ public class PanelVendedor extends javax.swing.JFrame {
         initComponents();
         this.user = user;
         this.control = control;
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
         lblUsuario.setText(user.getNombreUsuario());
     }
 
@@ -113,7 +120,6 @@ public class PanelVendedor extends javax.swing.JFrame {
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
         VentaVista venta = new VentaVista(user);
         venta.setVisible(true);
-        venta.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnVentaActionPerformed
 
@@ -139,4 +145,26 @@ public class PanelVendedor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
+
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
+    }
+    
 }

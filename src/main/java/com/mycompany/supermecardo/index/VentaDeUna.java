@@ -9,6 +9,7 @@ import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityExcep
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public class VentaDeUna extends javax.swing.JFrame {
@@ -24,6 +25,7 @@ public class VentaDeUna extends javax.swing.JFrame {
         initComponents();
         this.venta = venta;
         this.ventasTotales = ventasTotales;
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         control = new Controladora();
         String titulos[] = {"Producto", "Unidades", "Precio por Unidad", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {

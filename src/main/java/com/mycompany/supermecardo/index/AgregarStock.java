@@ -3,6 +3,7 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
+import javax.swing.JFrame;
 
 public class AgregarStock extends javax.swing.JFrame {
 
@@ -15,6 +16,7 @@ public class AgregarStock extends javax.swing.JFrame {
         this.producto = producto;
         this.control = control;
         this.user = user;
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         lblNombreProd.setText(producto.getNombre());
         lblStockActual.setText(producto.getStock().toString());
     }

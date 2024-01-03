@@ -3,7 +3,10 @@ package com.mycompany.supermecardo.persistencia;
 import com.mycompany.supermecardo.entidades.Venta;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,7 +16,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import org.eclipse.persistence.jpa.JpaHelper;
 
 public class VentaJpaController implements Serializable {
 
@@ -144,65 +146,48 @@ public class VentaJpaController implements Serializable {
 
     public List<Venta> buscarTodo(String vendedor, String anio, String mes, String dia, String formaDePago) {
         EntityManager em = getEntityManager();
-        
-        try {
-            // Construir la consulta de forma dinámica con JPQL
-            StringBuilder jpql = new StringBuilder("SELECT * FROM Venta WHERE 1=1");
+        Date fechaInicio = null;
+        Date fechaFin = null;
 
-            if (vendedor != null && !vendedor.isEmpty()) {
-                jpql.append(" AND Venta.vendedor.nombreUsuario = '").append(vendedor).append("'");
-            }
+        // Construir la consulta
+        String consulta = "SELECT v FROM Venta v WHERE 1 = 1";
 
-            if (anio != null && !anio.isEmpty()) {
-                jpql.append(" AND FUNC('YEAR', Venta.fecha) = '").append(anio).append("'");
-            }
-
-            if (mes != null && !mes.isEmpty()) {
-                jpql.append(" AND FUNC('MONTH', Venta.fecha) = '").append(mes).append("'");
-            }
-
-            if (dia != null && !dia.isEmpty()) {
-                jpql.append(" AND FUNC('DAY', Venta.fecha) = '").append(dia).append("'");
-            }
-
-            if (formaDePago != null && !formaDePago.isEmpty()) {
-                jpql.append(" AND Venta.formpago =  '").append(formaDePago).append("'");
-            }
-
-            TypedQuery<Venta> query = em.createQuery(jpql.toString(), Venta.class);
-
-            if (vendedor != null && !vendedor.isEmpty()) {
-                query.setParameter("vendedor", vendedor);
-            }
-
-            if (anio != null && !anio.isEmpty()) {
-                query.setParameter("anio", Integer.parseInt(anio));
-            }
-
-            if (mes != null && !mes.isEmpty()) {
-                query.setParameter("mes", Integer.parseInt(mes));
-            }
-
-            if (dia != null && !dia.isEmpty()) {
-                query.setParameter("dia", Integer.parseInt(dia));
-            }
-
-            if (formaDePago != null && !formaDePago.isEmpty()) {
-                query.setParameter("formaDePago", formaDePago);
-            }
-
-            List<Venta> resultados = query.getResultList();
-
-            // Convertir los resultados a objetos ResultadoVenta según tu lógica
-            return resultados;
-        } finally {
-            em.close();
+        if (vendedor != null && !vendedor.isEmpty()) {
+            consulta += " AND v.vendedor.nombreUsuario = :vendedor";
         }
+
+        if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
+            LocalDate fechaBusqueda = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
+            fechaInicio = Date.from(fechaBusqueda.atStartOfDay(ZoneId.systemDefault()).toInstant());
+             fechaFin = Date.from(fechaBusqueda.atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+
+            consulta += " AND v.fecha BETWEEN :fechaInicio AND :fechaFin";
+        }
+
+        if (formaDePago != null && !formaDePago.isEmpty()) {
+            consulta += " AND v.formpago = :formaDePago";
+        }
+
+        // Crear la consulta
+        TypedQuery<Venta> query = em.createQuery(consulta, Venta.class);
+
+        // Establecer los parámetros
+        if (vendedor != null && !vendedor.isEmpty()) {
+            query.setParameter("vendedor", vendedor);
+        }
+
+        if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
+            query.setParameter("fechaInicio", fechaInicio);
+            query.setParameter("fechaFin", fechaFin);
+        }
+
+        if (formaDePago != null && !formaDePago.isEmpty()) {
+            query.setParameter("formaDePago", formaDePago);
+        }
+
+        // Ejecutar la consulta y devolver los resultados
+        return query.getResultList();
+
     }
 
-    
-    
-    
 }
-
-

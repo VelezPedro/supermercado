@@ -2,6 +2,7 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public class BuscarPorCodigo extends javax.swing.JFrame {
@@ -12,6 +13,7 @@ public class BuscarPorCodigo extends javax.swing.JFrame {
 
     public BuscarPorCodigo() {
         initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         control = new Controladora();
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {

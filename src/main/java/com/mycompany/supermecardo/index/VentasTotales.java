@@ -4,13 +4,20 @@ import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class VentasTotales extends javax.swing.JFrame {
@@ -31,9 +38,10 @@ public class VentasTotales extends javax.swing.JFrame {
         initComponents();
         control = new Controladora();
         this.user = user;
-        
-        
-        String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia", "Hora", "Monto $","Forma de Pago"};
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
+
+        String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia", "Hora", "Monto $", "Forma de Pago"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -197,6 +205,7 @@ public class VentasTotales extends javax.swing.JFrame {
                 .addComponent(btnBuscar))
         );
 
+        tablaVentas.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -238,18 +247,15 @@ public class VentasTotales extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblCantidadVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(153, 153, 153)
-                                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(239, Short.MAX_VALUE))
+                        .addComponent(lblCantidadVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(153, 153, 153)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 542, Short.MAX_VALUE))))
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +328,7 @@ public class VentasTotales extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbVendedorActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        busqueda=null;
+        busqueda = null;
         this.total = BigDecimal.ZERO;
         String vendedor = (String) cmbVendedor.getSelectedItem();
         String anio = (String) cmbAnio.getSelectedItem();
@@ -351,7 +357,7 @@ public class VentasTotales extends javax.swing.JFrame {
     private void cbmPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmPagoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbmPagoActionPerformed
-        //METODO DOBLE CLICK PARA BUSCAR UNA VENTA EN LA TABLA------------------------------------------------------------
+    //METODO DOBLE CLICK PARA BUSCAR UNA VENTA EN LA TABLA------------------------------------------------------------
     private void tablaVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseClicked
 
         if (evt.getClickCount() == 2) {
@@ -407,7 +413,7 @@ public class VentasTotales extends javax.swing.JFrame {
     public void cargarTabla() {
         total = BigDecimal.ZERO;
         listaVentas = control.traerVentas();
-        busqueda=listaVentas;
+        busqueda = listaVentas;
         if (!listaVentas.isEmpty()) {
             for (Venta venta : listaVentas) {
                 Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
@@ -424,6 +430,8 @@ public class VentasTotales extends javax.swing.JFrame {
         lblTotal.setText("Total $" + total);
         lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaVentas.size()));
         tablaVentas.setModel(modeloTabla);
+        tablaVentas.setRowHeight(30);
+       
     }
 
     private void cargarTabla(List<Venta> listaBusqueda, String turno) {
@@ -551,6 +559,27 @@ public class VentasTotales extends javax.swing.JFrame {
     private String formatearBigDecimalConDosDecimales(BigDecimal numero) {
         DecimalFormat formato = new DecimalFormat("#.00");
         return formato.format(numero);
+    }
+    
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
     }
 
 }
