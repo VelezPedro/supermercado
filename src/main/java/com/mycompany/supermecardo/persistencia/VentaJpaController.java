@@ -189,5 +189,4 @@ public class VentaJpaController implements Serializable {
         return query.getResultList();
 
     }
-
 }

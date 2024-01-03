@@ -509,7 +509,7 @@ public class VentasTotales extends javax.swing.JFrame {
 
         if (!listaVentas.isEmpty()) {
             String anio = String.valueOf(listaVentas.get(0).getFecha().getYear() + 1900);
-
+            listaAnio.add("-");
             listaAnio.add(anio);
 
             for (Venta venta : listaVentas) {
