@@ -225,7 +225,6 @@ public class Principal extends javax.swing.JFrame {
 
 
     private void verVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verVentaActionPerformed
-        System.out.println(user.getNombreUsuario());
         VentasTotales ventasTotales = new VentasTotales(user);
         ventasTotales.setVisible(true);
         this.dispose();

@@ -490,6 +490,7 @@ public class VentaVista extends javax.swing.JFrame {
         cargarTablaPorProducto(codigoId, unidades);
         limpiarImput();
         precioMostrar.setText("$ " + totalVentas);
+        
 
     }//GEN-LAST:event_BuscarActionPerformed
 
@@ -501,7 +502,6 @@ public class VentaVista extends javax.swing.JFrame {
                 principal.setVisible(true);
                 this.dispose();
             } else if (rol.equals("user")) {
-//                System.out.println("entra a vendedor");
                 PanelVendedor panelVendedor = new PanelVendedor(control, user);
                 panelVendedor.setVisible(true);
                 this.dispose();
@@ -685,7 +685,6 @@ public class VentaVista extends javax.swing.JFrame {
             Producto key = entry.getKey();
             Double value = entry.getValue();
             Object[] objeto = {key.getNombre(), value.toString(), key.getPrecio(), formatearDoubleConDosDecimales(value * key.getPrecio())};
-            System.out.println("Nombre =" + objeto[0].toString() + " Unidades " + objeto[1].toString() + " Precio: " + objeto[2].toString());
             this.listaDeInfo.add(objeto);
         }
 
@@ -751,5 +750,6 @@ public class VentaVista extends javax.swing.JFrame {
             }
         });
     }
+
 
 }

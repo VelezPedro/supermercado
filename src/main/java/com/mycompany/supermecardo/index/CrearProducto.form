@@ -170,7 +170,7 @@
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Default Cursor"/>
+                  <Color id="Cursor Por defecto"/>
                 </Property>
               </Properties>
             </Component>
@@ -216,7 +216,7 @@
                   <StringArray count="3">
                     <StringItem index="0" value="-"/>
                     <StringItem index="1" value="Unidad"/>
-                    <StringItem index="2" value="Gramo"/>
+                    <StringItem index="2" value="Kilogramo"/>
                   </StringArray>
                 </Property>
               </Properties>

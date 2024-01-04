@@ -257,7 +257,6 @@ public class VerCajas extends javax.swing.JFrame {
     private void tblCajasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCajasMouseClicked
         if (evt.getClickCount() == 2) {
             CajaTotal cajaTotal = busqueda.get(tblCajas.getSelectedRow());
-            System.out.println(cajaTotal.getTotal());
             VerCajaUnica cajaUnica = new VerCajaUnica(cajaTotal, this);
             cajaUnica.setVisible(true);
             cajaUnica.setLocationRelativeTo(null);
