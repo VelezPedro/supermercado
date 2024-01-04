@@ -16,7 +16,6 @@ public class AgregarStock extends javax.swing.JFrame {
         this.producto = producto;
         this.control = control;
         this.user = user;
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         lblNombreProd.setText(producto.getNombre());
         lblStockActual.setText(producto.getStock().toString());
     }
@@ -167,7 +166,6 @@ public class AgregarStock extends javax.swing.JFrame {
         control.agregarStock(producto, Double.valueOf(txtStockNuevo.getText()) + producto.getStock());
         VerProductos verProductos = new VerProductos(user);
         verProductos.setVisible(true);
-        verProductos.setLocationRelativeTo(null);
         this.dispose();
 
     }//GEN-LAST:event_btnGuardarActionPerformed

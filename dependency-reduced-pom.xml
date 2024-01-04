@@ -38,8 +38,8 @@
             </goals>
             <configuration>
               <headerType>gui</headerType>
-              <outfile>C:\Users\maxic\Downloads\Supermerk2\supermercado\target\Supermercado.exe</outfile>
-              <jar>C:\Users\maxic\Downloads\Supermerk2\supermercado\target\Supermecardo-1.0-SNAPSHOT.jar</jar>
+              <outfile>C:\Users\Tecno\Documents\NetBeansProjects\superk2\supermercado\target\Supermercado.exe</outfile>
+              <jar>C:\Users\Tecno\Documents\NetBeansProjects\superk2\supermercado\target\Supermecardo-1.0-SNAPSHOT.jar</jar>
               <errTitle>Supermercado - Error</errTitle>
               <classPath>
                 <mainClass>com.mycompany.supermecardo.Supermecardo</mainClass>

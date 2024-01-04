@@ -8,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -222,14 +221,12 @@ public class Usuarios extends javax.swing.JFrame {
 
         Principal principal = new Principal(control, user);
         principal.setVisible(true);
-        principal.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoUsuarioActionPerformed
         AltaUsuario altaUsu = new AltaUsuario(control, user);
         altaUsu.setVisible(true);
-        altaUsu.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
 
@@ -296,5 +293,5 @@ public class Usuarios extends javax.swing.JFrame {
         JPanel emptyPanel = new JPanel();
         this.add(emptyPanel, gbc);
     }
-    
+
 }

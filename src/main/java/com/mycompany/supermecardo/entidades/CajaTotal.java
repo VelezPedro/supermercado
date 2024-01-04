@@ -22,20 +22,23 @@ public class CajaTotal implements Serializable{
     private List<Venta> listaDeVentas;    
     private String horaCierre;
     private String observacion;
+    private String total;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-
+    
     public CajaTotal() {
     }
 
-    public CajaTotal(String idCaja, List<Venta> listaDeVentas, String horaCierre, String observacion, Date fecha) {
+    public CajaTotal(String idCaja, List<Venta> listaDeVentas, String horaCierre, String observacion, String total, Date fecha) {
         this.idCaja = idCaja;
         this.listaDeVentas = listaDeVentas;
         this.horaCierre = horaCierre;
         this.observacion = observacion;
+        this.total = total;
         this.fecha = fecha;
     }
+
 
     public String getIdCaja() {
         return idCaja;
@@ -75,6 +78,14 @@ public class CajaTotal implements Serializable{
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
     }
         
 }

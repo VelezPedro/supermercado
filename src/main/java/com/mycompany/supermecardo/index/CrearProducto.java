@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -257,7 +256,6 @@ public class CrearProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
         Principal principal = new Principal(control, user);
         principal.setVisible(true);
-        principal.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 
@@ -346,7 +344,7 @@ public class CrearProducto extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void ajustarAlTamañoDeLaPantalla() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize);

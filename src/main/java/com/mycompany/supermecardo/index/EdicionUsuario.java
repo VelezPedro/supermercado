@@ -1,31 +1,25 @@
-
 package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
-import java.util.List;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-
 public class EdicionUsuario extends javax.swing.JFrame {
-    
+
     private int idUsuario;
     private Controladora control;
     private Usuario usu;
-    
+
     public EdicionUsuario(Controladora control, int idUsuario) {
         initComponents();
         this.idUsuario = idUsuario;
         this.control = control;
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         usu = control.traerUsuario(idUsuario);
         txtUsuario.setText(usu.getNombreUsuario());
         txtPassword.setText(usu.getPassword());
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -193,13 +187,11 @@ public class EdicionUsuario extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+
     private void cmbRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRolActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbRolActionPerformed
-    
-    
-    
-   
+
     public void mostrarMensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {

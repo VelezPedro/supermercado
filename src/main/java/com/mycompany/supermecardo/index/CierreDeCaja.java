@@ -18,6 +18,8 @@ public class CierreDeCaja extends javax.swing.JFrame {
     private String horaCierre;
     private String observacion;
     private List<Venta> ventaPorCaja;
+    private Double totalCaja ;
+    
 
     public CierreDeCaja(Usuario user) {
         initComponents();
@@ -186,6 +188,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
         caja.setFecha(new Date());
         caja.setHoraCierre(horaCierre);
         caja.setObservacion(observacion);
+        caja.setTotal(String.valueOf(totalCaja));
         control.cerrarCaja(caja);
         ventaPorCaja.clear();
         this.dispose();
@@ -231,7 +234,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
 
         String hora = hora(horaCierre);
         String minutos = minutos(horaCierre);
-        Double totalCaja = 0.0;
+        totalCaja = 0.0;
         Double totalTransferencia = 0.0;
         Double totalEfectivo = 0.0;
         Double totalDebito = 0.0;

@@ -190,13 +190,17 @@ public class Controladora {
         contPersis.cerrarCaja(caja);
     }
 
+    public List<CajaTotal> traerTodasCajas() {
+       return contPersis.traerTodasCajas();
+    }
     public void cambiarFormaDePago(Venta venta) throws Exception {
         contPersis.cambiarFormaDePago(venta);
          }
 
-    
+    public List<CajaTotal> buscarYMostrarResultadosParaCaja(String anio, String mes, String dia) {
+        return contPersis.buscarYMostrarResultadosParaCaja(anio,mes,dia);
+    }
 
-    
 
 
 }

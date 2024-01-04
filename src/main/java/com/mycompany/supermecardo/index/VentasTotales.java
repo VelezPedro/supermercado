@@ -14,7 +14,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -319,7 +318,6 @@ public class VentasTotales extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
         Principal principal = new Principal(control, user);
         principal.setVisible(true);
-        principal.setLocationRelativeTo(null);
         this.dispose();
     }
 
@@ -365,7 +363,6 @@ public class VentasTotales extends javax.swing.JFrame {
 
             VentaDeUna ventaDeUna = new VentaDeUna(venta, this);
             ventaDeUna.setVisible(true);
-            ventaDeUna.setLocationRelativeTo(null);
 
         }
 
@@ -513,7 +510,7 @@ public class VentasTotales extends javax.swing.JFrame {
 
         if (!listaVentas.isEmpty()) {
             String anio = String.valueOf(listaVentas.get(0).getFecha().getYear() + 1900);
-
+            listaAnio.add("-");
             listaAnio.add(anio);
 
             for (Venta venta : listaVentas) {
@@ -560,7 +557,7 @@ public class VentasTotales extends javax.swing.JFrame {
         DecimalFormat formato = new DecimalFormat("#.00");
         return formato.format(numero);
     }
-    
+
     private void ajustarAlTamañoDeLaPantalla() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize);

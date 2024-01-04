@@ -4,7 +4,6 @@ import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Ticket;
 import com.mycompany.supermecardo.entidades.Usuario;
-import com.mycompany.supermecardo.entidades.Venta;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,16 +16,13 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -483,9 +479,8 @@ public class VentaVista extends javax.swing.JFrame {
 
         descPorcentaje.setText("0");
         descPrecio.setText("0");
-        VentaVista ventaNueva=new VentaVista(user);
+        VentaVista ventaNueva = new VentaVista(user);
         ventaNueva.setVisible(true);
-        ventaNueva.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_terminarVentaActionPerformed
 
@@ -504,13 +499,11 @@ public class VentaVista extends javax.swing.JFrame {
             if (rol.equals("admin")) {
                 Principal principal = new Principal(control, user);
                 principal.setVisible(true);
-                principal.setLocationRelativeTo(null);
                 this.dispose();
             } else if (rol.equals("user")) {
 //                System.out.println("entra a vendedor");
                 PanelVendedor panelVendedor = new PanelVendedor(control, user);
                 panelVendedor.setVisible(true);
-                panelVendedor.setLocationRelativeTo(null);
                 this.dispose();
             }
         }
@@ -705,7 +698,7 @@ public class VentaVista extends javax.swing.JFrame {
         String numeroFormateadoStr = formato.format(numero);
         return Double.valueOf(numeroFormateadoStr);
     }
-    
+
     private void ajustarAlTamañoDeLaPantalla() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize);
@@ -726,6 +719,7 @@ public class VentaVista extends javax.swing.JFrame {
         JPanel emptyPanel = new JPanel();
         this.add(emptyPanel, gbc);
     }
+
     private void configurarAcciones() {
         // Agregar ActionListener para el campo de texto 'unidadesVendidas'
         unidadesVendidas.addActionListener(new ActionListener() {
@@ -757,4 +751,5 @@ public class VentaVista extends javax.swing.JFrame {
             }
         });
     }
+
 }

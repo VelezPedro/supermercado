@@ -3,12 +3,17 @@ package com.mycompany.supermecardo.persistencia;
 import com.mycompany.supermecardo.entidades.CajaTotal;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -131,6 +136,39 @@ public class CajaTotalJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+
+    List<CajaTotal> buscarYMostrarResultadosParaCaja(String anio, String mes, String dia) {
+        EntityManager em = getEntityManager();
+        Date fechaInicio = null;
+        Date fechaFin = null;
+
+        // Construir la consulta
+        String consulta = "SELECT v FROM CajaTotal v WHERE 1 = 1";
+
+
+        if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
+            LocalDate fechaBusqueda = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
+            fechaInicio = Date.from(fechaBusqueda.atStartOfDay(ZoneId.systemDefault()).toInstant());
+             fechaFin = Date.from(fechaBusqueda.atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+
+            consulta += " AND v.fecha BETWEEN :fechaInicio AND :fechaFin";
+        }
+
+
+        // Crear la consulta
+        TypedQuery<CajaTotal> query = em.createQuery(consulta, CajaTotal.class);
+
+        // Establecer los parámetros
+        
+
+        if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
+            query.setParameter("fechaInicio", fechaInicio);
+            query.setParameter("fechaFin", fechaFin);
+        }
+
+        // Ejecutar la consulta y devolver los resultados
+        return query.getResultList();
     }
     
 }
