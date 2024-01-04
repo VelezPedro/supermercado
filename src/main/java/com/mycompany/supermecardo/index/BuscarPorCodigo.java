@@ -2,6 +2,7 @@ package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public class BuscarPorCodigo extends javax.swing.JFrame {
@@ -12,6 +13,7 @@ public class BuscarPorCodigo extends javax.swing.JFrame {
 
     public BuscarPorCodigo() {
         initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         control = new Controladora();
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
@@ -132,14 +134,14 @@ public class BuscarPorCodigo extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         String codigoId = codigoProducto.getText();
-        Integer unidades= Integer.valueOf(unidad.getText());
-        cargarTablaPorProducto(codigoId,unidades);
+        Integer unidades = Integer.valueOf(unidad.getText());
+        cargarTablaPorProducto(codigoId, unidades);
         limpiarImput();
 
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
-        
+
     }//GEN-LAST:event_cargarActionPerformed
 
 
@@ -157,24 +159,23 @@ public class BuscarPorCodigo extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Para llenar la tabla
-    private void cargarTablaPorProducto(String codigoId,Integer unidades) {    
+    private void cargarTablaPorProducto(String codigoId, Integer unidades) {
         Producto producto = control.traerProducto(codigoId);
         if (producto != null) {
             Object[] objeto = {producto.getNombre(),
                 unidades,
                 producto.getPrecio(),
-                producto.getPrecio() *unidades };
+                producto.getPrecio() * unidades};
 
             modeloTabla.addRow(objeto);
 
         }
         tablaProducto.setModel(modeloTabla);
     }
-    
-    private void limpiarImput(){
+
+    private void limpiarImput() {
         codigoProducto.setText("");
         unidad.setText("");
     }
-    
 
 }

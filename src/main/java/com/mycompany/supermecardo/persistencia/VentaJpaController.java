@@ -3,15 +3,19 @@ package com.mycompany.supermecardo.persistencia;
 import com.mycompany.supermecardo.entidades.Venta;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
 
 public class VentaJpaController implements Serializable {
 
@@ -25,10 +29,9 @@ public class VentaJpaController implements Serializable {
     }
 
     public VentaJpaController() {
-        emf= Persistence.createEntityManagerFactory("Supermercado");
+        emf = Persistence.createEntityManagerFactory("Supermercado");
     }
-    
-    
+
     public void create(Venta venta) {
         EntityManager em = null;
         try {
@@ -132,5 +135,58 @@ public class VentaJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public List<Venta> listaVentasVendedor(String nombre) {
+        EntityManager em = getEntityManager();
+        List<Venta> listaVentas
+                = (List<Venta>) em.createQuery("SELECT v FROM Venta v WHERE v.vendedor.nombreUsuario LIKE :nombre").
+                        setParameter("nombre", nombre).getResultList();
+        return listaVentas;
+    }
+
+    public List<Venta> buscarTodo(String vendedor, String anio, String mes, String dia, String formaDePago) {
+        EntityManager em = getEntityManager();
+        Date fechaInicio = null;
+        Date fechaFin = null;
+
+        // Construir la consulta
+        String consulta = "SELECT v FROM Venta v WHERE 1 = 1";
+
+        if (vendedor != null && !vendedor.isEmpty()) {
+            consulta += " AND v.vendedor.nombreUsuario = :vendedor";
+        }
+
+        if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
+            LocalDate fechaBusqueda = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
+            fechaInicio = Date.from(fechaBusqueda.atStartOfDay(ZoneId.systemDefault()).toInstant());
+             fechaFin = Date.from(fechaBusqueda.atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+
+            consulta += " AND v.fecha BETWEEN :fechaInicio AND :fechaFin";
+        }
+
+        if (formaDePago != null && !formaDePago.isEmpty()) {
+            consulta += " AND v.formpago = :formaDePago";
+        }
+
+        // Crear la consulta
+        TypedQuery<Venta> query = em.createQuery(consulta, Venta.class);
+
+        // Establecer los parámetros
+        if (vendedor != null && !vendedor.isEmpty()) {
+            query.setParameter("vendedor", vendedor);
+        }
+
+        if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
+            query.setParameter("fechaInicio", fechaInicio);
+            query.setParameter("fechaFin", fechaFin);
+        }
+
+        if (formaDePago != null && !formaDePago.isEmpty()) {
+            query.setParameter("formaDePago", formaDePago);
+        }
+
+        // Ejecutar la consulta y devolver los resultados
+        return query.getResultList();
+
+    }
 }

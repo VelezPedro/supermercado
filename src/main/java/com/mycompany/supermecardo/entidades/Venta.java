@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,7 +26,10 @@ public class Venta implements Serializable {
     private Double precio;
     private Integer descuentoPorPorcentaje;
     private Integer descuentoPorPrecio;
-    private String vendedor;
+    
+    @ManyToOne
+    private Usuario vendedor;
+    
     private String formpago;
     
     @Temporal(TemporalType.TIMESTAMP)
@@ -33,9 +38,10 @@ public class Venta implements Serializable {
     //@Temporal(TemporalType.TIMESTAMP)
     private String horario;
     
+    @OneToOne
+    private Ticket ticket;
     
-
-    public Venta(String id, List<Producto> listaProductos, Double precio, Integer descuentoPorPorcentaje, Integer descuentoPorPrecio, String vendedor, String formpago, Date fecha, String horario) {
+    public Venta(String id, List<Producto> listaProductos, Double precio, Integer descuentoPorPorcentaje, Integer descuentoPorPrecio, Usuario vendedor, String formpago, Date fecha, String horario, Ticket ticket) {
         this.id = id;
         this.listaProductos = listaProductos;
         this.precio = precio;
@@ -45,9 +51,9 @@ public class Venta implements Serializable {
         this.formpago = formpago;
         this.fecha = fecha;
         this.horario = horario;
+        this.ticket = ticket;
     }
 
- 
     
     public Venta() {
     }
@@ -85,13 +91,14 @@ public class Venta implements Serializable {
         this.horario = horario;
     }
 
-    public String getVendedor() {
+    public Usuario getVendedor() {
         return vendedor;
     }
 
-    public void setVendedor(String vendedor) {
+    public void setVendedor(Usuario vendedor) {
         this.vendedor = vendedor;
     }
+
 
     public String getFormpago() {
         return formpago;
@@ -123,6 +130,14 @@ public class Venta implements Serializable {
 
     public void setListaProductos(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
     
     
