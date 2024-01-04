@@ -190,10 +190,14 @@ public class AltaUsuario extends javax.swing.JFrame {
         String usuario = txtUsuario.getText();
         String password = txtPassword.getText();
         String rol = (String) cmbRol.getSelectedItem();
+        if (txtUsuario.getText().isEmpty()||txtPassword.getText().isEmpty()) {
+            mostrarMensaje("Debe rellenar todos los campos", "Error", "Error");
+        }else{
+            control.crearUsuario(usuario, password, rol);
 
-        control.crearUsuario(usuario, password, rol);
-
-        mostrarMensaje("Usuario creado correctamente", "Info", "Creación exitosa");
+            mostrarMensaje("Usuario creado correctamente", "Info", "Creación exitosa");
+        }
+        
 
     }//GEN-LAST:event_btnGuardarUsuarioActionPerformed
 

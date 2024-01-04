@@ -162,10 +162,12 @@ public class EdicionUsuario extends javax.swing.JFrame {
         String usuario = txtUsuario.getText();
         String password = txtPassword.getText();
         String rol = (String) cmbRol.getSelectedItem();
-
-        control.editarUsuario(usu, usuario, password, rol);
-
-        mostrarMensaje("Usuario editado correctamente", "Info", "Creación de Usuario exitosa");
+        if (txtUsuario.getText().isEmpty()||txtPassword.getText().isEmpty()) {
+            mostrarMensaje("Debe ingresar todos los campos", "Error", "Error");
+        }else{
+            control.editarUsuario(usu, usuario, password, rol);
+            mostrarMensaje("Usuario editado correctamente", "Info", "Creación de Usuario exitosa");
+        }        
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 

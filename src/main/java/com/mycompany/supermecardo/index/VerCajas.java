@@ -4,9 +4,14 @@ import com.mycompany.supermecardo.entidades.CajaTotal;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class VerCajas extends javax.swing.JFrame {
@@ -25,6 +30,8 @@ public class VerCajas extends javax.swing.JFrame {
         this.user = user;
         this.listaAnio = new ArrayList<>();
         this.listaUsuarios = new ArrayList<>();
+        ajustarAlTamañoDeLaPantalla();
+        setLocationRelativeTo(null);
 
         String titulos[] = {"Año", "Mes", "Dia", "Hora", "Monto $", "Observacion"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
@@ -253,7 +260,7 @@ public class VerCajas extends javax.swing.JFrame {
             System.out.println(cajaTotal.getTotal());
             VerCajaUnica cajaUnica = new VerCajaUnica(cajaTotal, this);
             cajaUnica.setVisible(true);
-
+            cajaUnica.setLocationRelativeTo(null);
         }
     }//GEN-LAST:event_tblCajasMouseClicked
 
@@ -358,6 +365,25 @@ public class VerCajas extends javax.swing.JFrame {
         return control.buscarYMostrarResultadosParaCaja(anio, mes, dia);
     }
     
-    
+    private void ajustarAlTamañoDeLaPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Establece el layout manager del JFrame como GridBagLayout
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+
+        // Configura las restricciones para centrar y expandir automáticamente los componentes
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Agrega un panel vacío para ocupar todo el espacio disponible
+        JPanel emptyPanel = new JPanel();
+        this.add(emptyPanel, gbc);
+    }
     
 }

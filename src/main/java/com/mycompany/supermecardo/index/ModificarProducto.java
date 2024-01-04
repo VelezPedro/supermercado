@@ -269,21 +269,19 @@ public class ModificarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_volverActionPerformed
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
-        try {
+
             String catego = (String) categoria.getSelectedItem();
             String formaDeVenta = (String) formVenta.getSelectedItem();
-
-            control.modificarProducto(producto, nbrProducto, stock, costo, precioVenta, catego, formaDeVenta);
-
-            mensaje("Edicion correcta", "Info", "Edicion Correcta");
+            if (nbrProducto.getText().isEmpty() || stock.getText().isEmpty() || costo.getText().isEmpty() ||
+                    catego.isEmpty() || formaDeVenta.isEmpty())  {
+                mensaje("Debe llenar todos los campos", "Error", "Error");
+            }else{
+                control.modificarProducto(producto, nbrProducto, stock, costo, precioVenta, catego, formaDeVenta);
+                mensaje("Edicion correcta", "Info", "Edicion Correcta");
+            }         
             VerProductos pantalla = new VerProductos(user);
             pantalla.setVisible(true);
             this.dispose();
-        } catch (Exception ex) {
-            mensaje("Edicion incorrecta", "Error", "Edicion Incorrecta");
-            Logger.getLogger(ModificarProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
     private void formVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formVentaActionPerformed
