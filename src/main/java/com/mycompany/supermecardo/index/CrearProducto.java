@@ -103,7 +103,7 @@ public class CrearProducto extends javax.swing.JFrame {
         });
 
         cmbFormVenta.setForeground(new java.awt.Color(102, 153, 255));
-        cmbFormVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Unidad", "Gramo" }));
+        cmbFormVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Unidad", "Kilogramo" }));
 
         cmbCategoria.setForeground(new java.awt.Color(51, 153, 255));
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Panaderia", "Fiambreria", "Carniceria", "Bebida", "Almacen", "Limpieza", "Lacteos" }));

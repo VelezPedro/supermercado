@@ -282,16 +282,13 @@ public class VentaDeUna extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
-
             String idTicket = venta.getTicket().getId();
             control.borrarVenta(venta.getId());
-
             control.borrarTicket(idTicket);
             ventasTotales.limpiarTabla();
             ventasTotales.cargarTabla();
             devolverStockDeVentaEliminada(venta);
             this.dispose();
-
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(VentaDeUna.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -376,9 +373,6 @@ public class VentaDeUna extends javax.swing.JFrame {
                         String unidadesVendidasStr = tblProducto.getValueAt(contador, 1).toString();
                         Double unidadesVendidas = Double.parseDouble(unidadesVendidasStr);
                         Double nuevoStock = producto.getStock() + unidadesVendidas;
-                        System.out.println(producto.getStock());
-                        System.out.println(unidadesVendidas);
-                        System.out.println(nuevoStock);
                         control.agregarStock(producto, nuevoStock);
                         contador++;
                     }

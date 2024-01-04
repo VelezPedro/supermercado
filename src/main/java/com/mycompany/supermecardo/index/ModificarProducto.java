@@ -59,7 +59,7 @@ public class ModificarProducto extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Modificar Producto");
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
         nbrProducto.setForeground(new java.awt.Color(102, 153, 255));
         nbrProducto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
