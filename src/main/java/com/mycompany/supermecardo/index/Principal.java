@@ -91,6 +91,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         txtNombreUsuario.setEditable(false);
+        txtNombreUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNombreUsuario.setText("jTextField1");
         txtNombreUsuario.setBorder(null);
         txtNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -257,6 +258,7 @@ public class Principal extends javax.swing.JFrame {
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         Login login = new Login();
         login.setVisible(true);
+        login.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_salirActionPerformed
 
@@ -273,10 +275,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
 
-           VerCajas verCajas= new VerCajas(control,user);
-           verCajas.setVisible(true);
-           verCajas.setLocationRelativeTo(null);
-           this.dispose();
+        VerCajas verCajas = new VerCajas(control, user);
+        verCajas.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_btnCajaActionPerformed
 
