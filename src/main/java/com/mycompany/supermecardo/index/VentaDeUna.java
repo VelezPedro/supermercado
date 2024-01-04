@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -349,7 +350,9 @@ public class VentaDeUna extends javax.swing.JFrame {
         lblMes.setText(String.valueOf(venta.getFecha().getMonth() + 1));
         lblDia.setText(String.valueOf(venta.getFecha().getDate()));
         lblHora.setText(String.valueOf(venta.getHorario()));
-        lblTotal.setText(String.valueOf(venta.getPrecio()));
+        //lblTotal.setText(String.valueOf(venta.getPrecio()));
+        String formattedOutput = formatCurrency(String.valueOf(venta.getPrecio()));
+        lblTotal.setText(formattedOutput);
         lblDescuento.setText("Descuento % " + venta.getDescuentoPorPorcentaje() + " $ " + venta.getDescuentoPorPrecio());
         lblFormaDePago.setText(String.valueOf(venta.getFormpago()));
     }
@@ -409,4 +412,27 @@ public class VentaDeUna extends javax.swing.JFrame {
         this.add(emptyPanel, gbc);
     }
 
+    
+    //Para que escriba bien el monto final
+    public static String formatCurrency(String input) {
+        // Verificar si la cadena es nula o vacía
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+
+        // Quitar cualquier caracter no numérico excepto el punto decimal
+        String numericString = input.replaceAll("[^\\d.]", "");
+
+        // Verificar si el resultado es un número válido
+        try {
+            double number = Double.parseDouble(numericString);
+
+            // Formatear el número con comas y dos decimales
+            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+            return "$ " + decimalFormat.format(number);
+        } catch (NumberFormatException e) {
+            // Manejar la excepción si la cadena no es un número válido
+            return "Formato inválido";
+        }
+    }
 }

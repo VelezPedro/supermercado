@@ -478,7 +478,9 @@ public class VentaVista extends javax.swing.JFrame {
         Double unidades = Double.valueOf(unidadesVendidas.getText());
         cargarTablaPorProducto(codigoId, unidades);
         limpiarImput();
-        precioMostrar.setText("$ " + totalVentas);
+        //precioMostrar.setText("$ " + totalVentas);
+        String formattedOutput = formatCurrency(String.valueOf(totalVentas));
+        precioMostrar.setText(formattedOutput);
 
     }//GEN-LAST:event_BuscarActionPerformed
 
@@ -699,4 +701,28 @@ public class VentaVista extends javax.swing.JFrame {
         this.add(emptyPanel, gbc);
     }
 
+    
+    
+    //Para que escriba bien el monto final
+    public static String formatCurrency(String input) {
+        // Verificar si la cadena es nula o vacía
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+
+        // Quitar cualquier caracter no numérico excepto el punto decimal
+        String numericString = input.replaceAll("[^\\d.]", "");
+
+        // Verificar si el resultado es un número válido
+        try {
+            double number = Double.parseDouble(numericString);
+
+            // Formatear el número con comas y dos decimales
+            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+            return "$ " + decimalFormat.format(number);
+        } catch (NumberFormatException e) {
+            // Manejar la excepción si la cadena no es un número válido
+            return "Formato inválido";
+        }
+    }
 }
