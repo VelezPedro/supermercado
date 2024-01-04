@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -472,9 +473,15 @@ public class VerProductos extends javax.swing.JFrame {
 
         if (listaProductos != null) {
             for (Producto productos : listaProductos) {
-                Object[] objeto = {productos.getCodigoId(), productos.getNombre(),
-                    productos.getStock(), productos.getCosto(),
-                    productos.getPrecio(), productos.getCategoria(),
+                String precio= formatCurrency(String.valueOf(productos.getPrecio()));
+                String costo= formatCurrency(String.valueOf(productos.getCosto()));
+                Object[] objeto = {
+                    productos.getCodigoId(),
+                    productos.getNombre(),
+                    productos.getStock(), 
+                    costo,
+                    precio, 
+                    productos.getCategoria(),
                     productos.getFromVenta()};
 
                 modeloTabla.addRow(objeto);
@@ -550,10 +557,17 @@ public class VerProductos extends javax.swing.JFrame {
 
         //this.listaProductos = control.traerProductos();
         if (productos != null) {
+            
             for (Producto producto : productos) {
-                Object[] objeto = {producto.getCodigoId(), producto.getNombre(),
-                    producto.getStock(), producto.getCosto(),
-                    producto.getPrecio(), producto.getCategoria(),
+                String precio= formatCurrency(String.valueOf(producto.getPrecio()));
+                String costo= formatCurrency(String.valueOf(producto.getCosto()));
+                Object[] objeto = {
+                    producto.getCodigoId(),
+                    producto.getNombre(),
+                    producto.getStock(),
+                    costo,
+                    precio,
+                    producto.getCategoria(),
                     producto.getFromVenta()};
 
                 modeloTabla.addRow(objeto);
@@ -594,4 +608,26 @@ public class VerProductos extends javax.swing.JFrame {
         this.add(emptyPanel, gbc);
     }
 
+    //Para que escriba bien el monto final
+    public static String formatCurrency(String input) {
+        // Verificar si la cadena es nula o vacía
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+
+        // Quitar cualquier caracter no numérico excepto el punto decimal
+        String numericString = input.replaceAll("[^\\d.]", "");
+
+        // Verificar si el resultado es un número válido
+        try {
+            double number = Double.parseDouble(numericString);
+
+            // Formatear el número con comas y dos decimales
+            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+            return "$ " + decimalFormat.format(number);
+        } catch (NumberFormatException e) {
+            // Manejar la excepción si la cadena no es un número válido
+            return "Formato inválido";
+        }
+    }
 }
