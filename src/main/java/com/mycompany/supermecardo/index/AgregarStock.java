@@ -3,7 +3,9 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class AgregarStock extends javax.swing.JFrame {
 
@@ -162,15 +164,29 @@ public class AgregarStock extends javax.swing.JFrame {
     }//GEN-LAST:event_txtStockNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
-        control.agregarStock(producto, Double.valueOf(txtStockNuevo.getText()) + producto.getStock());
+        if (txtStockNuevo.getText().isEmpty()) {
+            mostrarMensaje("Debe ingresar el nuevo ingreso de Stock", "Error", "Error");
+        }else{
+            control.agregarStock(producto, Double.valueOf(txtStockNuevo.getText()) + producto.getStock());
+        }
+        
         VerProductos verProductos = new VerProductos(user);
         verProductos.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-
+     public void mostrarMensaje(String mensaje, String tipo, String titulo) {
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")) {
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        } else if (tipo.equals("Error")) {
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;

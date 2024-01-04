@@ -5,6 +5,7 @@ import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -203,6 +204,7 @@ public class VentasTotales extends javax.swing.JFrame {
                 .addComponent(btnBuscar))
         );
 
+        tablaVentas.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -425,6 +427,8 @@ public class VentasTotales extends javax.swing.JFrame {
         lblTotal.setText("Total $" + total);
         lblCantidadVentas.setText("Cantidad de ventas : " + String.valueOf(listaVentas.size()));
         tablaVentas.setModel(modeloTabla);
+        tablaVentas.setRowHeight(30);
+       
     }
 
     private void cargarTabla(List<Venta> listaBusqueda, String turno) {

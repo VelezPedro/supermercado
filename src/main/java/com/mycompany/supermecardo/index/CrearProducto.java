@@ -263,12 +263,12 @@ public class CrearProducto extends javax.swing.JFrame {
         try {
             String catego = (String) cmbCategoria.getSelectedItem();
             String formaDeVenta = (String) cmbFormVenta.getSelectedItem();
-            control.guardar(txtCodigoId, txtNombreProducto, txtStock, txtCosto, txtPrecioVenta, catego, formaDeVenta, 0);
-            JOptionPane optionPane = new JOptionPane("Extito en guardar = " + txtNombreProducto.getText());
-            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-            JDialog dialog = optionPane.createDialog("Guarda Productos");
-            dialog.setAlwaysOnTop(true);
-            dialog.setVisible(true);
+            if (txtNombreProducto.getText().isEmpty()|| txtCodigoId.getText().isEmpty() || txtCosto.getText().isEmpty() || txtPrecioVenta.getText().isEmpty()|| txtStock.getText().equals("Stock")) {         
+                mostrarMensaje("Debe llenar todos los campos", "Error", "Error");
+            }else{
+                control.guardar(txtCodigoId, txtNombreProducto, txtStock, txtCosto, txtPrecioVenta, catego, formaDeVenta, 0);
+                mostrarMensaje("Éxito al guardar: "+txtNombreProducto.getText(), "Info", "Producto guardado");
+            }                      
             PlaceholderExample();
         } catch (Exception ex) {
             Logger.getLogger(CrearProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -364,6 +364,18 @@ public class CrearProducto extends javax.swing.JFrame {
         // Agrega un panel vacío para ocupar todo el espacio disponible
         JPanel emptyPanel = new JPanel();
         this.add(emptyPanel, gbc);
+    }
+    
+     public void mostrarMensaje(String mensaje, String tipo, String titulo) {
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")) {
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        } else if (tipo.equals("Error")) {
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
     }
 
 }

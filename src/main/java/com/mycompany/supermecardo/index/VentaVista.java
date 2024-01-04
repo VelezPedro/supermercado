@@ -8,6 +8,10 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,6 +47,7 @@ public class VentaVista extends javax.swing.JFrame {
         ajustarAlTamañoDeLaPantalla();
         setLocationRelativeTo(null);
         lblUsuario.setText(user.getNombreUsuario());
+        configurarAcciones();
 
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
@@ -99,6 +104,7 @@ public class VentaVista extends javax.swing.JFrame {
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        tablaProducto.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         tablaProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -141,6 +147,11 @@ public class VentaVista extends javax.swing.JFrame {
         Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarActionPerformed(evt);
+            }
+        });
+        Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BuscarKeyPressed(evt);
             }
         });
 
@@ -478,9 +489,8 @@ public class VentaVista extends javax.swing.JFrame {
         Double unidades = Double.valueOf(unidadesVendidas.getText());
         cargarTablaPorProducto(codigoId, unidades);
         limpiarImput();
-        //precioMostrar.setText("$ " + totalVentas);
-        String formattedOutput = formatCurrency(String.valueOf(totalVentas));
-        precioMostrar.setText(formattedOutput);
+        precioMostrar.setText("$ " + totalVentas);
+        
 
     }//GEN-LAST:event_BuscarActionPerformed
 
@@ -551,6 +561,14 @@ public class VentaVista extends javax.swing.JFrame {
         cargarDescuento(desct);
     }//GEN-LAST:event_btnDescuentoActionPerformed
 
+    private void BuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        String codigoId = codigoProducto.getText();
+        Double unidades = Double.valueOf(unidadesVendidas.getText());
+        System.out.println("Buscar button pressed");
+        }
+    }//GEN-LAST:event_BuscarKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
@@ -607,6 +625,7 @@ public class VentaVista extends javax.swing.JFrame {
             unidadesVendidasPorProducto.put(producto, unidades);
         }
         tablaProducto.setModel(modeloTabla);
+        tablaProducto.setRowHeight(30);
 
     }
 
@@ -645,6 +664,7 @@ public class VentaVista extends javax.swing.JFrame {
             unidadesVendidasPorProducto.put(producto, unidades);
         }
         tablaProducto.setModel(modeloTabla);
+        tablaProducto.setRowHeight(30);
     }
 
     private void cargarDescuento(Object[] descuento) {
@@ -699,28 +719,37 @@ public class VentaVista extends javax.swing.JFrame {
         this.add(emptyPanel, gbc);
     }
 
-    
-    
-    //Para que escriba bien el monto final
-    public static String formatCurrency(String input) {
-        // Verificar si la cadena es nula o vacía
-        if (input == null || input.isEmpty()) {
-            return "";
-        }
+    private void configurarAcciones() {
+        // Agregar ActionListener para el campo de texto 'unidadesVendidas'
+        unidadesVendidas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Accionar el botón cuando se presiona "Enter" en 'unidadesVendidas'
+                BuscarActionPerformed(e);
+            }
+        });
+        unidadesVendidas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                BuscarKeyPressed(e);
+            }
+        });
+        txtCantidadXNombre.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    btnBuscarXNombre.doClick();
+                }
+            }
+        });
 
-        // Quitar cualquier caracter no numérico excepto el punto decimal
-        String numericString = input.replaceAll("[^\\d.]", "");
-
-        // Verificar si el resultado es un número válido
-        try {
-            double number = Double.parseDouble(numericString);
-
-            // Formatear el número con comas y dos decimales
-            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
-            return "$ " + decimalFormat.format(number);
-        } catch (NumberFormatException e) {
-            // Manejar la excepción si la cadena no es un número válido
-            return "Formato inválido";
-        }
+        btnBuscarXNombre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnBuscarXNombreActionPerformed(e);
+            }
+        });
     }
+
+
 }

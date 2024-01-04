@@ -60,6 +60,7 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
 
+        tablaUsuarios.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -213,6 +214,7 @@ public class Usuarios extends javax.swing.JFrame {
             }
         }
         tablaUsuarios.setModel(modeloTabla);
+        tablaUsuarios.setRowHeight(30);
     }
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -278,7 +280,7 @@ public class Usuarios extends javax.swing.JFrame {
         // Establece el layout manager del JFrame como GridBagLayout
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
-
+        
         // Configura las restricciones para centrar y expandir automáticamente los componentes
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
