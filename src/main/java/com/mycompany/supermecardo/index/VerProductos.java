@@ -28,7 +28,7 @@ public class VerProductos extends javax.swing.JFrame {
     Controladora control;
     Usuario user;
     List<Producto> listaProductos;
-
+    
     public VerProductos(Usuario user) {
         control = new Controladora();
         this.user = user;
@@ -37,6 +37,7 @@ public class VerProductos extends javax.swing.JFrame {
         PlaceholderExample();
         ajustarAlTamañoDeLaPantalla();
         setLocationRelativeTo(null);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -457,7 +458,7 @@ public class VerProductos extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarTabla() {
+    public void cargarTabla() {
 
         DefaultTableModel modeloTabla = new DefaultTableModel() {
             @Override
