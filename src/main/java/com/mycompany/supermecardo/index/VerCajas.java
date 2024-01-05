@@ -137,6 +137,7 @@ public class VerCajas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblCajas.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         tblCajas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},

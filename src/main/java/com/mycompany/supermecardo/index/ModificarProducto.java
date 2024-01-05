@@ -61,12 +61,12 @@ public class ModificarProducto extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        nbrProducto.setForeground(new java.awt.Color(102, 153, 255));
+        nbrProducto.setForeground(new java.awt.Color(69, 73, 74));
         nbrProducto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nbrProducto.setText("Nombre del producto");
         nbrProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        costo.setForeground(new java.awt.Color(102, 153, 255));
+        costo.setForeground(new java.awt.Color(69, 73, 74));
         costo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         costo.setText("Costo");
         costo.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +75,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        precioVenta.setForeground(new java.awt.Color(102, 153, 255));
+        precioVenta.setForeground(new java.awt.Color(69, 73, 74));
         precioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         precioVenta.setText("Precio de Venta");
         precioVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +84,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        formVenta.setForeground(new java.awt.Color(102, 153, 255));
+        formVenta.setForeground(new java.awt.Color(69, 73, 74));
         formVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Unidad", "Gramo" }));
         formVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +92,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        categoria.setForeground(new java.awt.Color(51, 153, 255));
+        categoria.setForeground(new java.awt.Color(69, 73, 74));
         categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Panaderia", "Fiambreria", "Carniceria", "Bebida", "Almacen", "Limpieza", "Lacteos" }));
 
         limpiar.setBackground(java.awt.SystemColor.activeCaption);
@@ -123,7 +123,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        stock.setForeground(new java.awt.Color(102, 153, 255));
+        stock.setForeground(new java.awt.Color(69, 73, 74));
         stock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         stock.setText("Stock");
 
