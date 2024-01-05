@@ -76,6 +76,7 @@ public class VerProductos extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         tablaProductos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tablaProductos.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -489,6 +490,7 @@ public class VerProductos extends javax.swing.JFrame {
             }
         }
         tablaProductos.setModel(modeloTabla);
+        tablaProductos.setRowHeight(30);
     }
 
     public void rellenarCategoria() {
@@ -575,6 +577,7 @@ public class VerProductos extends javax.swing.JFrame {
             }
         }
         tablaProductos.setModel(modeloTabla);
+        tablaProductos.setRowHeight(30);
 
     }
 
