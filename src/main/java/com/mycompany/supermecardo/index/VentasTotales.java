@@ -420,9 +420,15 @@ public class VentasTotales extends javax.swing.JFrame {
         busqueda = listaVentas;
         if (!listaVentas.isEmpty()) {
             for (Venta venta : listaVentas) {
-                Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
-                    venta.getFecha().getMonth() + 1, venta.getFecha().getDate(),
-                    venta.getHorario(), "$ " + venta.getPrecio(), venta.getFormpago()};
+                String precioTabla=numerosConComa(String.valueOf("$ " + venta.getPrecio()));
+                Object[] objeto = {
+                    venta.getVendedor().getNombreUsuario(),
+                    venta.getFecha().getYear() + 1900,
+                    venta.getFecha().getMonth() + 1,
+                    venta.getFecha().getDate(),
+                    venta.getHorario(),
+                    precioTabla,
+                    venta.getFormpago()};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
 
@@ -445,13 +451,14 @@ public class VentasTotales extends javax.swing.JFrame {
             for (Venta venta : listaBusqueda) {
                 String hora = "";
                 BigDecimal precio = BigDecimal.valueOf(venta.getPrecio());  // Convertir el precio a BigDecimal
+                String precioTabla=numerosConComa(String.valueOf(venta.getPrecio()));
                 Object[] objeto = {
                     venta.getVendedor().getNombreUsuario(),
                     venta.getFecha().getYear() + 1900,
                     venta.getFecha().getMonth() + 1,
                     venta.getFecha().getDate(),
                     venta.getHorario(),
-                    "$ " + formatearBigDecimalConDosDecimales(precio),
+                    precioTabla,
                     venta.getFormpago()
                 };
 
@@ -553,7 +560,7 @@ public class VentasTotales extends javax.swing.JFrame {
     public void limpiarTabla() {
         modeloTabla.setRowCount(0);
     }
-
+    
     private void actualizarLabelConBigDecimal(JLabel label, BigDecimal numero) {
         DecimalFormat formato = new DecimalFormat("#.00");
         //String numeroFormateado = formato.format(numero);
@@ -608,4 +615,5 @@ public class VentasTotales extends javax.swing.JFrame {
             return "Formato inválido";
         }
     }
+        
 }
