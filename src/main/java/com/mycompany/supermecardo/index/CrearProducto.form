@@ -284,7 +284,7 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="&#x9;RECOMENDACIONES&#xa;-Nombre especifico , unico del producto.&#xa;-Codigo unico por producto.&#xa;-Se recomienda armar grupo con codigos parecidos.&#xa;-Completar todas las celdas.&#xa;-Si se equivoca al cargar datos , no eliminar el producto, editarlo.&#xa;&#xa;-Si el producto se vende por Gramo , Cargar el precio por Kilo.&#xa;&#xa;"/>
+                    <Property name="text" type="java.lang.String" value="&#x9;         RECOMENDACIONES&#xa;-Nombre especifico , unico del producto.&#xa;-Codigo unico por producto.&#xa;-Si el producto tiene barra de codigo , &#xa;cargar en mismo en &quot;Codigo&quot;.&#xa;-Se recomienda armar grupo con codigos parecidos.&#xa;-Completar todas las celdas.&#xa;-Si se equivoca al cargar datos , no eliminar el producto, editarlo.&#xa;&#xa;                        Si el producto se vende por Kilogramo&#xa;-Cargar el precio por Kilogramo&#xa;-Utilizar &quot;.&quot; para cargar el Stock, lo mismo para venderlo, &#xa;no hay que utlizar &quot;,&quot;.&#xa;"/>
                   </Properties>
                 </Component>
               </SubComponents>
