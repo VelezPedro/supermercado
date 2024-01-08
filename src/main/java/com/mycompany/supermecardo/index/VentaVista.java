@@ -694,7 +694,11 @@ public class VentaVista extends javax.swing.JFrame {
                 precioTabla};
 
             modeloTabla.addRow(objeto);
+<<<<<<< Updated upstream
             totalVentas += producto.getPrecio() * unidades;
+=======
+            totalVentas += (Double) objeto[3];
+>>>>>>> Stashed changes
             producto.setUnidadesVendidas(unidades);
             listProducto.add(producto);
             unidadesVendidasPorProducto.put(producto, unidades);
