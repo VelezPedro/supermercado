@@ -163,7 +163,7 @@ public class VerProductos extends javax.swing.JFrame {
                         .addGap(12, 12, 12))))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Buscar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jLabel2.setText("CODIGO");
 
@@ -252,6 +252,7 @@ public class VerProductos extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lista de Productos");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
@@ -262,7 +263,7 @@ public class VerProductos extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Se puede buscar por:\n-Codigo: Traera un procucto en especitfico.\n-Nombre: Se buscar por el nombre especifico o \nuna palabra en comun traera una lista de \nproductos que la contengan.\n-Categoria:Traera todos los productos que \npertenezcan a esa categoria\n-Stock :Sirve para acomodar la tabla por stock.\n\n\nEDITAR o BORRAR UN PRODUCTO:\nSe lo debe seleccionar en la tabla y luego \nprecionar el botom.\n");
-        jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -279,10 +280,7 @@ public class VerProductos extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(297, 297, 297))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,7 +387,8 @@ public class VerProductos extends javax.swing.JFrame {
                 Producto producto = control.traerProducto((String) tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
                 AgregarStock agregarStock = new AgregarStock(producto, control, user);
                 agregarStock.setVisible(true);
-                agregarStock.setLocationRelativeTo(null);
+                this.dispose();
+                
 
             } else {
                 mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
@@ -397,7 +396,7 @@ public class VerProductos extends javax.swing.JFrame {
         } else {
             mensaje("No hay elementos cargados", "Error", "Error de Tabla");
         }
-
+        
     }//GEN-LAST:event_btnAgregarStockActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
