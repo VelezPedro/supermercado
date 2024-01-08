@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\maxic\Downloads\Supermerk2\supermercado\target\Supermecardo-1.0-SNAPSHOT.jar</jar>
+  <outfile>C:\Users\maxic\Downloads\Supermerk2\supermercado\target\M&amp;M_Drugstore.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\maxic\Downloads\logo.pdf_1.ico</icon>
+  <jre>
+    <path>C:\Program Files\Java\jdk-17\bin</path>
+    <requiresJdk>true</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion>17</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>
