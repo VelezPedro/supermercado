@@ -500,7 +500,7 @@ public class VentaVista extends javax.swing.JFrame {
             cargarTablaPorProducto(codigoId, Double.valueOf(unidades));
             limpiarImput();
             String precioMostarF = numerosConComa(String.valueOf(totalVentas));
-            precioMostrar.setText(precioMostarF);
+            precioMostrar.setText("$ " +precioMostarF);
         } catch (Exception e) {
         }
 
@@ -533,10 +533,8 @@ public class VentaVista extends javax.swing.JFrame {
                 Double precioProd = Double.valueOf(precioSinPuntos);
                 System.out.println(precioProd + 1);
                 if (nombre.contains("Descuento")) {
-
-                    modeloTabla.removeRow(tablaProducto.getSelectedRow());
-                    totalVentas -= precioProd;
-
+                        modeloTabla.removeRow(tablaProducto.getSelectedRow());
+                        totalVentas += precioProd;
                     String precioMostarF = numerosConComa(String.valueOf(totalVentas));
                     precioMostrar.setText("$ " + precioMostarF);
                 } else {

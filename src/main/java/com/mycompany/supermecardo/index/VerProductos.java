@@ -64,6 +64,9 @@ public class VerProductos extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -160,7 +163,7 @@ public class VerProductos extends javax.swing.JFrame {
                         .addGap(12, 12, 12))))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Buscar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jLabel2.setText("CODIGO");
 
@@ -252,6 +255,16 @@ public class VerProductos extends javax.swing.JFrame {
         jLabel1.setText("Lista de Productos");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Modo de uso");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Se puede buscar por:\n-Codigo: Traera un procucto en especitfico.\n-Nombre: Se buscar por el nombre especifico o \nuna palabra en comun traera una lista de \nproductos que la contengan.\n-Categoria:Traera todos los productos que \npertenezcan a esa categoria\n-Stock :Sirve para acomodar la tabla por stock.\n\n\nEDITAR o BORRAR UN PRODUCTO:\nSe lo debe seleccionar en la tabla y luego \nprecionar el botom.\n");
+        jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane2.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -261,7 +274,11 @@ public class VerProductos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -275,7 +292,12 @@ public class VerProductos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
 
@@ -298,71 +320,11 @@ public class VerProductos extends javax.swing.JFrame {
         rellenarCategoria();
     }//GEN-LAST:event_formWindowOpened
 
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // conotrolo que la tabla tenga porlomenos un registro
-        if (tablaProductos.getRowCount() > 0) {
-            //controlo que haya algo seleccionado
-            if (tablaProductos.getSelectedRow() != -1) {
-                String codigoId = (String) (tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
-                System.out.println(codigoId);
-                control.borrarProducto(codigoId);
-                mensaje("Producto eliminado correctamente", "Info", "Borrado de Produtos");
-                cargarTabla();
-            } else {
-                mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
-            }
-        } else {
-            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
-        }
-
-    }//GEN-LAST:event_eliminarActionPerformed
-
-    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-        if (tablaProductos.getRowCount() > 0) {
-            //controlo que haya algo seleccionado
-            if (tablaProductos.getSelectedRow() != -1) {
-                String codigoId = (String) (tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
-
-                ModificarProducto pantallModf = new ModificarProducto(codigoId, user);
-                pantallModf.setVisible(true);
-
-                cargarTabla();
-                this.dispose();
-            } else {
-                mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
-            }
-        } else {
-            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
-        }
-
-    }//GEN-LAST:event_editarActionPerformed
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
-        Principal principal = new Principal(control, user);
-        principal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void btnAgregarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarStockActionPerformed
-
-        if (tablaProductos.getRowCount() > 0) {
-
-            if (tablaProductos.getSelectedRow() != -1) {
-                Producto producto = control.traerProducto((String) tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
-                AgregarStock agregarStock = new AgregarStock(producto, control, user);
-                agregarStock.setVisible(true);
-                agregarStock.setLocationRelativeTo(null);
-
-            } else {
-                mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
-            }
-        } else {
-            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
-        }
-
-
-    }//GEN-LAST:event_btnAgregarStockActionPerformed
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        PlaceholderExample();
+        cmbCategorias.setSelectedIndex(0);
+        cmbStock.setSelectedIndex(0);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         List<Producto> productoBusqueda = new ArrayList<>();
@@ -370,6 +332,9 @@ public class VerProductos extends javax.swing.JFrame {
         String nombre = txtNombre.getText();
         String categoria = (String) cmbCategorias.getSelectedItem();
         int stock = cmbStock.getSelectedIndex();
+        if (codigo.equalsIgnoreCase("CODIGO # 00")||categoria.equals("-")||stock == 0||nombre.equals("NOMBRE")) {
+            cargarTabla();
+        }
 
         if (!codigo.equalsIgnoreCase("CODIGO # 00")) {
             productoBusqueda.add(control.traerProducto(codigo));
@@ -389,7 +354,6 @@ public class VerProductos extends javax.swing.JFrame {
 
                 cargarTabla(productoBusqueda);
             }
-            System.out.println("Stock " + stock);
             if (stock != 0) {
                 if (stock == 1) {
                     Collections.sort(productoBusqueda, new StockComparator().reversed());
@@ -417,12 +381,69 @@ public class VerProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnAgregarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarStockActionPerformed
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        PlaceholderExample();
-        cmbCategorias.setSelectedIndex(0);
-        cmbStock.setSelectedIndex(0);
-    }//GEN-LAST:event_btnLimpiarActionPerformed
+        if (tablaProductos.getRowCount() > 0) {
+
+            if (tablaProductos.getSelectedRow() != -1) {
+                Producto producto = control.traerProducto((String) tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
+                AgregarStock agregarStock = new AgregarStock(producto, control, user);
+                agregarStock.setVisible(true);
+                agregarStock.setLocationRelativeTo(null);
+
+            } else {
+                mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
+            }
+        } else {
+            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
+        }
+
+    }//GEN-LAST:event_btnAgregarStockActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+        Principal principal = new Principal(control, user);
+        principal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+        if (tablaProductos.getRowCount() > 0) {
+            //controlo que haya algo seleccionado
+            if (tablaProductos.getSelectedRow() != -1) {
+                String codigoId = (String) (tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
+
+                ModificarProducto pantallModf = new ModificarProducto(codigoId, user);
+                pantallModf.setVisible(true);
+
+                cargarTabla();
+                this.dispose();
+            } else {
+                mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
+            }
+        } else {
+            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
+        }
+    }//GEN-LAST:event_editarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // conotrolo que la tabla tenga porlomenos un registro
+        if (tablaProductos.getRowCount() > 0) {
+            //controlo que haya algo seleccionado
+            if (tablaProductos.getSelectedRow() != -1) {
+                String codigoId = (String) (tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 0));
+                System.out.println(codigoId);
+                control.borrarProducto(codigoId);
+                mensaje("Producto eliminado correctamente", "Info", "Borrado de Produtos");
+                cargarTabla();
+            } else {
+                mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
+            }
+        } else {
+            mensaje("No hay elementos cargados", "Error", "Error de Tabla");
+        }
+    }//GEN-LAST:event_eliminarActionPerformed
+
 
     public void mensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
@@ -450,10 +471,13 @@ public class VerProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable tablaProductos;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombre;

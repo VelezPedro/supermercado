@@ -126,7 +126,7 @@ public class CrearProducto extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("\tRECOMENDACIONES\n-Nombre especifico , unico del producto.\n-Codigo unico por producto.\n-Se recomienda armar grupo con codigos parecidos.\n-Completar todas las celdas.\n-Si se equivoca al cargar datos , no eliminar el producto, editarlo.\n\n-Si el producto se vende por Gramo , Cargar el precio por Kilo.\n\n");
+        jTextArea1.setText("\t         RECOMENDACIONES\n-Nombre especifico , unico del producto.\n-Codigo unico por producto.\n-Si el producto tiene barra de codigo , \ncargar en mismo en \"Codigo\".\n-Se recomienda armar grupo con codigos parecidos.\n-Completar todas las celdas.\n-Si se equivoca al cargar datos , no eliminar el producto, editarlo.\n\n                        Si el producto se vende por Kilogramo\n-Cargar el precio por Kilogramo\n-Utilizar \".\" para cargar el Stock, lo mismo para venderlo, \nno hay que utlizar \",\".\n");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

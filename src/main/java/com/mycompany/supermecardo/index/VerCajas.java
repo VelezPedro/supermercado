@@ -9,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -310,12 +311,13 @@ public class VerCajas extends javax.swing.JFrame {
         busqueda = listaCajas;
         if (!listaCajas.isEmpty()) {
             for (CajaTotal caja : listaCajas) {
+                String precioTabla=numerosConComa(String.valueOf(caja.getTotal()));
                 Object[] objeto = {
                     caja.getFecha().getYear() + 1900,
                     caja.getFecha().getMonth() + 1,
                     caja.getFecha().getDate(),
                     caja.getHoraCierre(),
-                    "$ " + caja.getTotal(),
+                    precioTabla,
                     !caja.getObservacion().isEmpty(),};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
@@ -336,12 +338,13 @@ public class VerCajas extends javax.swing.JFrame {
 
             for (CajaTotal caja : listaBusqueda) {
                 String hora = "";
+                String precioTabla=numerosConComa(String.valueOf(caja.getTotal()));
                 Object[] objeto = {
                     caja.getFecha().getYear() + 1900,
                     caja.getFecha().getMonth() + 1,
                     caja.getFecha().getDate(),
                     caja.getHoraCierre(),
-                    "$ " + caja.getTotal(),
+                    precioTabla,
                     !caja.getObservacion().isEmpty()
                 };
                 modeloTabla.addRow(objeto);
@@ -385,5 +388,25 @@ public class VerCajas extends javax.swing.JFrame {
         JPanel emptyPanel = new JPanel();
         this.add(emptyPanel, gbc);
     }
-    
+        public static String numerosConComa(String input) {
+        // Verificar si la cadena es nula o vacía
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+
+        // Quitar cualquier caracter no numérico excepto el punto decimal
+        String numericString = input.replaceAll("[^\\d.]", "");
+
+        // Verificar si el resultado es un número válido
+        try {
+            double number = Double.parseDouble(numericString);
+
+            // Formatear el número con comas y dos decimales
+            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+            return "$ "+decimalFormat.format(number);
+        } catch (NumberFormatException e) {
+            // Manejar la excepción si la cadena no es un número válido
+            return "Formato inválido";
+        }
+    }
 }
