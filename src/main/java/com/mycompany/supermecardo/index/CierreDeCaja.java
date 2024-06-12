@@ -4,11 +4,15 @@ import com.mycompany.supermecardo.entidades.CajaTotal;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class CierreDeCaja extends javax.swing.JFrame {
 
@@ -18,8 +22,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
     private String horaCierre;
     private String observacion;
     private List<Venta> ventaPorCaja;
-    private Double totalCaja ;
-    
+    private Double totalCaja;
 
     public CierreDeCaja(Usuario user) {
         initComponents();
@@ -30,7 +33,7 @@ public class CierreDeCaja extends javax.swing.JFrame {
         this.horaCierre = horaSdf.format(horaCierre);
         this.ventaPorCaja = new ArrayList<>();
         this.observacion = "";
-        cargarTabla();
+        cargarTabla(user);
     }
 
     @SuppressWarnings("unchecked")
@@ -190,7 +193,17 @@ public class CierreDeCaja extends javax.swing.JFrame {
         caja.setObservacion(observacion);
         caja.setTotal(String.valueOf(totalCaja));
         control.cerrarCaja(caja);
+
+        modeloTabla.setRowCount(0);
         ventaPorCaja.clear();
+        totalCaja = 0.0;
+        observacion = "";
+        lblTotalCaja.setText("Total caja: $0.0");
+        lblCred.setText("Total Crédito: $0.0");
+        lblDebit.setText("Total Debito: $0.0");
+        lblEfete.setText("Total Efectivo: $0.0");
+        lblTrans.setText("Total Transferencia: $0.0");
+
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -220,64 +233,77 @@ public class CierreDeCaja extends javax.swing.JFrame {
     private javax.swing.JTable tblVentas;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarTabla() {
+    private void cargarTabla(Usuario vendedor) {
+    String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia", "Hora", "Monto $", "Forma de pago"};
+    modeloTabla = new DefaultTableModel(titulos, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    modeloTabla.setRowCount(0);
 
-        String titulos[] = {"Nombre/Vendedor", "Año", "Mes", "Dia", "Hora", "Monto $", "Forma de pago"};
-        modeloTabla = new DefaultTableModel(titulos, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
+    List<Venta> ventasUsuario = control.traerVentasVendedor(vendedor.getNombreUsuario());
+    Date ultimaFechaCierre = control.obtenerUltimaFechaCierre();
+    
+    totalCaja = 0.0;
+    Double totalTransferencia = 0.0;
+    Double totalEfectivo = 0.0;
+    Double totalDebito = 0.0;
+    Double totalCredito = 0.0;
 
-        List<Venta> ventasUsuario = control.traerVentasVendedor(user.getNombreUsuario());
+    if (!ventasUsuario.isEmpty()) {
+        for (Venta venta : ventasUsuario) {
+            Date fechaVenta = convertirStringADate(venta.getFecha().toString()); // Asegúrate de que el formato coincida con el de la base de datos
+            if (fechaVenta != null && fechaVenta.after(ultimaFechaCierre)) {
+                Object[] objeto = {
+                    venta.getVendedor().getNombreUsuario(),
+                    venta.getFecha().getYear() + 1900,
+                    venta.getFecha().getMonth() + 1,
+                    venta.getFecha().getDate(),
+                    venta.getHorario(),
+                    "$ " + venta.getPrecio(),
+                    venta.getFormpago()
+                };
+                ventaPorCaja.add(venta);
+                totalCaja += venta.getPrecio();
 
-        String hora = hora(horaCierre);
-        String minutos = minutos(horaCierre);
-        totalCaja = 0.0;
-        Double totalTransferencia = 0.0;
-        Double totalEfectivo = 0.0;
-        Double totalDebito = 0.0;
-        Double totalCredito = 0.0;
-
-        if (!ventasUsuario.isEmpty()) {
-            for (Venta venta : ventasUsuario) {
-
-                String horaVenta = hora(venta.getHorario());
-                String minutosVenta = minutos(venta.getHorario());
-
-                if (venta.getFecha().getDate() == (new Date().getDate())) {
-                    if (Integer.parseInt(horaVenta) <= Integer.parseInt(hora) && Integer.parseInt(minutosVenta) <= Integer.parseInt(minutos)) {
-                        Object[] objeto = {venta.getVendedor().getNombreUsuario(), venta.getFecha().getYear() + 1900,
-                            venta.getFecha().getMonth() + 1, venta.getFecha().getDate(),
-                            venta.getHorario(), "$ " + venta.getPrecio(),
-                            venta.getFormpago()};
-                        ventaPorCaja.add(venta);
-                        totalCaja += venta.getPrecio();
-
-                        if (venta.getFormpago().equalsIgnoreCase("transferencia")) {
-                            totalTransferencia += venta.getPrecio();
-                        } else if (venta.getFormpago().equalsIgnoreCase("débito")) {
-                            totalDebito += venta.getPrecio();
-                        } else if (venta.getFormpago().equalsIgnoreCase("crédito")) {
-                            totalCredito += venta.getPrecio();
-                        } else if (venta.getFormpago().equalsIgnoreCase("efectivo")) {
-                            totalEfectivo += venta.getPrecio();
-                        }
-
-                        modeloTabla.addRow(objeto);
-                    }
+                switch (venta.getFormpago().toLowerCase()) {
+                    case "transferencia":
+                        totalTransferencia += venta.getPrecio();
+                        break;
+                    case "débito":
+                        totalDebito += venta.getPrecio();
+                        break;
+                    case "crédito":
+                        totalCredito += venta.getPrecio();
+                        break;
+                    case "efectivo":
+                        totalEfectivo += venta.getPrecio();
+                        break;
                 }
 
+                modeloTabla.addRow(objeto);
             }
         }
-        lblTotalCaja.setText("Total caja: $" + totalCaja);
-        lblCred.setText("Total Crédito: $" + totalCredito);
-        lblDebit.setText("Total Debito: $" + totalDebito);
-        lblEfete.setText("Total Efectivo: $" + totalEfectivo);
-        lblTrans.setText("Total Transferencia: $" + totalTransferencia);
-        tblVentas.setModel(modeloTabla);
     }
+    lblTotalCaja.setText("Total caja: $" + totalCaja);
+    lblCred.setText("Total Crédito: $" + totalCredito);
+    lblDebit.setText("Total Debito: $" + totalDebito);
+    lblEfete.setText("Total Efectivo: $" + totalEfectivo);
+    lblTrans.setText("Total Transferencia: $" + totalTransferencia);
+    tblVentas.setModel(modeloTabla);
+}
+
+    public Date convertirStringADate(String fechaString) {
+    SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH); // Ajusta el formato según tu necesidad
+    try {
+        return formato.parse(fechaString);
+    } catch (ParseException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
 
     private String hora(String horaModificar) {
         String hora = "";
