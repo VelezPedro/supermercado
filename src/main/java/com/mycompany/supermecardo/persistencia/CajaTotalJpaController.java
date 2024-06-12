@@ -170,5 +170,14 @@ public class CajaTotalJpaController implements Serializable {
         // Ejecutar la consulta y devolver los resultados
         return query.getResultList();
     }
+
+    public Date obtenerUltimaFechaCierre() {
+        EntityManager em = getEntityManager();
+        
+        TypedQuery<Date> query = em.createQuery("SELECT MAX(c.fecha) FROM CajaTotal c", Date.class);
+        return query.getSingleResult();
+    }
+        
+      
     
 }

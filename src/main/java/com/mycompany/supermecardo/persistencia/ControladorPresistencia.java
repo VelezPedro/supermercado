@@ -6,6 +6,7 @@ import com.mycompany.supermecardo.entidades.Ticket;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -144,6 +145,10 @@ public class ControladorPresistencia {
 
     public List<CajaTotal> buscarYMostrarResultadosParaCaja(String anio, String mes, String dia) {
         return cajaTotalJpa.buscarYMostrarResultadosParaCaja(anio,mes,dia);
+    }
+
+    public Date obtenerUltimaFechaCierre() {
+        return cajaTotalJpa.obtenerUltimaFechaCierre();
     }
 
 }
