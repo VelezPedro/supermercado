@@ -201,6 +201,10 @@ public class Controladora {
         return contPersis.buscarYMostrarResultadosParaCaja(anio,mes,dia);
     }
 
+    public Date obtenerUltimaFechaCierre() {
+        return contPersis.obtenerUltimaFechaCierre();
+    }
+
 
 
 }
