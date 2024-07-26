@@ -5,7 +5,6 @@ import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -30,7 +29,6 @@ public class VentasTotales extends javax.swing.JFrame {
     private List<String> listaAnio;
     private List<Venta> listaVentas;
     private List<Venta> busqueda;
-    private Producto producto;
     private Venta venta;
 
     public VentasTotales(Usuario user) {
@@ -73,12 +71,12 @@ public class VentasTotales extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cmbTurno = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVentas = new javax.swing.JTable();
         lblTotal = new javax.swing.JLabel();
         lblCantidadVentas = new javax.swing.JLabel();
-        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +144,15 @@ public class VentasTotales extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Turno");
 
+        btnVolver.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-volver-48.png"))); // NOI18N
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -178,8 +185,10 @@ public class VentasTotales extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(234, 234, 234)
                 .addComponent(btnBuscar)
-                .addGap(241, 241, 241))
+                .addGap(67, 67, 67))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +210,9 @@ public class VentasTotales extends javax.swing.JFrame {
                     .addComponent(cmbTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolver))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -233,15 +244,6 @@ public class VentasTotales extends javax.swing.JFrame {
         lblCantidadVentas.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         lblCantidadVentas.setText("Cantidad de Ventas");
 
-        btnVolver.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-volver-48.png"))); // NOI18N
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -251,9 +253,6 @@ public class VentasTotales extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblCantidadVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,9 +269,7 @@ public class VentasTotales extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCantidadVentas)
                     .addComponent(lblTotal))
-                .addGap(58, 58, 58)
-                .addComponent(btnVolver)
-                .addGap(15, 15, 15))
+                .addGap(129, 129, 129))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -417,22 +414,21 @@ public class VentasTotales extends javax.swing.JFrame {
     public void cargarTabla() {
         total = BigDecimal.ZERO;
         listaVentas = control.traerVentas();
-        busqueda = listaVentas;
         if (!listaVentas.isEmpty()) {
-            for (Venta venta : listaVentas) {
-                String precioTabla=numerosConComa(String.valueOf("$ " + venta.getPrecio()));
+            for (Venta ventaUnitaria : listaVentas) {
+                String precioTabla=numerosConComa(String.valueOf("$ " + ventaUnitaria.getPrecio()));
                 Object[] objeto = {
-                    venta.getVendedor().getNombreUsuario(),
-                    venta.getFecha().getYear() + 1900,
-                    venta.getFecha().getMonth() + 1,
-                    venta.getFecha().getDate(),
-                    venta.getHorario(),
+                    ventaUnitaria.getVendedor().getNombreUsuario(),
+                    ventaUnitaria.getFecha().getYear() + 1900,
+                    ventaUnitaria.getFecha().getMonth() + 1,
+                    ventaUnitaria.getFecha().getDate(),
+                    ventaUnitaria.getHorario(),
                     precioTabla,
-                    venta.getFormpago()};
+                    ventaUnitaria.getFormpago()};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
 
-                total = total.add(BigDecimal.valueOf(venta.getPrecio()));
+                total = total.add(BigDecimal.valueOf(ventaUnitaria.getPrecio()));
 
             }
         }

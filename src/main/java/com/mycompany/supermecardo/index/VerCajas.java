@@ -3,12 +3,10 @@ package com.mycompany.supermecardo.index;
 import com.mycompany.supermecardo.entidades.CajaTotal;
 import com.mycompany.supermecardo.entidades.Controladora;
 import com.mycompany.supermecardo.entidades.Usuario;
-import com.mycompany.supermecardo.entidades.Venta;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -331,7 +329,6 @@ public class VerCajas extends javax.swing.JFrame {
         //total = BigDecimal.ZERO;
         
         listaCajas = control.traerTodasCajas();
-        busqueda = listaCajas;
         if (!listaCajas.isEmpty()) {
             for (CajaTotal caja : listaCajas) {
                 String precioTabla = numerosConComa(String.valueOf(caja.getTotal()));

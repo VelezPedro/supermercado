@@ -19,13 +19,14 @@ public class Controladora {
     }
 
     public void guardar(JTextField codigoId, JTextField nbrProducto, JTextField stock,
-            JTextField costo, JTextField precioVenta, String catego, String formaDeVenta, Integer unidadesVendidas) throws Exception {
+            Double costo, Double precioVenta, String catego, String formaDeVenta,
+            Integer unidadesVendidas) throws Exception {
         Producto producto = new Producto();
         producto.setCodigoId(codigoId.getText());
         producto.setNombre(nbrProducto.getText());
         producto.setStock(Double.valueOf(stock.getText()));
-        producto.setCosto(Integer.valueOf(costo.getText()));
-        producto.setPrecio(Integer.valueOf(precioVenta.getText()));
+        producto.setCosto(costo);
+        producto.setPrecio(precioVenta);
         producto.setCategoria(catego);
         producto.setFromVenta(formaDeVenta);
         producto.setUnidadesVendidas(0.0);
@@ -50,8 +51,8 @@ public class Controladora {
 
         producto.setNombre(nbrProducto.getText());
         producto.setStock(Double.valueOf(stock.getText()));
-        producto.setCosto(Integer.valueOf(costo.getText()));
-        producto.setPrecio(Integer.valueOf(precioVenta.getText()));
+        producto.setCosto(Double.valueOf(costo.getText()));
+        producto.setPrecio(Double.valueOf(precioVenta.getText()));
         producto.setCategoria(catego);
         producto.setFromVenta(formaDeVenta);
         contPersis.modificarProducto(producto);

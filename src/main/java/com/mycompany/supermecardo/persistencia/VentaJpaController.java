@@ -14,6 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -91,7 +92,7 @@ public class VentaJpaController implements Serializable {
     }
 
     public List<Venta> findVentaEntities() {
-        return findVentaEntities(100,0); 
+        return findVentaEntities(100, 0);
     }
 
     public List<Venta> findVentaEntities(int maxResults, int firstResult) {
@@ -101,8 +102,13 @@ public class VentaJpaController implements Serializable {
     private List<Venta> findVentaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Venta.class));
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Venta> cq = cb.createQuery(Venta.class);
+            Root<Venta> venta = cq.from(Venta.class);
+
+            // Ordenar por fecha en orden descendente
+            cq.orderBy(cb.desc(venta.get("fecha")));
+
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -159,7 +165,7 @@ public class VentaJpaController implements Serializable {
         if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
             LocalDate fechaBusqueda = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
             fechaInicio = Date.from(fechaBusqueda.atStartOfDay(ZoneId.systemDefault()).toInstant());
-             fechaFin = Date.from(fechaBusqueda.atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+            fechaFin = Date.from(fechaBusqueda.atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
 
             consulta += " AND v.fecha BETWEEN :fechaInicio AND :fechaFin";
         }
