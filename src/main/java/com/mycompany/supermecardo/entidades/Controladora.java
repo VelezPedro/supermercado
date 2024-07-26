@@ -19,7 +19,8 @@ public class Controladora {
     }
 
     public void guardar(JTextField codigoId, JTextField nbrProducto, JTextField stock,
-            JTextField costo, JTextField precioVenta, String catego, String formaDeVenta, Integer unidadesVendidas) throws Exception {
+            JTextField costo, JTextField precioVenta, String catego, String formaDeVenta,
+            Integer unidadesVendidas) throws Exception {
         Producto producto = new Producto();
         producto.setCodigoId(codigoId.getText());
         producto.setNombre(nbrProducto.getText());

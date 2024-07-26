@@ -14,6 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -31,8 +32,6 @@ public class CajaTotalJpaController implements Serializable {
     public CajaTotalJpaController() {
         emf = Persistence.createEntityManagerFactory("Supermercado");
     }
-    
-    
 
     public void create(CajaTotal cajaTotal) {
         EntityManager em = null;
@@ -103,8 +102,13 @@ public class CajaTotalJpaController implements Serializable {
     private List<CajaTotal> findCajaTotalEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(CajaTotal.class));
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<CajaTotal> cq = cb.createQuery(CajaTotal.class);
+            Root<CajaTotal> cajaTotal = cq.from(CajaTotal.class);
+
+            // Ordenar por fecha en orden descendente
+            cq.orderBy(cb.desc(cajaTotal.get("fecha")));
+
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -146,22 +150,18 @@ public class CajaTotalJpaController implements Serializable {
         // Construir la consulta
         String consulta = "SELECT v FROM CajaTotal v WHERE 1 = 1";
 
-
         if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
             LocalDate fechaBusqueda = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
             fechaInicio = Date.from(fechaBusqueda.atStartOfDay(ZoneId.systemDefault()).toInstant());
-             fechaFin = Date.from(fechaBusqueda.atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+            fechaFin = Date.from(fechaBusqueda.atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
 
             consulta += " AND v.fecha BETWEEN :fechaInicio AND :fechaFin";
         }
-
 
         // Crear la consulta
         TypedQuery<CajaTotal> query = em.createQuery(consulta, CajaTotal.class);
 
         // Establecer los parámetros
-        
-
         if (anio != null && !anio.isEmpty() && mes != null && !mes.isEmpty() && dia != null && !dia.isEmpty()) {
             query.setParameter("fechaInicio", fechaInicio);
             query.setParameter("fechaFin", fechaFin);
@@ -173,11 +173,9 @@ public class CajaTotalJpaController implements Serializable {
 
     public Date obtenerUltimaFechaCierre() {
         EntityManager em = getEntityManager();
-        
+
         TypedQuery<Date> query = em.createQuery("SELECT MAX(c.fecha) FROM CajaTotal c", Date.class);
         return query.getSingleResult();
     }
-        
-      
-    
+
 }

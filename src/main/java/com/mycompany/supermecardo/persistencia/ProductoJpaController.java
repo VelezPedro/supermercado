@@ -4,6 +4,7 @@ import com.mycompany.supermecardo.entidades.Producto;
 import com.mycompany.supermecardo.persistencia.exceptions.NonexistentEntityException;
 import com.mycompany.supermecardo.persistencia.exceptions.PreexistingEntityException;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -29,22 +30,14 @@ public class ProductoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Producto producto) throws PreexistingEntityException, Exception {
+    public void create(Producto producto) throws PreexistingEntityException, SQLException {
         EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            em.persist(producto);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findProducto(producto.getCodigoId()) != null) {
-                throw new PreexistingEntityException("Producto " + producto + " already exists.", ex);
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+        em = getEntityManager();
+        em.getTransaction().begin();
+        em.persist(producto);
+        em.getTransaction().commit();
+        if (em != null) {
+            em.close();
         }
     }
 

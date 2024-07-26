@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -118,6 +119,11 @@ public class CrearProducto extends javax.swing.JFrame {
 
         txtStock.setForeground(new java.awt.Color(102, 153, 255));
         txtStock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("CATEGORIA");
 
@@ -262,18 +268,26 @@ public class CrearProducto extends javax.swing.JFrame {
         try {
             String catego = (String) cmbCategoria.getSelectedItem();
             String formaDeVenta = (String) cmbFormVenta.getSelectedItem();
-            if (txtNombreProducto.getText().isEmpty()|| txtCodigoId.getText().isEmpty() || txtCosto.getText().isEmpty() || txtPrecioVenta.getText().isEmpty()|| txtStock.getText().equals("Stock")) {         
+            if (txtNombreProducto.getText().isEmpty() || txtCodigoId.getText().isEmpty()
+                    || txtCosto.getText().isEmpty() || txtPrecioVenta.getText().isEmpty()
+                    || txtStock.getText().equals("Stock")) {
                 mostrarMensaje("Debe llenar todos los campos", "Error", "Error");
-            }else{
-                control.guardar(txtCodigoId, txtNombreProducto, txtStock, txtCosto, txtPrecioVenta, catego, formaDeVenta, 0);
-                mostrarMensaje("Éxito al guardar: "+txtNombreProducto.getText(), "Info", "Producto guardado");
-            }                      
+            } else {
+                control.guardar(txtCodigoId, txtNombreProducto, txtStock,
+                        txtCosto, txtPrecioVenta, catego, formaDeVenta, 0);
+                mostrarMensaje("Éxito al guardar: " + txtNombreProducto.getText(),
+                        "Info", "Producto guardado");
+            }
             PlaceholderExample();
-        } catch (Exception ex) {
-            Logger.getLogger(CrearProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (Exception e) {
+            mostrarMensaje("El codigo ya existe, ingrese otro", "Error", "Ingrese otro Codigo");
+        } 
 
     }//GEN-LAST:event_guardarActionPerformed
+
+    private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStockActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -364,8 +378,8 @@ public class CrearProducto extends javax.swing.JFrame {
         JPanel emptyPanel = new JPanel();
         this.add(emptyPanel, gbc);
     }
-    
-     public void mostrarMensaje(String mensaje, String tipo, String titulo) {
+
+    public void mostrarMensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
