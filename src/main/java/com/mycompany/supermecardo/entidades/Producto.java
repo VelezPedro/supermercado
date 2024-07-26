@@ -11,8 +11,8 @@ public class Producto implements Serializable {
     private String codigoId;
     private String nombre;
     private Double stock;
-    private Integer costo;
-    private Integer precio;
+    private Double costo;
+    private Double precio;
     private String categoria;
     private String fromVenta;
     private Double unidadesVendidas;
@@ -21,7 +21,7 @@ public class Producto implements Serializable {
     }
 
     public Producto(String codigoId, String nombre, Double stock,
-            Integer costo, Integer precio, String categoria, 
+            Double costo, Double precio, String categoria, 
             String fromVenta, Double unidadesVendidas) {
         this.codigoId = codigoId;
         this.nombre = nombre;
@@ -59,19 +59,19 @@ public class Producto implements Serializable {
 
 
 
-    public Integer getCosto() {
+    public Double getCosto() {
         return costo;
     }
 
-    public void setCosto(Integer costo) {
+    public void setCosto(Double costo) {
         this.costo = costo;
     }
 
-    public Integer getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Integer precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
