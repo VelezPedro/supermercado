@@ -8,6 +8,10 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,6 +47,7 @@ public class VentaVista extends javax.swing.JFrame {
         ajustarAlTamañoDeLaPantalla();
         setLocationRelativeTo(null);
         lblUsuario.setText(user.getNombreUsuario());
+        configurarAcciones();
 
         String titulos[] = {"Nombre", "Unidades", "Precio Unitario", "Total"};
         modeloTabla = new DefaultTableModel(titulos, 0) {
@@ -99,6 +104,7 @@ public class VentaVista extends javax.swing.JFrame {
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        tablaProducto.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         tablaProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -141,6 +147,11 @@ public class VentaVista extends javax.swing.JFrame {
         Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarActionPerformed(evt);
+            }
+        });
+        Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BuscarKeyPressed(evt);
             }
         });
 
@@ -438,12 +449,15 @@ public class VentaVista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void terminarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarVentaActionPerformed
+        if (listProducto.isEmpty()) {
+            mensaje("Debe cargar productos", "Error", "Venta Error");
+        }else {
         Date dia = new Date();
         SimpleDateFormat horaSdf = new SimpleDateFormat("HH:mm");
         String horario = horaSdf.format(dia);
         String formaDeVenta = (String) formVenta.getSelectedItem();
         try {
-
+            
             control.actualizarStock(unidadesVendidasPorProducto);
             Ticket tic = cargarTicket();
             control.crearTicket(tic);
@@ -471,14 +485,25 @@ public class VentaVista extends javax.swing.JFrame {
         VentaVista ventaNueva = new VentaVista(user);
         ventaNueva.setVisible(true);
         this.dispose();
+        }
     }//GEN-LAST:event_terminarVentaActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        String codigoId = codigoProducto.getText();
-        Double unidades = Double.valueOf(unidadesVendidas.getText());
-        cargarTablaPorProducto(codigoId, unidades);
-        limpiarImput();
-        precioMostrar.setText("$ " + totalVentas);
+        try {
+            String codigoId = codigoProducto.getText();
+            String unidades = unidadesVendidas.getText();
+            if (codigoId.equals("")) {
+                mensaje("El codigo esta vacio", "Error", "Cargar pedido");
+            } else if (unidades.equals("")) {
+                mensaje("Debe cargar las unidades a vender", "Error", "Cargar pedido");
+            }
+            cargarTablaPorProducto(codigoId, Double.valueOf(unidades));
+            limpiarImput();
+            String precioMostarF = numerosConComa(String.valueOf(totalVentas));
+            precioMostrar.setText("$ " +precioMostarF);
+        } catch (Exception e) {
+        }
+
 
     }//GEN-LAST:event_BuscarActionPerformed
 
@@ -490,7 +515,6 @@ public class VentaVista extends javax.swing.JFrame {
                 principal.setVisible(true);
                 this.dispose();
             } else if (rol.equals("user")) {
-//                System.out.println("entra a vendedor");
                 PanelVendedor panelVendedor = new PanelVendedor(control, user);
                 panelVendedor.setVisible(true);
                 this.dispose();
@@ -504,18 +528,22 @@ public class VentaVista extends javax.swing.JFrame {
             //controlo que haya algo seleccionado
             if (tablaProducto.getSelectedRow() != -1) {
                 String nombre = (String) tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 0);
-                Double precioProd = (Double) (tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 3));
+                String precioConPuntos = (String) tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 3);
+                String precioSinPuntos = precioConPuntos.replaceAll("\\.", "").replace(",", ".");
+                Double precioProd = Double.valueOf(precioSinPuntos);
+                System.out.println(precioProd + 1);
                 if (nombre.contains("Descuento")) {
-
-                    modeloTabla.removeRow(tablaProducto.getSelectedRow());
-                    totalVentas -= precioProd;
-                    precioMostrar.setText("$ " + totalVentas);
+                        modeloTabla.removeRow(tablaProducto.getSelectedRow());
+                        totalVentas += precioProd;
+                    String precioMostarF = numerosConComa(String.valueOf(totalVentas));
+                    precioMostrar.setText("$ " + precioMostarF);
                 } else {
                     unidadesVendidasPorProducto.remove(listProducto.get(tablaProducto.getSelectedRow()));
                     listProducto.remove(tablaProducto.getSelectedRow());
                     modeloTabla.removeRow(tablaProducto.getSelectedRow());
                     totalVentas -= precioProd;
-                    precioMostrar.setText("$ " + totalVentas);
+                    String precioMostarF = numerosConComa(String.valueOf(totalVentas));
+                    precioMostrar.setText("$ " + precioMostarF);
                 }
             } else {
                 mensaje("No se selecciono ningun producto", "Error", "Borrado de Productos");
@@ -526,29 +554,52 @@ public class VentaVista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarXNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarXNombreActionPerformed
-        String nombreP = txtNombreProducto.getText();
-        Double unidades = Double.valueOf(txtCantidadXNombre.getText());
-        cargarTablaPorProductoXNombre(nombreP, unidades);
-        limpiarImput();
-        precioMostrar.setText("$ " + totalVentas);
+        try {
+            String nombreP = txtNombreProducto.getText();
+            System.out.println(nombreP);
+            String unidades = txtCantidadXNombre.getText();
+            if (nombreP.equals("")) {
+                mensaje("Debe cargar el nombre del producto", "Error", "Buscar producto por nombre");
+            } else if (unidades.equals("")) {
+                mensaje("Debe cargar las unidades a vender", "Error", "Cargar pedido");
+            }
+            cargarTablaPorProductoXNombre(nombreP, Double.valueOf(unidades));
+            limpiarImput();
+            String precioMostarF = numerosConComa(String.valueOf(totalVentas));
+            precioMostrar.setText("$ " + precioMostarF);
+        } catch (Exception e) {
+        }
+
 
     }//GEN-LAST:event_btnBuscarXNombreActionPerformed
 
     private void btnDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescuentoActionPerformed
         String nombre = null;
         Double descuento = null;
+        String descuentoCadena = null;
         if (Integer.parseInt(descPorcentaje.getText()) > 0) {
             descuento = (Double.valueOf(descPorcentaje.getText()) * totalVentas) / 100;
+            descuentoCadena = numerosConComa(String.valueOf(descuento));
             nombre = "%" + descPorcentaje.getText();
         } else if (Integer.parseInt(descPrecio.getText()) > 0) {
             descuento = (Double.valueOf(descPrecio.getText()));
+            descuentoCadena = numerosConComa(String.valueOf(descuento));
             nombre = "$" + descPrecio.getText();
         }
 
-        precioMostrar.setText("$ " + String.valueOf(formatearDoubleConDosDecimales(totalVentas)));
-        Object[] desct = {"Descuento " + nombre, "1", "1", (-descuento)};
+        Object[] desct = {"Descuento " + nombre, "1", "1", descuentoCadena};
         cargarDescuento(desct);
+        String precioMostarF = numerosConComa(String.valueOf(totalVentas));
+        precioMostrar.setText("$ " + precioMostarF);
     }//GEN-LAST:event_btnDescuentoActionPerformed
+
+    private void BuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String codigoId = codigoProducto.getText();
+            Double unidades = Double.valueOf(unidadesVendidas.getText());
+
+        }
+    }//GEN-LAST:event_BuscarKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -592,20 +643,23 @@ public class VentaVista extends javax.swing.JFrame {
         Producto producto = control.traerProducto(codigoId);
 
         if (producto != null) {
-            if (producto.getFromVenta().equalsIgnoreCase("unidad")) {
-            }
+//            if (producto.getFromVenta().equalsIgnoreCase("unidad")) {
+//            }
+//            String precioTabla = numerosConComa(String.valueOf(producto.getPrecio() * unidades));
             Object[] objeto = {producto.getNombre(),
                 unidades,
                 producto.getPrecio(),
                 producto.getPrecio() * unidades};
 
+            objeto[3] = numerosConComa(String.valueOf(producto.getPrecio() * unidades));
             modeloTabla.addRow(objeto);
-            formatearDoubleConDosDecimales(totalVentas += (Double) objeto[3]);
+            totalVentas += producto.getPrecio() * unidades;
             producto.setUnidadesVendidas(unidades);
             listProducto.add(producto);
             unidadesVendidasPorProducto.put(producto, unidades);
         }
         tablaProducto.setModel(modeloTabla);
+        tablaProducto.setRowHeight(30);
 
     }
 
@@ -630,28 +684,30 @@ public class VentaVista extends javax.swing.JFrame {
 
     private void cargarTablaPorProductoXNombre(String nombre, Double unidades) {
         Producto producto = control.traerProductoXNombre(nombre);
+        String precioTabla = numerosConComa(String.valueOf(producto.getPrecio() * unidades));
         if (producto != null) {
-
             Object[] objeto = {producto.getNombre(),
                 unidades,
                 producto.getPrecio(),
-                formatearDoubleConDosDecimales(producto.getPrecio() * unidades)};
+                precioTabla};
 
             modeloTabla.addRow(objeto);
-            formatearDoubleConDosDecimales(totalVentas += (Double) objeto[3]);
+            totalVentas += producto.getPrecio() * unidades;
             producto.setUnidadesVendidas(unidades);
             listProducto.add(producto);
             unidadesVendidasPorProducto.put(producto, unidades);
         }
         tablaProducto.setModel(modeloTabla);
+        tablaProducto.setRowHeight(30);
     }
 
     private void cargarDescuento(Object[] descuento) {
-
+        String precioConPuntos = (String) descuento[3];
+        String precioSinPuntos = precioConPuntos.replaceAll("\\.", "").replace(",", ".");
         if (descuento != null) {
             modeloTabla.addRow(descuento);
-            totalVentas += (Double) descuento[3];
-            precioMostrar.setText("$ " + (totalVentas));
+            totalVentas -= Double.valueOf(precioSinPuntos);
+            precioMostrar.setText("$ " + String.valueOf((totalVentas)));
 
         }
         tablaProducto.setModel(modeloTabla);
@@ -663,19 +719,12 @@ public class VentaVista extends javax.swing.JFrame {
         for (Map.Entry<Producto, Double> entry : unidadesVendidasPorProducto.entrySet()) {
             Producto key = entry.getKey();
             Double value = entry.getValue();
-            Object[] objeto = {key.getNombre(), value.toString(), key.getPrecio(), formatearDoubleConDosDecimales(value * key.getPrecio())};
-            System.out.println("Nombre =" + objeto[0].toString() + " Unidades " + objeto[1].toString() + " Precio: " + objeto[2].toString());
+            Object[] objeto = {key.getNombre(), value.toString(), key.getPrecio(), value * key.getPrecio()};
             this.listaDeInfo.add(objeto);
         }
 
         ticket.setListaDeInfo(listaDeInfo);
         return ticket;
-    }
-
-    public static Double formatearDoubleConDosDecimales(double numero) {
-        DecimalFormat formato = new DecimalFormat("#.##");
-        String numeroFormateadoStr = formato.format(numero);
-        return Double.valueOf(numeroFormateadoStr);
     }
 
     private void ajustarAlTamañoDeLaPantalla() {
@@ -699,4 +748,69 @@ public class VentaVista extends javax.swing.JFrame {
         this.add(emptyPanel, gbc);
     }
 
+    private void configurarAcciones() {
+        // Agregar ActionListener para el campo de texto 'unidadesVendidas'
+        unidadesVendidas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Accionar el botón cuando se presiona "Enter" en 'unidadesVendidas'
+                BuscarActionPerformed(e);
+            }
+        });
+        unidadesVendidas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                BuscarKeyPressed(e);
+            }
+        });
+//        txtCantidadXNombre.addKeyListener(new KeyAdapter() {
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+//                    btnBuscarXNombre.doClick();
+//                }
+//            }
+//        });
+//
+//        btnBuscarXNombre.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                btnBuscarXNombreActionPerformed(e);
+//            }
+//        });
+    }
+
+    public static String numerosConComa(String input) {
+        // Verificar si la cadena es nula o vacía
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+
+        // Quitar cualquier caracter no numérico excepto el punto decimal
+        String numericString = input.replaceAll("[^\\d.]", "");
+
+        // Verificar si el resultado es un número válido
+        try {
+            double number = Double.parseDouble(numericString);
+
+            // Formatear el número con comas y dos decimales
+            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+            return decimalFormat.format(number);
+        } catch (NumberFormatException e) {
+            // Manejar la excepción si la cadena no es un número válido
+            return "Formato inválido";
+        }
+    }
+
+    public void mostrarMensaje(String mensaje, String tipo, String titulo) {
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")) {
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        } else if (tipo.equals("Error")) {
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
 }

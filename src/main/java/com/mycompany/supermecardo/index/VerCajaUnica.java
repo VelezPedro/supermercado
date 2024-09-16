@@ -1,6 +1,7 @@
 package com.mycompany.supermecardo.index;
 
 import com.mycompany.supermecardo.entidades.CajaTotal;
+import com.mycompany.supermecardo.entidades.Usuario;
 import com.mycompany.supermecardo.entidades.Venta;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +13,7 @@ public class VerCajaUnica extends javax.swing.JFrame {
     private final CajaTotal cajaTotal;
     private DefaultTableModel modeloTabla;
     private List<Venta> listaVentas;
+    
     
     public VerCajaUnica(CajaTotal cajaTotal, VerCajas verCajas) {
         initComponents();
@@ -250,7 +252,6 @@ public class VerCajaUnica extends javax.swing.JFrame {
             Venta venta = listaVentas.get(tblVentas.getSelectedRow());
             VentaDeUna ventaDeUna = new VentaDeUna(venta);
             ventaDeUna.setVisible(true);
-
         }
     }//GEN-LAST:event_tblVentasMouseClicked
 

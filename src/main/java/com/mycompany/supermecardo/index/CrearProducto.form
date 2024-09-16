@@ -41,18 +41,15 @@
               <Group type="102" attributes="0">
                   <EmptySpace pref="65" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="volver" min="-2" max="-2" attributes="0"/>
-                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="357" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="volver" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel1" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -170,7 +167,7 @@
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Default Cursor"/>
+                  <Color id="Cursor Por defecto"/>
                 </Property>
               </Properties>
             </Component>
@@ -216,7 +213,7 @@
                   <StringArray count="3">
                     <StringItem index="0" value="-"/>
                     <StringItem index="1" value="Unidad"/>
-                    <StringItem index="2" value="Gramo"/>
+                    <StringItem index="2" value="Kilogramo"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -287,7 +284,7 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="&#x9;RECOMENDACIONES&#xa;-Nombre especifico , unico del producto.&#xa;-Codigo unico por producto.&#xa;-Se recomienda armar grupo con codigos parecidos.&#xa;-Completar todas las celdas.&#xa;-Si se equivoca al cargar datos , no eliminar el producto, editarlo.&#xa;&#xa;-Si el producto se vende por Gramo , Cargar el precio por Kilo.&#xa;&#xa;"/>
+                    <Property name="text" type="java.lang.String" value="&#x9;         RECOMENDACIONES&#xa;-Nombre especifico , unico del producto.&#xa;-Codigo unico por producto.&#xa;-Si el producto tiene barra de codigo , &#xa;cargar en mismo en &quot;Codigo&quot;.&#xa;-Se recomienda armar grupo con codigos parecidos.&#xa;-Completar todas las celdas.&#xa;-Si se equivoca al cargar datos , no eliminar el producto, editarlo.&#xa;&#xa;                        Si el producto se vende por Kilogramo&#xa;-Cargar el precio por Kilogramo&#xa;-Utilizar &quot;.&quot; para cargar el Stock, lo mismo para venderlo, &#xa;no hay que utlizar &quot;,&quot;.&#xa;"/>
                   </Properties>
                 </Component>
               </SubComponents>

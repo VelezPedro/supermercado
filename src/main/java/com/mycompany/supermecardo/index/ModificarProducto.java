@@ -59,14 +59,14 @@ public class ModificarProducto extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Modificar Producto");
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        nbrProducto.setForeground(new java.awt.Color(102, 153, 255));
+        nbrProducto.setForeground(new java.awt.Color(69, 73, 74));
         nbrProducto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nbrProducto.setText("Nombre del producto");
         nbrProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        costo.setForeground(new java.awt.Color(102, 153, 255));
+        costo.setForeground(new java.awt.Color(69, 73, 74));
         costo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         costo.setText("Costo");
         costo.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +75,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        precioVenta.setForeground(new java.awt.Color(102, 153, 255));
+        precioVenta.setForeground(new java.awt.Color(69, 73, 74));
         precioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         precioVenta.setText("Precio de Venta");
         precioVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +84,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        formVenta.setForeground(new java.awt.Color(102, 153, 255));
+        formVenta.setForeground(new java.awt.Color(69, 73, 74));
         formVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Unidad", "Gramo" }));
         formVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +92,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        categoria.setForeground(new java.awt.Color(51, 153, 255));
+        categoria.setForeground(new java.awt.Color(69, 73, 74));
         categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Panaderia", "Fiambreria", "Carniceria", "Bebida", "Almacen", "Limpieza", "Lacteos" }));
 
         limpiar.setBackground(java.awt.SystemColor.activeCaption);
@@ -123,7 +123,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        stock.setForeground(new java.awt.Color(102, 153, 255));
+        stock.setForeground(new java.awt.Color(69, 73, 74));
         stock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         stock.setText("Stock");
 
@@ -269,21 +269,19 @@ public class ModificarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_volverActionPerformed
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
-        try {
+
             String catego = (String) categoria.getSelectedItem();
             String formaDeVenta = (String) formVenta.getSelectedItem();
-
-            control.modificarProducto(producto, nbrProducto, stock, costo, precioVenta, catego, formaDeVenta);
-
-            mensaje("Edicion correcta", "Info", "Edicion Correcta");
+            if (nbrProducto.getText().isEmpty() || stock.getText().isEmpty() || costo.getText().isEmpty() ||
+                    catego.isEmpty() || formaDeVenta.isEmpty())  {
+                mensaje("Debe llenar todos los campos", "Error", "Error");
+            }else{
+                control.modificarProducto(producto, nbrProducto, stock, costo, precioVenta, catego, formaDeVenta);
+                mensaje("Edicion correcta", "Info", "Edicion Correcta");
+            }         
             VerProductos pantalla = new VerProductos(user);
             pantalla.setVisible(true);
             this.dispose();
-        } catch (Exception ex) {
-            mensaje("Edicion incorrecta", "Error", "Edicion Incorrecta");
-            Logger.getLogger(ModificarProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
     private void formVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formVentaActionPerformed

@@ -103,7 +103,7 @@ public class CrearProducto extends javax.swing.JFrame {
         });
 
         cmbFormVenta.setForeground(new java.awt.Color(102, 153, 255));
-        cmbFormVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Unidad", "Gramo" }));
+        cmbFormVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Unidad", "Kilogramo" }));
 
         cmbCategoria.setForeground(new java.awt.Color(51, 153, 255));
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Panaderia", "Fiambreria", "Carniceria", "Bebida", "Almacen", "Limpieza", "Lacteos" }));
@@ -126,7 +126,7 @@ public class CrearProducto extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("\tRECOMENDACIONES\n-Nombre especifico , unico del producto.\n-Codigo unico por producto.\n-Se recomienda armar grupo con codigos parecidos.\n-Completar todas las celdas.\n-Si se equivoca al cargar datos , no eliminar el producto, editarlo.\n\n-Si el producto se vende por Gramo , Cargar el precio por Kilo.\n\n");
+        jTextArea1.setText("\t         RECOMENDACIONES\n-Nombre especifico , unico del producto.\n-Codigo unico por producto.\n-Si el producto tiene barra de codigo , \ncargar en mismo en \"Codigo\".\n-Se recomienda armar grupo con codigos parecidos.\n-Completar todas las celdas.\n-Si se equivoca al cargar datos , no eliminar el producto, editarlo.\n\n                        Si el producto se vende por Kilogramo\n-Cargar el precio por Kilogramo\n-Utilizar \".\" para cargar el Stock, lo mismo para venderlo, \nno hay que utlizar \",\".\n");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -205,14 +205,13 @@ public class CrearProducto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(65, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(volver)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(357, 357, 357))))
+                    .addComponent(volver)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(83, 83, 83))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,12 +262,12 @@ public class CrearProducto extends javax.swing.JFrame {
         try {
             String catego = (String) cmbCategoria.getSelectedItem();
             String formaDeVenta = (String) cmbFormVenta.getSelectedItem();
-            control.guardar(txtCodigoId, txtNombreProducto, txtStock, txtCosto, txtPrecioVenta, catego, formaDeVenta, 0);
-            JOptionPane optionPane = new JOptionPane("Extito en guardar = " + txtNombreProducto.getText());
-            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-            JDialog dialog = optionPane.createDialog("Guarda Productos");
-            dialog.setAlwaysOnTop(true);
-            dialog.setVisible(true);
+            if (txtNombreProducto.getText().isEmpty()|| txtCodigoId.getText().isEmpty() || txtCosto.getText().isEmpty() || txtPrecioVenta.getText().isEmpty()|| txtStock.getText().equals("Stock")) {         
+                mostrarMensaje("Debe llenar todos los campos", "Error", "Error");
+            }else{
+                control.guardar(txtCodigoId, txtNombreProducto, txtStock, txtCosto, txtPrecioVenta, catego, formaDeVenta, 0);
+                mostrarMensaje("Éxito al guardar: "+txtNombreProducto.getText(), "Info", "Producto guardado");
+            }                      
             PlaceholderExample();
         } catch (Exception ex) {
             Logger.getLogger(CrearProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -364,6 +363,18 @@ public class CrearProducto extends javax.swing.JFrame {
         // Agrega un panel vacío para ocupar todo el espacio disponible
         JPanel emptyPanel = new JPanel();
         this.add(emptyPanel, gbc);
+    }
+    
+     public void mostrarMensaje(String mensaje, String tipo, String titulo) {
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")) {
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        } else if (tipo.equals("Error")) {
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
     }
 
 }

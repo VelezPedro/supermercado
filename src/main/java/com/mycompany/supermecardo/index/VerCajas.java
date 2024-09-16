@@ -9,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -63,6 +64,7 @@ public class VerCajas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCajas = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
+        btnCerrarCaja = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +139,7 @@ public class VerCajas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblCajas.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         tblCajas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -179,25 +182,33 @@ public class VerCajas extends javax.swing.JFrame {
             }
         });
 
+        btnCerrarCaja.setText("Cerrar caja actual");
+        btnCerrarCaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarCajaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(427, 427, 427)
-                        .addComponent(btnVolver)))
-                .addContainerGap(45, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(447, 447, 447))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(btnVolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(121, 121, 121))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,8 +220,10 @@ public class VerCajas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnVolver)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVolver)
+                    .addComponent(btnCerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,16 +270,26 @@ public class VerCajas extends javax.swing.JFrame {
     private void tblCajasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCajasMouseClicked
         if (evt.getClickCount() == 2) {
             CajaTotal cajaTotal = busqueda.get(tblCajas.getSelectedRow());
-            System.out.println(cajaTotal.getTotal());
             VerCajaUnica cajaUnica = new VerCajaUnica(cajaTotal, this);
             cajaUnica.setVisible(true);
             cajaUnica.setLocationRelativeTo(null);
         }
     }//GEN-LAST:event_tblCajasMouseClicked
 
+    private void btnCerrarCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarCajaActionPerformed
+        Usuario user = this.user; // Asegúrate de pasar el usuario adecuado
+        CierreDeCaja cierreDeCaja = new CierreDeCaja(user);
+        cierreDeCaja.setVisible(true);
+        cierreDeCaja.setLocationRelativeTo(null);               
+        listaCajas.clear();        
+        System.out.println(user.getNombreUsuario());
+        
+    }//GEN-LAST:event_btnCerrarCajaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCerrarCaja;
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cmbAnio;
     private javax.swing.JComboBox<String> cmbDia;
@@ -306,16 +329,18 @@ public class VerCajas extends javax.swing.JFrame {
 
     public void cargarTabla() {
         //total = BigDecimal.ZERO;
+        
         listaCajas = control.traerTodasCajas();
         busqueda = listaCajas;
         if (!listaCajas.isEmpty()) {
             for (CajaTotal caja : listaCajas) {
+                String precioTabla = numerosConComa(String.valueOf(caja.getTotal()));
                 Object[] objeto = {
                     caja.getFecha().getYear() + 1900,
                     caja.getFecha().getMonth() + 1,
                     caja.getFecha().getDate(),
                     caja.getHoraCierre(),
-                    "$ " + caja.getTotal(),
+                    precioTabla,
                     !caja.getObservacion().isEmpty(),};
                 //agrega una fila nueva cada vez que ingresa al ciclo.
                 modeloTabla.addRow(objeto);
@@ -331,17 +356,19 @@ public class VerCajas extends javax.swing.JFrame {
     }
 
     private void cargarTabla(List<CajaTotal> listaBusqueda) {
+        
 
         if (listaBusqueda != null) {
 
             for (CajaTotal caja : listaBusqueda) {
                 String hora = "";
+                String precioTabla = numerosConComa(String.valueOf(caja.getTotal()));
                 Object[] objeto = {
                     caja.getFecha().getYear() + 1900,
                     caja.getFecha().getMonth() + 1,
                     caja.getFecha().getDate(),
                     caja.getHoraCierre(),
-                    "$ " + caja.getTotal(),
+                    precioTabla,
                     !caja.getObservacion().isEmpty()
                 };
                 modeloTabla.addRow(objeto);
@@ -352,7 +379,7 @@ public class VerCajas extends javax.swing.JFrame {
     }
 
     private List<CajaTotal> cargarTablaVariablesCaja(String anio, String mes, String dia) {
-    if (anio.equals(" ")) {
+        if (anio.equals(" ")) {
             anio = null;
             mes = null;
             dia = null;
@@ -364,7 +391,7 @@ public class VerCajas extends javax.swing.JFrame {
         }
         return control.buscarYMostrarResultadosParaCaja(anio, mes, dia);
     }
-    
+
     private void ajustarAlTamañoDeLaPantalla() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize);
@@ -385,5 +412,26 @@ public class VerCajas extends javax.swing.JFrame {
         JPanel emptyPanel = new JPanel();
         this.add(emptyPanel, gbc);
     }
-    
+
+    public static String numerosConComa(String input) {
+        // Verificar si la cadena es nula o vacía
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+
+        // Quitar cualquier caracter no numérico excepto el punto decimal
+        String numericString = input.replaceAll("[^\\d.]", "");
+
+        // Verificar si el resultado es un número válido
+        try {
+            double number = Double.parseDouble(numericString);
+
+            // Formatear el número con comas y dos decimales
+            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+            return "$ " + decimalFormat.format(number);
+        } catch (NumberFormatException e) {
+            // Manejar la excepción si la cadena no es un número válido
+            return "Formato inválido";
+        }
+    }
 }

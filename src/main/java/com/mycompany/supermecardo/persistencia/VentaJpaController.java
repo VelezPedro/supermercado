@@ -91,7 +91,7 @@ public class VentaJpaController implements Serializable {
     }
 
     public List<Venta> findVentaEntities() {
-        return findVentaEntities(true, -1, -1);
+        return findVentaEntities(100,0); 
     }
 
     public List<Venta> findVentaEntities(int maxResults, int firstResult) {
